@@ -21,8 +21,10 @@ body {
   width: 90%;
   height: 100px;
   border-radius: 7px;
-  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background-image: linear-gradient(to top, #dbe8f0 30%, #e2ebf0 100%);
   margin: 0 auto;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 input {
   width: 150px;
