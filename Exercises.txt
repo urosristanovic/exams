@@ -1,0 +1,30 @@
+--- Front-End Web Developer, Part VII - Document Object Model (DOM) ---
+Collection of exercises, that should be followed in this order:
+	1. New Contact
+		Improve New Contact example to display confirmation message after saving information about new contact.
+
+	2. Fahrenheit to Celsius v2
+		Create Web application that converts degrees in Fahrenheit to degrees in Celsius, and displays the result.
+			Conversion formula: c = (f - 32) * (5/9)
+		NOTE: Pay attention to look & feel (UX) of the application.
+
+	3. Leap Year v3
+		Create Web application that checks if a given year is a leap year or not.
+		NOTE: Rules for calculating if given year is a leap year or not are as follows: Year number is divisible by 4 and, at least one of the following conditions is true, year number is NOT divisible by 100 or year number is divisible by 400.
+			
+	4. Days in a Month v4
+		Create Web application that displays number of days in a given month of a given year.
+		NOTE: Rules for calculating if given year is a leap year or not are as follows: Year number is divisible by 4 and, at least one of the following conditions is true, year number is NOT divisible by 100 or year number is divisible by 400.
+
+	5. Trip Cost v2
+		Create Web application that will calculate the cost of a potential car trip based on
+			- expected driving distance in km,
+			- average fuel consumption per 100km and
+			- fuel price per liter.
+		NOTE: Pay attention to look & feel (UX) of the application.
+
+	6. Primes in a Range v2
+		Create Web application that displays all prime numbers in given range (all primes between two specified numbers).
+		NOTE: Take into consideration that:
+				number 1 is not a prime number,
+				number 2 is a prime number.
