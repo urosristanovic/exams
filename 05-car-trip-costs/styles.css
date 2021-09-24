@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  background-color: #60dfcd;
+  background-image: linear-gradient(315deg, #60dfcd 0%, #1e9afe 74%);
+}
+#heading {
+  display: flex;
+  align-items: center;
+}
+#heading i {
+  font-size: 30px;
+  padding: 0 10px;
+  height: 30px;
+  color: rgb(255, 255, 24);
+}
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+input {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  height: 30px;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 7px;
+  background-color: transparent;
+  border: 2px rgb(8, 98, 121) dashed;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  text-align: center;
+  color: rgb(25, 255, 25);
+  font-size: 30px;
+}
+input:focus {
+  background-color: rgba(37, 143, 175, 0.5);
+}
+.input {
+  width: 400px;
+}
+.input p {
+  margin: 20px 0 10px 0;
+}
+i {
+  width: 30px;
+  height: 20px;
+  font-size: 20px;
+  text-align: center;
+}
+button {
+  padding: 10px 40px;
+  border-radius: 7px;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.493);
+  background-color: transparent;
+  margin-top: 30px;
+}
+input:hover,
+button:hover {
+  background-color: #258faf;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  transform: scale(1.05);
+}
+.fa-dollar-sign {
+  font-size: 65px;
+  color: rgb(25, 255, 25);
+  text-shadow: rgb(197, 248, 79) 1px 0 10px;
+}
+span {
+  padding-left: 20px;
+  font-size: 80px;
+  color: rgb(255, 255, 24);
+}
+.message p {
+  font-weight: 700;
+  color: rgb(10, 20, 11);
+}
