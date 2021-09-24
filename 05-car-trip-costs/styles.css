@@ -84,12 +84,21 @@ button:hover {
 .fa-dollar-sign {
   font-size: 65px;
   color: rgb(25, 255, 25);
-  text-shadow: rgb(197, 248, 79) 1px 0 10px;
+  text-shadow: rgb(197, 248, 79) 1px 0 7px;
 }
 span {
   padding-left: 20px;
   font-size: 80px;
   color: rgb(255, 255, 24);
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.message i {
+  height: 75px;
 }
 .message p {
   font-weight: 700;
