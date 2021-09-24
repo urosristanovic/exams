@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  background-color: black;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+#paragraph {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 20px;
+}
+.form {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  width: 50%;
+}
+label {
+  margin: 5px;
+}
+input {
+  text-align: center;
+  border: 2px solid rgb(48, 48, 48);
+  padding: 5px;
+  border-radius: 4px;
+  outline: none;
+  background-color: black;
+  color: white;
+}
+input:active {
+  transform: scale(1.05);
+  transition: ease 0.2s;
+}
+#btn-submit {
+  padding: 5px 25px;
+  border: 1px white solid;
+  background-color: transparent;
+  color: white;
+  margin-top: 25px;
+  cursor: pointer;
+}
+.message {
+  box-shadow: rgba(214, 214, 255, 0.1) 0px 0px 48px,
+    rgba(252, 252, 255, 0.1) 0px 0px 48px, rgba(199, 199, 233, 0.1) 0px 0px 48px;
+  margin-top: 30px;
+  padding: 15px;
+  border-radius: 10px;
+}
