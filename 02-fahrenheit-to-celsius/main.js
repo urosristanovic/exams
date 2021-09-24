@@ -3,14 +3,16 @@ function calculateCelsius(degree) {
 }
 
 const convert = document.getElementById('convert');
-const fahrenheit = document.getElementById('fahrenheit');
-const celsius = document.getElementById('celsius');
-const calculation = document.getElementById('calculation');
 
 convert.addEventListener('click', () => {
+  const fahrenheit = document.getElementById('fahrenheit');
+  const celsius = document.getElementById('celsius');
+  const calculation = document.getElementById('calculation');
   celsius.value = calculateCelsius(fahrenheit.value);
   calculation.innerText = `(${fahrenheit.value}°F - 32) × 5/9`;
 });
+
+// read only celsius
 
 // const convert = document.getElementById('convert');
 

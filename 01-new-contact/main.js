@@ -19,3 +19,5 @@ saveBtn.addEventListener('click', e => {
   paragraph.appendChild(text);
   message.appendChild(paragraph);
 });
+
+// submit forme, a ne klik na button

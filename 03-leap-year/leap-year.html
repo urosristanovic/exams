@@ -11,11 +11,25 @@
     <h2 class="heading">Check leap year!</h2>
 
     <div class="container">
-      <div class="leap_year">
-        <label for="leap_year">Input year: </label>
-        <input type="text" name="leap_year" id="leap_year" />
-      </div>
-      <button class="check" id="check">CHECK</button>
+      <form action="" id="form" class="form">
+        <div class="leap_year">
+          <label for="leap_year">Input year: </label>
+          <input
+            type="text"
+            name="leap_year"
+            id="leap_year"
+            required
+            autocomplete="off"
+          />
+        </div>
+        <input
+          type="submit"
+          class="check"
+          id="check"
+          required
+          autocomplete="off"
+        />
+      </form>
       <div class="result" id="result"></div>
     </div>
 

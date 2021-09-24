@@ -38,7 +38,6 @@ input {
   display: flex;
   justify-content: space-between;
   width: 75%;
-  height: 30px;
   display: inline-block;
   padding: 5px 10px;
   border-radius: 7px;
@@ -66,16 +65,16 @@ i {
   font-size: 20px;
   text-align: center;
 }
-button {
-  padding: 10px 40px;
+#btn {
   border-radius: 7px;
   outline: none;
   border: 2px solid rgba(0, 0, 0, 0.493);
   background-color: transparent;
   margin-top: 30px;
+  width: 200px;
 }
 input:hover,
-button:hover {
+#btn:hover {
   background-color: #258faf;
   cursor: pointer;
   transition: ease-in-out 0.3s;

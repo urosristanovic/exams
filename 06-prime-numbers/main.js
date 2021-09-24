@@ -14,7 +14,6 @@ function primeNumber(number) {
     return true;
   }
 }
-
 function createListItem(value) {
   const li = document.createElement('li');
   const em = document.createElement('em');
@@ -23,11 +22,11 @@ function createListItem(value) {
   return li;
 }
 
-const first = document.getElementById('first_number');
-const second = document.getElementById('second_number');
 const show = document.getElementById('btn');
 
 show.addEventListener('click', () => {
+  const first = document.getElementById('first_number');
+  const second = document.getElementById('second_number');
   for (i = Number(first.value); i <= Number(second.value); i++) {
     let isPrime = primeNumber(i);
     if (isPrime) {

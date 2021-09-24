@@ -1,15 +1,15 @@
 'use strict';
 
-const month = document.getElementById('month');
-const year = document.getElementById('year');
+const check = document.getElementById('form');
 
-const check = document.getElementById('btn-submit');
-const message = document.getElementById('message');
-
-check.addEventListener('click', e => {
+check.addEventListener('submit', e => {
   e.preventDefault();
+  const month = document.getElementById('month');
+  const year = document.getElementById('year');
+  const message = document.getElementById('message');
   const result = getDaysInMonth(Number(month.value), Number(year.value));
-  message.innerHTML = `<p class="message">Month with ordinal number ${month.value} have ${result} days in ${year.value} year.</p>`;
+  const monthName = getMonthName(Number(month.value));
+  message.innerHTML = `<p class="message">${monthName} in ${year.value} have ${result} days.</p>`;
 });
 
 function checkLeapYear(year) {
@@ -36,5 +36,33 @@ function getDaysInMonth(month, year) {
       return 30;
     default:
       return -1;
+  }
+}
+
+function getMonthName(month) {
+  switch (month) {
+    case 1:
+      return 'January';
+    case 2:
+      return 'February';
+    case 3:
+      return 'March';
+    case 4:
+      return 'April';
+    case 5:
+    case 6:
+      return 'May';
+    case 7:
+      return 'June';
+    case 8:
+      return 'July';
+    case 9:
+      return 'August';
+    case 10:
+      return 'September';
+    case 11:
+      return 'October';
+    case 12:
+      return 'November';
   }
 }

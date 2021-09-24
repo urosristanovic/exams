@@ -43,7 +43,6 @@ body {
 }
 #celsius,
 #calculation {
-  pointer-events: none;
   background-color: rgba(150, 80, 0, 0.05);
 }
 label {

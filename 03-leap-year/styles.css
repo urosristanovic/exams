@@ -46,9 +46,9 @@ label {
   border-radius: 4px;
   outline: none;
   border: 1px #71a2f1 solid;
-  background-color: #7ba7ee;
 }
-#leap_year {
+#leap_year,
+#check {
   background-color: #7ba7ee;
 }
 #leap_year:focus,
@@ -62,4 +62,7 @@ label {
 .result {
   width: 200px;
   margin-left: 20px;
+}
+.form {
+  display: flex;
 }
