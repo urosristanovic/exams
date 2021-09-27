@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess Game</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="heading">
+        <i class="fas fa-gamepad"></i>
+        <h1>Guess Game</h1>
+        <i class="fas fa-gamepad"></i>
+      </div>
+      <!-- <p>Choose range</p>
+      <form action="" id="form-range">
+        <div class="from">
+          <label for="from">from</label>
+          <input type="number" name="from" id="num-from" />
+        </div>
+        <div class="to">
+          <label for="to">to</label>
+          <input type="number" name="to" id="num-to" />
+        </div>
+        <input type="submit" value="Let's play" />
+      </form> -->
+      <div class="guess-container" id="guess-container">
+        <div class="guess">
+          <h3>Your guess:</h3>
+          <form action="" id="form-guess">
+            <input type="number" name="guess" id="guess" required />
+            <input type="submit" value="TRY" id="try" />
+          </form>
+          <div class="arrows">
+            <div>
+              <i class="fas fa-arrow-alt-circle-down" id="below"></i>
+            </div>
+            <div>
+              <i class="fas fa-check-circle" id="correct"></i>
+            </div>
+            <div>
+              <i class="fas fa-arrow-alt-circle-up" id="higher"></i>
+            </div>
+          </div>
+        </div>
+        <div class="lives">
+          <p>Lives:</p>
+          <i class="fas fa-heart red"></i>
+          <i class="fas fa-heart red"></i>
+          <i class="fas fa-heart red"></i>
+          <i class="fas fa-heart red"></i>
+          <i class="fas fa-heart red"></i>
+        </div>
+      </div>
+      <p id="not-in-range"></p>
+      <div id="hint">
+        <div id="play-again"><h3 id="game-result"></h3></div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
