@@ -5,7 +5,6 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: 'Montserrat', sans-serif; */
   font-family: 'Press Start 2P', cursive;
   color: white;
   background-color: rgb(37, 37, 37);
@@ -55,12 +54,16 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+#try:disabled,
 #guess:hover,
 #try:hover {
   border: 2px solid rgb(37, 37, 37);
   background-color: white;
   color: rgb(37, 37, 37);
   transition: all 0.3s;
+}
+#try:disabled {
+  cursor: default;
 }
 #guess {
   font-size: 30px;
@@ -117,4 +120,7 @@ button:hover {
 }
 #not-in-range {
   color: red;
+}
+ol {
+  list-style-type: hiragana-iroha;
 }
