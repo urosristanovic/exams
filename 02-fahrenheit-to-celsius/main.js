@@ -1,16 +1,16 @@
 function calculateCelsius(degree) {
-  return (degree - 32) * (5 / 9).toFixed(2);
+  return (degree - 32) * (5 / 9);
 }
 
 const convert = document.getElementById('form');
 
 convert.addEventListener('submit', e => {
   e.preventDefault();
-  const fahrenheit = document.getElementById('fahrenheit');
+  const fahrenheit = document.getElementById('fahrenheit').value;
   const celsius = document.getElementById('celsius');
   const calculation = document.getElementById('calculation');
 
-  celsius.value = calculateCelsius(fahrenheit.value);
+  celsius.value = calculateCelsius(fahrenheit).toFixed(2);
 
-  calculation.innerText = `(${fahrenheit.value}°F - 32) × 5/9`;
+  calculation.innerText = `(${fahrenheit}°F - 32) × 5/9`;
 });
