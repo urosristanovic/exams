@@ -21,30 +21,29 @@
         <i class="fas fa-car"></i>
       </div>
       <h4>Let's see how expensive your trip will be..</h4>
-      <form action="" class="form">
+      <form action="" class="form" id="form">
         <div class="input">
           <p>Enter expected driving distance in km:</p>
           <i class="fas fa-road"></i>
-          <input type="text" id="distance" required autocomplete="off" />
+          <input type="number" id="distance" required autocomplete="off" />
           <i class="fas fa-road"></i>
         </div>
         <div class="input">
           <p>Enter average fuel consumption per 100km:</p>
           <i class="fas fa-gas-pump"></i>
-          <input type="text" id="consumption" required autocomplete="off" />
+          <input type="number" id="consumption" required autocomplete="off" />
           <i class="fas fa-gas-pump"></i>
         </div>
         <div class="input">
           <p>Enter fuel price per liter:</p>
           <i class="fas fa-money-bill-alt"></i>
-          <input type="text" id="fuel_price" required autocomplete="off" />
+          <input type="number" id="fuel_price" required autocomplete="off" />
           <i class="fas fa-money-bill-alt"></i>
         </div>
-        <!-- <button id="btn">Let's see</button> -->
         <input type="submit" id="btn" value="Let's see" />
       </form>
       <div class="message">
-        <p>Daaamn, your expenses are:</p>
+        <p>Your expenses are:</p>
         <div>
           <i class="fas fa-dollar-sign"></i> <span id="expenses"></span>
         </div>

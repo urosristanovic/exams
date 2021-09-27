@@ -4,20 +4,16 @@ function calculateExpenses(distance, consumption, fuel_price) {
   return (distance / 100) * consumption * fuel_price;
 }
 
-const btn = document.getElementById('btn');
+const btn = document.getElementById('form');
 
-btn.addEventListener('click', e => {
+btn.addEventListener('submit', e => {
   e.preventDefault();
   const expenses = document.getElementById('expenses');
-  const distance = document.getElementById('distance');
-  const consumption = document.getElementById('consumption');
-  const fuel_price = document.getElementById('fuel_price');
+  const distance = Number(document.getElementById('distance').value);
+  const consumption = Number(document.getElementById('consumption').value);
+  const fuel_price = Number(document.getElementById('fuel_price').value);
 
-  const res = calculateExpenses(
-    Number(distance.value),
-    Number(consumption.value),
-    Number(fuel_price.value)
-  );
+  const res = calculateExpenses(distance, consumption, fuel_price);
 
   expenses.innerText = res.toFixed();
 });
