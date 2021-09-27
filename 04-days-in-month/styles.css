@@ -46,6 +46,11 @@ input:active {
   transform: scale(1.05);
   transition: ease 0.2s;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 #btn-submit {
   padding: 5px 25px;
   border: 1px white solid;

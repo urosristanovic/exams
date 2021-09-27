@@ -4,12 +4,18 @@ const check = document.getElementById('form');
 
 check.addEventListener('submit', e => {
   e.preventDefault();
-  const month = document.getElementById('month');
-  const year = document.getElementById('year');
+  const month = Number(document.getElementById('month').value);
+  const year = Number(document.getElementById('year').value);
   const message = document.getElementById('message');
-  const result = getDaysInMonth(Number(month.value), Number(year.value));
-  const monthName = getMonthName(Number(month.value));
-  message.innerHTML = `<p class="message">${monthName} in ${year.value} have ${result} days.</p>`;
+
+  if (month < 1 || month > 12) {
+    message.innerHTML = `<p class="message">Please input nubmer between 1-12.</p>`;
+  } else {
+    const days = getDaysInMonth(month, year);
+    const monthName = getMonthName(month);
+
+    message.innerHTML = `<p class="message">${monthName} in ${year} have ${days} days.</p>`;
+  }
 });
 
 function checkLeapYear(year) {
@@ -50,19 +56,20 @@ function getMonthName(month) {
     case 4:
       return 'April';
     case 5:
-    case 6:
       return 'May';
-    case 7:
+    case 6:
       return 'June';
-    case 8:
+    case 7:
       return 'July';
-    case 9:
+    case 8:
       return 'August';
-    case 10:
+    case 9:
       return 'September';
-    case 11:
+    case 10:
       return 'October';
-    case 12:
+    case 11:
       return 'November';
+    case 12:
+      return 'December';
   }
 }
