@@ -90,7 +90,7 @@ input::-webkit-inner-spin-button {
 .lives i {
   font-size: 20px;
 }
-#hint {
+#game-container {
   display: flex;
   flex-direction: column;
   text-align: center;

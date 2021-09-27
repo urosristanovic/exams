@@ -1,14 +1,13 @@
 let randomNumber = setRandomNumber();
-let attempt = 5;
+let live = 5;
 
-const check = document.getElementById('form-guess');
+const form = document.getElementById('form-guess');
 
-check.addEventListener('submit', e => {
+form.addEventListener('submit', e => {
   e.preventDefault();
   const guess = Number(document.getElementById('guess').value);
-  const check = isValid(guess);
-
-  if (check) {
+  const isValidGuess = isValid(guess);
+  if (isValidGuess) {
     checkNumber(guess);
   }
 });
@@ -41,38 +40,42 @@ function checkNumber(number) {
 
   if (number > randomNumber) {
     setRedClass(below, higher);
-    checkAttempts();
-    attempt--;
+    countLives();
   } else if (number < randomNumber) {
     setRedClass(higher, below);
-    checkAttempts();
-    attempt--;
+    countLives();
   } else {
     higher.classList.remove('red');
     below.classList.remove('red');
     correct.classList.add('green');
-    game.innerText = `Good game!`;
+    document.getElementById('try').disabled = true;
     game.classList.add('green');
-    playAgainBtns();
+    game.innerText = `Good game!`;
+    playAgain();
   }
 }
 
-function checkAttempts() {
+function countLives() {
   const game = document.getElementById('game-result');
-  const reds = document.getElementsByClassName('red');
-  const attempts = attempt > 1;
+  const haveMoreLives = live > 1;
 
-  reds[attempt].classList.remove('red');
-
-  if (!attempts) {
-    game.innerText = `Game over!`;
+  decrementLives();
+  if (!haveMoreLives) {
+    document.getElementById('try').disabled = true;
+    game.classList.remove('green');
     game.classList.add('red');
-    playAgainBtns();
+    game.innerText = `Game over!`;
+    playAgain();
   }
-  return attempts;
 }
 
-function playAgainBtns() {
+function decrementLives() {
+  const reds = document.getElementsByClassName('red');
+  reds[live].classList.remove('red');
+  live--;
+}
+
+function playAgain() {
   const div = document.createElement('div');
   const hint = document.getElementById('play-again');
   div.setAttribute('id', 'play-container');
@@ -80,12 +83,12 @@ function playAgainBtns() {
   <button id="yes">Yes</button>
   <button id="no">No</button>`;
   hint.appendChild(div);
-  playAgain();
+  setGame();
 }
 
-function playAgain() {
-  const hint = document.getElementById('guess-container');
-  const realHint = document.getElementById('hint');
+function setGame() {
+  const guessContainer = document.getElementById('guess-container');
+  const gameContainer = document.getElementById('game-container');
   const yes = document.getElementById('yes');
   const no = document.getElementById('no');
   const playContainer = document.getElementById('play-container');
@@ -98,9 +101,11 @@ function playAgain() {
 
   yes.addEventListener('click', () => {
     randomNumber = setRandomNumber();
-    attempt = 5;
+    live = 5;
     document.getElementById('guess').value = '';
     document.getElementById('game-result').innerText = '';
+    document.getElementById('try').disabled = false;
+
     higher.classList.remove('red');
     below.classList.remove('red');
     correct.classList.remove('green');
@@ -112,7 +117,8 @@ function playAgain() {
   });
 
   no.addEventListener('click', () => {
-    hint.innerHTML = `<div class="thank-you green"><h3>Bye, hope you had fun! :)</h3></div>`;
-    realHint.remove();
+    guessContainer.innerHTML = `<div class="thank-you green">
+    <h3>Bye, hope you had fun! :)</h3></div>`;
+    gameContainer.remove();
   });
 }
