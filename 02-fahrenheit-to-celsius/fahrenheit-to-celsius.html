@@ -11,34 +11,38 @@
     <h2 class="heading">Fahrenheit to Celsius conversion</h2>
 
     <div class="container">
-      <div class="fahrenheit">
-        <label for="fahrenheit">Fahrenheit: </label>
-        <input
-          type="text"
-          name="fahrenheit"
-          id="fahrenheit"
-          required
-          autocomplete="off"
-        />
-        <span>°F</span>
-      </div>
-      <button class="convert" id="convert">= CONVERT</button>
-      <div class="celsius">
-        <label for="celsius">Celsius: </label>
-        <input
-          type="text"
-          readonly
-          name="celsius"
-          id="celsius"
-          required
-          autocomplete="off"
-        />
-        <span>°C</span>
-      </div>
-      <div class="calculation">
-        <label for="calculation">Calculation: </label>
-        <p id="calculation"></p>
-      </div>
+      <form action="" id="form">
+        <div class="fahrenheit">
+          <label for="fahrenheit">Fahrenheit: </label>
+          <input
+            type="number"
+            name="fahrenheit"
+            id="fahrenheit"
+            required
+            autocomplete="off"
+          />
+          <span>°F</span>
+        </div>
+        <div class="convert-container">
+          <button class="convert" id="convert">= CONVERT</button>
+        </div>
+        <div class="celsius">
+          <label for="celsius">Celsius: </label>
+          <input
+            type="text"
+            readonly
+            name="celsius"
+            id="celsius"
+            required
+            autocomplete="off"
+          />
+          <span>°C</span>
+        </div>
+        <div class="calculation">
+          <label for="calculation">Calculation: </label>
+          <p id="calculation"></p>
+        </div>
+      </form>
     </div>
 
     <script src="main.js"></script>
