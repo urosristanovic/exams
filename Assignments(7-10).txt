@@ -1,0 +1,25 @@
+--- Front-End Web Developer, Part VII - Document Object Model (DOM) ---
+Collection of assignments, that should be followed in this order:
+	1. Kilometers to Miles v2
+		Create Web application that converts length given in kilometers to length measured in miles, and displays the result.
+		Conversion formula: 1 mile = 1609.344 meters
+		NOTE: Pay attention to the look & feel (UX) of the application.
+		
+	2. Guessing Game v2
+		Create Web application that gives user 5 tries to guess a randomly chosen natural number in range [1..100]. After each step, application should inform user if given number is less, greater or equal to the chosen number. After game ends, application should ask user if he wants to guess another number.
+		NOTE: Pay attention to the look & feel (UX) of the application.
+
+	3. Rational Calculator v3
+		Create Web based rational calculator that supports basic four arithmetic operations using rational numbers (fractions).
+		NOTE: Pay attention to the look & feel (UX) of the application.
+		
+	4. Restaurants Selector v2
+		Create Web application that allows user to filter list of restaurants based on different criteria.
+		Each restaurant is defined with following properties: name, address, phone number, image, average price per meal, number of tables, opening and closing time, multiple types of food served.
+		Available filtering criteria are based on: price range, size range, working time (current or specified), food served.
+		Price Range is defined with following properties: label, note, min price, max price.
+		Size Range is defined with following properties: label, note, min number of tables, max number of tables.
+		Working Time is defined as a time in a day when restaurant should be opened to be selected.
+		Food Served is defined as an array of different types of food, and indicator if ALL or ANY of specified types of food have to be served in a selected restaurant.
+		NOTE: Predefine list of restaurants in an array.
+		NOTE: Pay attention to the look & feel (UX) of the application.
