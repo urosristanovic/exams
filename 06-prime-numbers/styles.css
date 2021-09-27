@@ -22,13 +22,16 @@ h2 {
   width: 450px;
   text-align: center;
 }
-.form {
+.numbers {
   display: flex;
-}
-.first_number,
-.second_number {
   text-align: center;
 }
+.submit {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
 input {
   height: 30px;
   padding: 5px 10px;
@@ -44,18 +47,22 @@ input {
 input:focus {
   background-color: rgba(172, 255, 47, 0.5);
 }
-button {
-  padding: 10px 40px;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+#btn {
+  height: 50px;
   border-radius: 7px;
-  outline: none;
   border: 2px solid rgba(72, 214, 84, 0.493);
   background-color: transparent;
-  margin-top: 30px;
   color: greenyellow;
   box-shadow: rgba(131, 255, 29, 0.308) 0px 0px 25px;
+  padding: 0px 25px;
 }
 input:hover,
-button:hover {
+#btn:hover {
   background-color: rgba(172, 255, 47, 0.5);
   cursor: pointer;
   transition: ease-in-out 0.3s;

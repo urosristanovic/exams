@@ -22,9 +22,10 @@ function createListItem(value) {
   return li;
 }
 
-const show = document.getElementById('btn');
+const show = document.getElementById('form');
 
-show.addEventListener('click', () => {
+show.addEventListener('submit', e => {
+  e.preventDefault();
   const first = document.getElementById('first_number');
   const second = document.getElementById('second_number');
   for (i = Number(first.value); i <= Number(second.value); i++) {

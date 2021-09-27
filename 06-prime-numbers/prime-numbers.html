@@ -10,17 +10,32 @@
   <body>
     <div class="container">
       <h2>Input two numbers and check all prime numbers between them.</h2>
-      <form action="" class="form">
-        <div class="first_number">
-          <p>First number:</p>
-          <input type="text" id="first_number" />
+      <form action="" class="form" id="form">
+        <div class="numbers">
+          <div class="first_number">
+            <p>First number:</p>
+            <input
+              type="number"
+              id="first_number"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="second_number">
+            <p>Second number:</p>
+            <input
+              type="number"
+              id="second_number"
+              required
+              autocomplete="off"
+            />
+          </div>
         </div>
-        <div class="second_number">
-          <p>Second number:</p>
-          <input type="text" id="second_number" />
+        <div class="submit">
+          <input type="submit" value="Show prime numbers" id="btn" />
         </div>
       </form>
-      <button id="btn">Show prime numbers</button>
+      <!-- <button id="btn">Show prime numbers</button> -->
       <ol id="list"></ol>
     </div>
     <script src="main.js"></script>
