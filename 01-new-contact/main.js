@@ -1,23 +1,24 @@
 'use strict';
 
-function createMessage(value) {
-  const div = document.createElement('div');
+function createMessage(name, surename, date) {
   const p = document.createElement('p');
-  p.textContent = value;
-  div.appendChild(p);
-  return div;
+  p.innerHTML = `[<em>${date}</em>]: New contact <strong>${name} ${surename}</strong> successfully created!`;
+  return p;
 }
 
-const saveBtn = document.getElementById('btn-submit');
-
-saveBtn.addEventListener('click', e => {
+const save = document.getElementById('form');
+save.addEventListener('submit', e => {
   e.preventDefault();
+  const name = document.getElementById('first-name').value;
+  const surename = document.getElementById('surename').value;
+  const date = document.getElementById('date').value;
   const message = document.getElementById('message');
 
-  const paragraph = document.createElement('p');
-  const text = document.createTextNode('You successfully created new contact!');
-  paragraph.appendChild(text);
-  message.appendChild(paragraph);
-});
+  const contactMessage = createMessage(name, surename, date);
 
-// submit forme, a ne klik na button
+  message.appendChild(contactMessage);
+
+  name.value = '';
+  surename.value = '';
+  date.value = '';
+});
