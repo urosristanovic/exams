@@ -1,23 +1,5 @@
 'use strict';
 
-const check = document.getElementById('form');
-
-check.addEventListener('submit', e => {
-  e.preventDefault();
-  const month = Number(document.getElementById('month').value);
-  const year = Number(document.getElementById('year').value);
-  const message = document.getElementById('message');
-
-  if (month < 1 || month > 12) {
-    message.innerHTML = `<p class="message">Please input nubmer between 1-12.</p>`;
-  } else {
-    const days = getDaysInMonth(month, year);
-    const monthName = getMonthName(month);
-
-    message.innerHTML = `<p class="message">${monthName} in ${year} have ${days} days.</p>`;
-  }
-});
-
 function checkLeapYear(year) {
   const leapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
   return leapYear;
@@ -73,3 +55,19 @@ function getMonthName(month) {
       return 'December';
   }
 }
+
+const check = document.getElementById('form');
+check.addEventListener('submit', e => {
+  e.preventDefault();
+  const month = Number(document.getElementById('month').value);
+  const year = Number(document.getElementById('year').value);
+  const message = document.getElementById('message');
+
+  if (month < 1 || month > 12) {
+    message.innerText = `Please input month number between 1 and 12.`;
+  } else {
+    const days = getDaysInMonth(month, year);
+    const monthName = getMonthName(month);
+    message.innerHTML = `<strong>${monthName}</strong> in <strong>${year}</strong> year have <strong>${days}</strong> days.`;
+  }
+});
