@@ -65,9 +65,13 @@ p {
   border-radius: 5px;
   padding: 5px;
 }
-.red {
+.wrong-input {
   background-color: rgb(255, 49, 49);
 }
 .green {
   background-color: rgb(73, 238, 73);
+}
+#message,
+#negative {
+  display: none;
 }
