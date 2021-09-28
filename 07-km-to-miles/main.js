@@ -1,5 +1,5 @@
-const KM_IN_MILE = 1.609344;
 function convertKmToMiles(kilometers) {
+  const KM_IN_MILE = 1.609344;
   return kilometers / KM_IN_MILE;
 }
 
@@ -8,8 +8,8 @@ function createMessage(km, miles) {
   message.innerHTML = `Distance of <strong>${km}</strong> km is <strong>${miles}</strong> miles.`;
 }
 
-const convert = document.getElementById('form');
-convert.addEventListener('submit', e => {
+const form = document.getElementById('form');
+form.addEventListener('submit', e => {
   e.preventDefault();
   const km = document.getElementById('kilometers').value;
 
