@@ -80,3 +80,8 @@ input:first-child {
 p {
   font-size: 20px;
 }
+.red {
+  padding: 5px 20px;
+  border-radius: 5px;
+  background-color: red;
+}

@@ -72,24 +72,39 @@ function getNumbers() {
     firstNumber: rational(),
     secondNumber: rational(),
   };
+  const firstDen = document.getElementById('first-denominator').value;
+  const secondDen = document.getElementById('second-denominator').value;
 
-  numbers.firstNumber.numerator =
-    document.getElementById('first-numerator').value;
-  numbers.firstNumber.denominator =
-    document.getElementById('first-denominator').value;
-  numbers.secondNumber.numerator =
-    document.getElementById('second-numerator').value;
-  numbers.secondNumber.denominator =
-    document.getElementById('second-denominator').value;
+  const message = document.getElementById('message');
+
+  if (firstDen == 0 || secondDen == 0) {
+    message.innerHTML = `<p class="red">Denominator must be greater then zero.</p>`;
+  } else {
+    message.innerHTML = ``;
+    numbers.firstNumber.numerator =
+      document.getElementById('first-numerator').value;
+    numbers.firstNumber.denominator =
+      document.getElementById('first-denominator').value;
+    numbers.secondNumber.numerator =
+      document.getElementById('second-numerator').value;
+    numbers.secondNumber.denominator =
+      document.getElementById('second-denominator').value;
+  }
 
   return numbers;
 }
 
 function showResult(result) {
-  const gcd = calculateGcd(result.numerator, result.denominator);
-  document.getElementById('result-numerator').value = result.numerator / gcd;
-  document.getElementById('result-denominator').value =
-    result.denominator / gcd;
+  if (result.numerator == 0) {
+    document.getElementById('result-numerator').value = 0;
+    document.getElementById('result-denominator').value = 0;
+  } else {
+    console.log(result);
+    const gcd = calculateGcd(result.numerator, result.denominator);
+    document.getElementById('result-numerator').value = result.numerator / gcd;
+    document.getElementById('result-denominator').value =
+      result.denominator / gcd;
+  }
 }
 
 const form = document.getElementById('form-numbers');
