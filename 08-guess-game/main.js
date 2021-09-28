@@ -1,17 +1,20 @@
-setRandomNumber();
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+let lives = 5;
+
+console.log(randomNumber);
 
 const form = document.getElementById('form-guess');
-
 form.addEventListener('submit', e => {
   e.preventDefault();
   const guess = Number(document.getElementById('guess').value);
-  const randomNumber = document.getElementById('random').value;
   const isValidGuess = isValid(guess);
 
   if (isValidGuess) {
     guessesList(guess);
     checkNumber(guess, randomNumber);
+    lives--;
   }
+  console.log(randomNumber);
 });
 
 function isValid(number) {
@@ -26,124 +29,78 @@ function isValid(number) {
   return !isValid;
 }
 function guessesList(guess) {
-  const list = document.getElementsByTagName('li');
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].innerText != guess) {
-      console.log('damn');
-    }
-  }
   const ol = document.querySelector('ol');
-  const li = createListItem(guess);
-  li.setAttribute('id', 'list-item');
+  const li = document.createElement('li');
+  li.innerHTML = `<em class='green'>${guess}</em>`;
   ol.appendChild(li);
 }
-function createListItem(value) {
-  const li = document.createElement('li');
-  const em = document.createElement('em');
-  em.textContent = value;
-  li.appendChild(em);
-  return li;
-}
-function setRedClass(addRed, removeRed) {
-  addRed.classList.add('red');
-  removeRed.classList.remove('red');
-}
-function setRandomNumber() {
-  const number = Math.floor(Math.random() * 100) + 1;
-  document.getElementById('random').value = number;
-  console.log(number);
-}
 function checkNumber(number, randomNumber) {
-  const below = document.getElementById('below');
-  const higher = document.getElementById('higher');
-  const correct = document.getElementById('correct');
-  const game = document.getElementById('game-result');
-
   if (number > randomNumber) {
-    setRedClass(below, higher);
-    countLives();
+    document.getElementById('below').style.color = 'red';
+    document.getElementById('higher').style.color = 'white';
+    countLives(lives);
   } else if (number < randomNumber) {
-    setRedClass(higher, below);
-    countLives();
+    document.getElementById('below').style.color = 'white';
+    document.getElementById('higher').style.color = 'red';
+    countLives(lives);
   } else {
-    higher.classList.remove('red');
-    below.classList.remove('red');
-    correct.classList.add('green');
     document.getElementById('try').disabled = true;
-    game.classList.add('green');
-    game.innerText = `Good game!`;
+    document.getElementById('good-game').style.display = 'block';
+    document.getElementById('below').style.color = 'white';
+    document.getElementById('higher').style.color = 'white';
+    document.getElementById('correct').style.color = 'rgb(37, 255, 37)';
     playAgain();
   }
 }
+function resetGame() {
+  const hearts = document.getElementsByClassName('fa-heart');
 
-function countLives() {
-  const game = document.getElementById('game-result');
-  const lives = document.getElementById('counter').value;
+  document.getElementById('play-again').style.display = 'none';
+  document.getElementById('game-over').style.display = 'none';
+  document.getElementById('random-number').style.display = 'none';
+  document.getElementById('list-guesses').innerHTML = '';
+  document.getElementById('below').style.color = 'white';
+  document.getElementById('higher').style.color = 'white';
+  document.getElementById('try').disabled = false;
+  document.getElementById('guess').value = '';
+  document.getElementById('good-game').style.display = 'none';
+  document.getElementById('correct').style.color = 'white';
+
+  randomNumber = Math.floor(Math.random() * 100) + 1;
+  lives = 5;
+
+  for (let i = 0; i < hearts.length; i++) {
+    hearts[i].classList.add('heart');
+  }
+}
+function countLives(lives) {
+  const hearts = document.getElementsByClassName('heart');
   const haveMoreLives = lives > 1;
 
-  decrementLives(lives);
+  hearts[lives - 1].classList.remove('heart');
   if (!haveMoreLives) {
     document.getElementById('try').disabled = true;
-    game.classList.remove('green');
-    game.classList.add('red');
-    game.innerText = `Game over!`;
+    document.getElementById('game-over').style.display = 'block';
+    document.getElementById('random-number').style.display = 'block';
+    document.getElementById(
+      'random-number'
+    ).innerText = `Random number was ${randomNumber}.`;
     playAgain();
   }
-}
-
-function decrementLives(lives) {
-  const reds = document.getElementsByClassName('red');
-  reds[lives].classList.remove('red');
-  document.getElementById('counter').value--;
 }
 
 function playAgain() {
-  const hint = document.getElementById('play-again');
-  const div = document.createElement('div');
-  div.setAttribute('id', 'play-container');
-  div.innerHTML = `<h4>Do you want to play again?</h4>
-  <button id="yes">Yes</button>
-  <button id="no">No</button>`;
-  hint.appendChild(div);
-  setGame();
-}
-
-function setGame() {
-  const guessContainer = document.getElementById('guess-container');
-  const gameContainer = document.getElementById('game-container');
   const yes = document.getElementById('yes');
   const no = document.getElementById('no');
-  const playContainer = document.getElementById('play-container');
 
-  const below = document.getElementById('below');
-  const higher = document.getElementById('higher');
-  const correct = document.getElementById('correct');
-
-  const hearts = document.getElementsByClassName('fa-heart');
+  document.getElementById('play-again').style.display = 'block';
 
   yes.addEventListener('click', () => {
-    document.getElementById('guess').value = '';
-    document.getElementById('counter').value = 5;
-    document.getElementById('game-result').innerText = '';
-    document.getElementById('try').disabled = false;
-    document.getElementById('list-guesses').innerHTML = '';
-
-    setRandomNumber();
-
-    higher.classList.remove('red');
-    below.classList.remove('red');
-    correct.classList.remove('green');
-    playContainer.remove();
-
-    for (let i = 0; i < hearts.length; i++) {
-      hearts[i].classList.add('red');
-    }
+    resetGame();
   });
-
   no.addEventListener('click', () => {
-    document.getElementById('list-guesses').innerHTML = '';
-    guessContainer.innerHTML = `<div class="thank-you green">
-    <h3>Bye, hope you had fun! :)</h3></div>`;
-    gameContainer.remove();
+    document.getElementById('guess-container').style.display = 'none';
+    document.getElementById('thank-you').style.display = 'block';
+    resetGame();
   });
 }

@@ -109,10 +109,17 @@ button {
 button:hover {
   border: 2px solid rgb(37, 37, 37);
   background-color: white;
-  color: rgb(37, 37, 37);
   transition: all 0.3s;
+  color: black;
 }
-.red {
+#yes:hover {
+  background-color: rgb(37, 255, 37);
+}
+#no:hover {
+  background-color: red;
+}
+.red,
+.heart {
   color: red;
 }
 .green {
@@ -121,6 +128,12 @@ button:hover {
 #not-in-range {
   color: red;
 }
-/* ol {
-  list-style-type: hiragana-iroha;
-} */
+#play-again {
+  display: none;
+}
+#thank-you,
+#random-number,
+#game-over,
+#good-game {
+  display: none;
+}
