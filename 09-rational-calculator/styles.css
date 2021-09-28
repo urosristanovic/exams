@@ -17,6 +17,7 @@ body {
   align-items: center;
 }
 input {
+  width: 80px;
   height: 30px;
   background-color: transparent;
   outline: none;
@@ -27,7 +28,8 @@ input {
   outline: none;
   border: none;
 }
-button:hover,
+#result:hover,
+#options:hover,
 input:hover {
   background-color: rgba(255, 255, 255, 0.103);
   cursor: pointer;
@@ -44,16 +46,21 @@ input::-webkit-inner-spin-button {
 input:first-child {
   border-bottom: 1px solid black;
 }
-button {
-  width: 50px;
-  height: 50px;
-  font-size: 35px;
-  color: black;
-  background-color: transparent;
-  border: 1px black dotted;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px;
+#options,
+#result {
+  width: 60px;
+  height: 60px;
   border-radius: 5px;
-  margin: 5px;
+  font-size: 30px;
+  border: 1px dashed black;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  margin: 0 10px;
+}
+#form-numbers select {
+  text-align: center;
+  -webkit-appearance: none;
 }
 #form-numbers {
   display: flex;

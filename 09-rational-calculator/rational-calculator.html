@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <h1>Rational Calculator</h1>
-      <p>Input numbers:</p>
+      <p>Input numbers, choose operation and press equal sign for result.</p>
       <form action="" id="form-numbers">
         <div class="first-number">
           <input
@@ -26,6 +26,12 @@
             id="first-denominator"
           />
         </div>
+        <select id="options">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">&#215</option>
+          <option value="/">&#247</option>
+        </select>
         <div class="second-number">
           <input
             type="number"
@@ -40,30 +46,24 @@
             id="second-denominator"
           />
         </div>
+        <input type="submit" value="=" id="result"/>
+        <div class="result-number">
+          <input
+            type="number"
+            required
+            autocomplete="off"
+            id="result-numerator"
+            disabled
+          />
+          <input
+            type="number"
+            required
+            autocomplete="off"
+            id="result-denominator"
+            disabled
+          />
+        </div>
       </form>
-      <div class="calculate">
-        <button type="submit" name="add" value="+" id="add">+</button>
-        <button type="submit" name="sub" value="-" id="sub">-</button>
-        <button type="submit" name="mul" value="*" id="mul">&#215</button>
-        <button type="submit" name="div" value="/" id="div">&#247</button>
-      </div>
-      <p id="result">Result</p>
-      <div class="result-number">
-        <input
-          type="number"
-          required
-          autocomplete="off"
-          id="result-numerator"
-          disabled
-        />
-        <input
-          type="number"
-          required
-          autocomplete="off"
-          id="result-denominator"
-          disabled
-        />
-      </div>
     </div>
     <script src="main.js"></script>
   </body>

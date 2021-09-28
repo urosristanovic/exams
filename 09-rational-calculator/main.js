@@ -92,36 +92,31 @@ function showResult(result) {
     result.denominator / gcd;
 }
 
-const addition = document.getElementById('add');
-const substraction = document.getElementById('sub');
-const multiplication = document.getElementById('mul');
-const div = document.getElementById('div');
+const form = document.getElementById('form-numbers');
 
-let result;
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const options = document.getElementById('options').value;
+  const numbers = getNumbers();
+  calculate(options, numbers);
+});
 
-addition.addEventListener('click', e => {
-  e.preventDefault();
-  const numbers = getNumbers();
-  result = add(numbers.firstNumber, numbers.secondNumber);
-  showResult(result);
-});
-substraction.addEventListener('click', e => {
-  e.preventDefault();
-  const numbers = getNumbers();
-  result = subtract(numbers.firstNumber, numbers.secondNumber);
-  showResult(result);
-});
-multiplication.addEventListener('click', e => {
-  e.preventDefault();
-  const numbers = getNumbers();
-  result = multiply(numbers.firstNumber, numbers.secondNumber);
-  showResult(result);
-});
-div.addEventListener('click', e => {
-  e.preventDefault();
-  console.log(e.target.value);
-  const numbers = getNumbers();
-  console.log(numbers);
-  result = divide(numbers.firstNumber, numbers.secondNumber);
-  showResult(result);
-});
+function calculate(options, numbers) {
+  let result;
+
+  switch (options) {
+    case '+':
+      result = add(numbers.firstNumber, numbers.secondNumber);
+      break;
+    case '-':
+      result = subtract(numbers.firstNumber, numbers.secondNumber);
+      break;
+    case '*':
+      result = multiply(numbers.firstNumber, numbers.secondNumber);
+      break;
+    case '/':
+      result = divide(numbers.firstNumber, numbers.secondNumber);
+      break;
+  }
+  result = showResult(result);
+}
