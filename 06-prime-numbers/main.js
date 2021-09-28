@@ -14,29 +14,42 @@ function primeNumber(number) {
     return true;
   }
 }
-function createListItem(value) {
+function createListItem(prime) {
   const li = document.createElement('li');
-  const em = document.createElement('em');
-  em.textContent = value;
-  li.appendChild(em);
+  li.innerHTML = `<em>${prime}</em>`;
   return li;
 }
+function getPrimes(first, second) {
+  const arrayOfPrimes = [];
+  let isPrime;
 
-const show = document.getElementById('form');
+  for (i = first; i <= second; i++) {
+    isPrime = primeNumber(i);
+    if (isPrime) {
+      arrayOfPrimes.push(i);
+    }
+  }
+  return arrayOfPrimes;
+}
+function showPrimes(primes) {
+  const list = document.querySelector('ol');
+  primes.forEach(element => {
+    const li = createListItem(element);
+    list.appendChild(li);
+  });
+}
 
-show.addEventListener('submit', e => {
+const form = document.getElementById('form');
+form.addEventListener('submit', e => {
   e.preventDefault();
   const first = Number(document.getElementById('first_number').value);
   const second = Number(document.getElementById('second_number').value);
 
-  getPrimes(first, second);
+  const primes = getPrimes(first, second);
 
-  for (i = first; i <= second; i++) {
-    let isPrime = primeNumber(i);
-    if (isPrime) {
-      const list = document.querySelector('ol');
-      const li = createListItem(i);
-      list.appendChild(li);
-    }
-  }
+  showPrimes(primes);
+});
+form.addEventListener('change', () => {
+  const list = document.querySelector('ol');
+  list.innerHTML = ``;
 });
