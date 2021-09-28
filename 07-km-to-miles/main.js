@@ -5,6 +5,7 @@ function convertKmToMiles(kilometers) {
 
 function createMessage(km, miles) {
   const p = document.createElement('p');
+  p.classList.add('green');
   p.innerHTML = `Distance of <strong>${km}</strong> km is <strong>${miles}</strong> miles.`;
   return p;
 }
@@ -12,12 +13,19 @@ function createMessage(km, miles) {
 const convert = document.getElementById('form');
 convert.addEventListener('submit', e => {
   e.preventDefault();
+  const heading = document.getElementById('miles');
+  const negative = document.getElementById('negative');
   const kilometers = document.getElementById('kilometers');
   const km = kilometers.value;
-  const miles = convertKmToMiles(km).toFixed(2);
-
-  const heading = document.getElementById('miles');
-  const mes = createMessage(km, miles);
-  heading.appendChild(mes);
+  if (km < 0) {
+    negative.classList.add('red');
+    negative.innerHTML = `Please use positive numbers for conversion kilometers in miles.`;
+  } else {
+    negative.classList.remove('red');
+    negative.innerHTML = ``;
+    const miles = convertKmToMiles(km).toFixed(2);
+    const mes = createMessage(km, miles);
+    heading.appendChild(mes);
+  }
   kilometers.value = '';
 });
