@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(245, 245, 245);
+}
+
+button {
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  border: none;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 5px 25px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 0 3px;
+}
+
+select {
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+  border: none;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 0 3px;
+}
+p {
+  margin: 0;
+}
+.container {
+  width: 100%;
+  display: flex;
+}
+.filter {
+  min-width: 230px;
+  margin: 30px;
+}
+.restaurants {
+  width: 100%;
+}
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgb(201, 197, 197);
+}
+.filter-item p {
+  padding-bottom: 5px;
+  font-weight: 500;
+}
+.btns {
+  display: flex;
+}
+.btns button {
+  flex-grow: 1;
+}
+#price-range button {
+  background-color: rgba(95, 255, 95, 0.65);
+}
+#filter-capacity button {
+  background-color: rgba(128, 227, 245, 0.65);
+}
+#working-hours button,
+#working-hours select {
+  background-color: rgba(255, 224, 49, 0.534);
+}
+.btn-submit button {
+  margin-top: 10px;
+  background-color: rgba(255, 131, 86, 0.719);
+}
+#price-range button:hover {
+  background-color: rgb(60, 207, 60);
+  transition: all 0.3s;
+}
+#filter-capacity button:hover {
+  background-color: rgb(55, 170, 190);
+  transition: all 0.3s;
+}
+#working-hours button:hover,
+#working-hours select:hover {
+  background-color: rgb(209, 184, 41);
+  transition: all 0.3s;
+}
+.btn-submit button:hover {
+  background-color: rgb(219, 99, 55);
+  transition: all 0.3s;
+}
+.btn-submit {
+  display: flex;
+  justify-content: flex-end;
+}
+.filter-item label:hover {
+  font-weight: 500;
+}
+input[type='checkbox'] {
+  transform: scale(1.2);
+  margin: 5px 10px;
+  outline: none;
+}
+
+.restaurants {
+  display: flex;
+  flex-direction: column;
+  margin: 30px 30px 30px 0;
+}
+.card {
+  display: flex;
+  justify-content: space-evenly;
+  width: 550px;
+  height: 250px;
+  background-color: gainsboro;
+  border-radius: 7px;
+  margin-top: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px;
+}
+.card a {
+  color: rgb(248, 110, 60);
+  text-decoration: none;
+  padding-bottom: 10px;
+}
+.logo {
+  padding: 30px;
+  align-self: center;
+}
+.logo img {
+  width: 170px;
+  height: 170px;
+  border-radius: 5px;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.details h2 {
+  margin: 20px 0;
+}
+.details h5 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding-right: 10px;
+}
+.details h6 {
+  display: flex;
+  align-items: center;
+  margin: 5px 5px 5px 0;
+  background-color: rgba(248, 110, 60, 0.5);
+}
+.details div {
+  display: flex;
+}
+.sizes {
+  padding-bottom: 10px;
+}
+.p-range {
+  padding-right: 10px;
+}
+.avg-price,
+.card-capacity {
+  font-size: 20px;
+  font-weight: 500;
+}
+.avg-price {
+  color: rgb(27, 214, 27);
+}
+.card-capacity {
+  color: rgb(44, 133, 250);
+}
+.w-hours {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: rgb(134, 131, 131);
+  border-radius: 10px;
+  padding: 5px 0;
+}
+.openning,
+.closing {
+  color: rgb(255, 243, 81);
+  font-weight: 500;
+  width: 150px;
+}

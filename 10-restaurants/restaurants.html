@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurants</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <section class="filter">
+        <div id="price-range" class="filter-item">
+          <p>Price range:</p>
+          <div class="btns">
+            <button class="inexpensive">$</button>
+            <button class="moderate">$$</button>
+            <button class="expensive">$$$</button>
+          </div>
+        </div>
+        <div id="filter-capacity" class="filter-item">
+          <p>Capacity:</p>
+          <div class="btns">
+            <button class="small">s</button>
+            <button class="medium">m</button>
+            <button class="large">l</button>
+          </div>
+        </div>
+        <div id="working-hours" class="filter-item">
+          <p>Working hours:</p>
+          <div class="btns">
+            <button class="open-now">open now</button>
+            <div class="select-hours">
+              <select>
+                <option value="0">00:00</option>
+                <option value="1">01:00</option>
+                <option value="2">02:00</option>
+                <option value="3">03:00</option>
+                <option value="4">04:00</option>
+                <option value="5">05:00</option>
+                <option value="6">06:00</option>
+                <option value="7">07:00</option>
+                <option value="8">08:00</option>
+                <option value="9">09:00</option>
+                <option value="10">10:00</option>
+                <option value="11">11:00</option>
+                <option value="12">12:00</option>
+                <option value="13">13:00</option>
+                <option value="14">14:00</option>
+                <option value="15">15:00</option>
+                <option value="16">16:00</option>
+                <option value="17">17:00</option>
+                <option value="18">18:00</option>
+                <option value="19">19:00</option>
+                <option value="20">20:00</option>
+                <option value="21">21:00</option>
+                <option value="22">22:00</option>
+                <option value="23">23:00</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div id="food-served" class="filter-item">
+          <p>Food served:</p>
+          <form action="" id="form-food">
+            <div>
+              <input
+                type="checkbox"
+                id="serbian"
+                name="interest"
+                value="serbian"
+              />
+              <label for="serbian">Serbian</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="chinese"
+                name="interest"
+                value="chinese"
+              />
+              <label for="chinese">Chinese</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="international"
+                name="interest"
+                value="international"
+              />
+              <label for="international">International</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="italian"
+                name="interest"
+                value="italian"
+              />
+              <label for="italian">Italian</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="mexican"
+                name="interest"
+                value="mexican"
+              />
+              <label for="mexican">Mexican</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="burgers"
+                name="interest"
+                value="burgers"
+              />
+              <label for="burgers">Burgers</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="taiwanese"
+                name="interest"
+                value="taiwanese"
+              />
+              <label for="taiwanese">Taiwanese</label>
+            </div>
+            <div class="btn-submit">
+              <button type="submit" id="submit">Apply filters</button>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="restaurants">
+        <div class="card">
+          <div class="logo">
+            <img src="images/logo.png" alt="logo" />
+          </div>
+          <div class="details">
+            <h2 class="restaurant-name">Pivarijum</h2>
+            <p class="address">Brace Popovic 2</p>
+            <a href="tel:063-81-39-248">0638139248</a>
+            <div class="food-card">
+              <h6>Burgers</h6>
+              <h6>Serbian</h6>
+            </div>
+            <div class="sizes">
+              <div class="p-range">
+                <h5>Price range:</h5>
+                <p class="avg-price">$$</p>
+              </div>
+              <div class="c-range">
+                <h5>Capacity:</h5>
+                <p class="card-capacity">M</p>
+              </div>
+            </div>
+            <div class="w-hours">
+              <p class="openning">opening: 12h</p>
+              <p class="closing">closing: 22h</p>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="logo">
+            <img src="images/logo.png" alt="logo" />
+          </div>
+          <div class="details">
+            <h2 class="restaurant-name">Juliet bar & Restaurant</h2>
+            <p class="address">Veselina Maslese 32a</p>
+            <a href="tel:021-30-14-334">0213014334</a>
+            <div class="food-card">
+              <h6>Serbian</h6>
+              <h6>Italian</h6>
+              <h6>International</h6>
+              <h6>Mexican</h6>
+            </div>
+            <div class="sizes">
+              <div class="p-range">
+                <h5>Price range:</h5>
+                <p class="avg-price">$$$</p>
+              </div>
+              <div class="c-range">
+                <h5>Capacity:</h5>
+                <p class="card-capacity">L</p>
+              </div>
+            </div>
+            <div class="w-hours">
+              <p class="openning">opening: 8h</p>
+              <p class="closing">closing: 22h</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
