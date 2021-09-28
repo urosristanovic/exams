@@ -26,9 +26,12 @@ const show = document.getElementById('form');
 
 show.addEventListener('submit', e => {
   e.preventDefault();
-  const first = document.getElementById('first_number');
-  const second = document.getElementById('second_number');
-  for (i = Number(first.value); i <= Number(second.value); i++) {
+  const first = Number(document.getElementById('first_number').value);
+  const second = Number(document.getElementById('second_number').value);
+
+  getPrimes(first, second);
+
+  for (i = first; i <= second; i++) {
     let isPrime = primeNumber(i);
     if (isPrime) {
       const list = document.querySelector('ol');

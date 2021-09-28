@@ -29,3 +29,5 @@ convert.addEventListener('submit', e => {
   }
   kilometers.value = '';
 });
+
+// validate kilometers
