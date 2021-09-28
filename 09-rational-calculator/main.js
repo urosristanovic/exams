@@ -8,7 +8,7 @@ function add(firstNumber, secondNumber) {
     secondNumber.numerator * firstNumber.denominator;
   result.denominator = firstNumber.denominator * secondNumber.denominator;
 
-  return result;
+  return shortenFraction(result);
 }
 function subtract(firstNumber, secondNumber) {
   const result = rational(0, 0);
@@ -17,21 +17,21 @@ function subtract(firstNumber, secondNumber) {
     secondNumber.numerator * firstNumber.denominator;
   result.denominator = firstNumber.denominator * secondNumber.denominator;
 
-  return result;
+  return shortenFraction(result);
 }
 function multiply(firstNumber, secondNumber) {
   const result = rational(0, 0);
   result.numerator = firstNumber.numerator * secondNumber.numerator;
   result.denominator = firstNumber.denominator * secondNumber.denominator;
 
-  return result;
+  return shortenFraction(result);
 }
 function divide(firstNumber, secondNumber) {
   const result = rational(0, 0);
   result.numerator = firstNumber.numerator * secondNumber.denominator;
   result.denominator = firstNumber.denominator * secondNumber.numerator;
 
-  return result;
+  return shortenFraction(result);
 }
 
 function getLowerNumber(fn, sn) {
@@ -41,7 +41,6 @@ function getLowerNumber(fn, sn) {
     return fn;
   }
 }
-
 function calculateGcd(firstNumber, secondNumber) {
   let lowerNumber = 1;
   let gcd = 1;
@@ -66,6 +65,14 @@ function calculateGcd(firstNumber, secondNumber) {
     return gcd;
   }
 }
+function shortenFraction(result) {
+  const gcd = calculateGcd(result.numerator, result.denominator);
+
+  result.numerator = result.numerator / gcd;
+  result.denominator = result.denominator / gcd;
+
+  return result;
+}
 
 function getNumbers() {
   const numbers = {
@@ -74,13 +81,14 @@ function getNumbers() {
   };
   const firstDen = document.getElementById('first-denominator').value;
   const secondDen = document.getElementById('second-denominator').value;
-
   const message = document.getElementById('message');
-
+  console.log(firstDen == 0);
+  console.log(secondDen);
   if (firstDen == 0 || secondDen == 0) {
-    message.innerHTML = `<p class="red">Denominator must be greater then zero.</p>`;
+    console.log('why not');
+    document.getElementById('message').style.display = 'block';
   } else {
-    message.innerHTML = ``;
+    document.getElementById('message').style.display = 'none';
     numbers.firstNumber.numerator =
       document.getElementById('first-numerator').value;
     numbers.firstNumber.denominator =
@@ -93,17 +101,13 @@ function getNumbers() {
 
   return numbers;
 }
-
 function showResult(result) {
   if (result.numerator == 0) {
     document.getElementById('result-numerator').value = 0;
     document.getElementById('result-denominator').value = 0;
   } else {
-    console.log(result);
-    const gcd = calculateGcd(result.numerator, result.denominator);
-    document.getElementById('result-numerator').value = result.numerator / gcd;
-    document.getElementById('result-denominator').value =
-      result.denominator / gcd;
+    document.getElementById('result-numerator').value = result.numerator;
+    document.getElementById('result-denominator').value = result.denominator;
   }
 }
 
