@@ -113,12 +113,13 @@ input[type='checkbox'] {
 }
 .card {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 550px;
   height: 250px;
   background-color: gainsboro;
   border-radius: 7px;
   margin-top: 20px;
+  padding: 0 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 10px;
 }
 .card a {
@@ -166,6 +167,8 @@ input[type='checkbox'] {
 }
 .avg-price,
 .card-capacity {
+  display: flex;
+  align-items: center;
   font-size: 20px;
   font-weight: 500;
 }

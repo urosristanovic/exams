@@ -13,7 +13,7 @@
         <div id="price-range" class="filter-item">
           <p>Price range:</p>
           <div class="btns">
-            <button class="inexpensive">$</button>
+            <button class="inexpensive" id="inexpensive">$</button>
             <button class="moderate">$$</button>
             <button class="expensive">$$$</button>
           </div>
@@ -132,66 +132,7 @@
           </form>
         </div>
       </section>
-      <section class="restaurants">
-        <div class="card">
-          <div class="logo">
-            <img src="images/logo.png" alt="logo" />
-          </div>
-          <div class="details">
-            <h2 class="restaurant-name">Pivarijum</h2>
-            <p class="address">Brace Popovic 2</p>
-            <a href="tel:063-81-39-248">0638139248</a>
-            <div class="food-card">
-              <h6>Burgers</h6>
-              <h6>Serbian</h6>
-            </div>
-            <div class="sizes">
-              <div class="p-range">
-                <h5>Price range:</h5>
-                <p class="avg-price">$$</p>
-              </div>
-              <div class="c-range">
-                <h5>Capacity:</h5>
-                <p class="card-capacity">M</p>
-              </div>
-            </div>
-            <div class="w-hours">
-              <p class="openning">opening: 12h</p>
-              <p class="closing">closing: 22h</p>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="logo">
-            <img src="images/logo.png" alt="logo" />
-          </div>
-          <div class="details">
-            <h2 class="restaurant-name">Juliet bar & Restaurant</h2>
-            <p class="address">Veselina Maslese 32a</p>
-            <a href="tel:021-30-14-334">0213014334</a>
-            <div class="food-card">
-              <h6>Serbian</h6>
-              <h6>Italian</h6>
-              <h6>International</h6>
-              <h6>Mexican</h6>
-            </div>
-            <div class="sizes">
-              <div class="p-range">
-                <h5>Price range:</h5>
-                <p class="avg-price">$$$</p>
-              </div>
-              <div class="c-range">
-                <h5>Capacity:</h5>
-                <p class="card-capacity">L</p>
-              </div>
-            </div>
-            <div class="w-hours">
-              <p class="openning">opening: 8h</p>
-              <p class="closing">closing: 22h</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div class="restaurants" id="restaurants"></div>
     </div>
     <script src="main.js"></script>
   </body>
