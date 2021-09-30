@@ -191,6 +191,9 @@ const getOpenRestaurantsNow = list => {
 const getOpenRestaurants = (list, hours) => {
   return list.filter(res => res.opening <= hours && res.closing > hours);
 };
+const getRestaurantsByCategory = (list, category) => {
+  return list.filter(res => category.every(c => res.category.includes(c)));
+};
 
 function createFoods(foods) {
   let string = '';
@@ -236,13 +239,17 @@ function createRestaurantCard(res) {
 }
 
 function createRest(listOfRestaurants) {
-  list.innerHTML = ``;
+  list.innerHTML = `
+  <h2 class="no-restaurants" id="no-restaurants">
+  Sorry, there is no restaurants with following criteria. Please, try something else.</h2>`;
 
   listOfRestaurants.forEach(res => {
     const rest = createRestaurantCard(res);
     list.appendChild(rest);
   });
-  if (listOfRestaurants < 1) console.log(listOfRestaurants);
+  if (listOfRestaurants < 1) {
+    document.getElementById('no-restaurants').style.display = 'block';
+  }
 }
 
 const list = document.getElementById('restaurants');
@@ -274,7 +281,7 @@ btnsCapacity.addEventListener('click', e => {
 });
 
 const btnOpenNow = document.getElementById('open-now');
-btnOpenNow.addEventListener('click', e => {
+btnOpenNow.addEventListener('click', () => {
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
   createRest(openedRestaurants);
 });
@@ -286,4 +293,34 @@ selectHours.addEventListener('click', e => {
     const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
     createRest(openedRestaurants);
   }
+});
+
+const form = document.getElementById('form-food');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const foods = [
+    'serbian',
+    'chinese',
+    'international',
+    'italian',
+    'mexican',
+    'burgers',
+    'taiwanese',
+  ];
+
+  const categories = [];
+
+  foods.forEach(food => {
+    const checkFood = document.getElementById(food).checked;
+    if (checkFood) {
+      categories.push(food.charAt(0).toUpperCase() + food.slice(1));
+    }
+  });
+
+  const restaurantsByCategory = getRestaurantsByCategory(
+    listOfRestaurants,
+    categories
+  );
+  createRest(restaurantsByCategory);
 });
