@@ -124,7 +124,75 @@ const listOfRestaurants = [
   juliet,
 ];
 
-function createFood(foods) {
+const choosePriceRange = selectedPriceRange => {
+  let priceRanges = [
+    {
+      label: '$',
+      note: 'Inexpensive',
+      minAvgPricePerMeal: 0,
+      maxAvgPricePerMeal: 500,
+    },
+    {
+      label: '$$',
+      note: 'Moderate',
+      minAvgPricePerMeal: 501,
+      maxAvgPricePerMeal: 1000,
+    },
+    {
+      label: '$$$',
+      note: 'Expensive',
+      minAvgPricePerMeal: 1001,
+      maxAvgPricePerMeal: 10000,
+    },
+  ];
+
+  switch (selectedPriceRange) {
+    case 'inexpensive':
+      return priceRanges[0];
+    case 'moderate':
+      return priceRanges[1];
+    case 'expensive':
+      return priceRanges[2];
+  }
+};
+const chooseCapacityRange = selectedCapacity => {
+  let capacityRange = [
+    { note: 'Small', label: 'S', minTables: 0, maxTables: 50 },
+    { note: 'Medium', label: 'M', minTables: 51, maxTables: 150 },
+    { note: 'Large', label: 'L', minTables: 151, maxTables: 1000 },
+  ];
+
+  switch (selectedCapacity) {
+    case 'small':
+      return capacityRange[0];
+    case 'medium':
+      return capacityRange[1];
+    case 'large':
+      return capacityRange[2];
+  }
+};
+const getRestaurantsByPriceRange = (list, price) => {
+  return list.filter(
+    res =>
+      res.avgMealPrice >= price.minAvgPricePerMeal &&
+      res.avgMealPrice < price.maxAvgPricePerMeal
+  );
+};
+const getRestaurantByCapacityRange = (list, capacity) => {
+  return list.filter(
+    res =>
+      res.capacity >= capacity.minTables && res.capacity < capacity.maxTables
+  );
+};
+const getOpenRestaurantsNow = list => {
+  const hours = new Date().getHours();
+  return getOpenRestaurants(list, hours);
+};
+const getOpenRestaurants = (list, hours) => {
+  return list.filter(res => res.opening <= hours && res.closing > hours);
+};
+
+function createFoods(foods) {
   let string = '';
   foods.forEach(food => {
     const h6 = document.createElement('h6');
@@ -133,9 +201,8 @@ function createFood(foods) {
   });
   return string;
 }
-
 function createRestaurantCard(res) {
-  const foods = createFood(res.category);
+  const foods = createFoods(res.category);
   const div = document.createElement('div');
   div.classList.add('card');
   div.innerHTML = `
@@ -168,12 +235,55 @@ function createRestaurantCard(res) {
   return div;
 }
 
-const btn = document.getElementById('inexpensive');
+function createRest(listOfRestaurants) {
+  list.innerHTML = ``;
 
-btn.addEventListener('click', () => {
-  const list = document.getElementById('restaurants');
   listOfRestaurants.forEach(res => {
     const rest = createRestaurantCard(res);
     list.appendChild(rest);
   });
+  if (listOfRestaurants < 1) console.log(listOfRestaurants);
+}
+
+const list = document.getElementById('restaurants');
+listOfRestaurants.forEach(res => {
+  const rest = createRestaurantCard(res);
+  list.appendChild(rest);
+});
+
+const btnsPriceRange = document.getElementById('btns-price');
+btnsPriceRange.addEventListener('click', e => {
+  const selectedPriceRange = e.target.value;
+  const priceRange = choosePriceRange(selectedPriceRange);
+  const restaurantsByPrice = getRestaurantsByPriceRange(
+    listOfRestaurants,
+    priceRange
+  );
+  createRest(restaurantsByPrice);
+});
+
+const btnsCapacity = document.getElementById('btns-capacity');
+btnsCapacity.addEventListener('click', e => {
+  const selectedCapacity = e.target.value;
+  const capacity = chooseCapacityRange(selectedCapacity);
+  const restaurantsByCapacity = getRestaurantByCapacityRange(
+    listOfRestaurants,
+    capacity
+  );
+  createRest(restaurantsByCapacity);
+});
+
+const btnOpenNow = document.getElementById('open-now');
+btnOpenNow.addEventListener('click', e => {
+  const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
+  createRest(openedRestaurants);
+});
+
+const selectHours = document.getElementById('select-hours');
+selectHours.addEventListener('click', e => {
+  const hours = e.target.value;
+  if (hours != 'choose') {
+    const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
+    createRest(openedRestaurants);
+  }
 });

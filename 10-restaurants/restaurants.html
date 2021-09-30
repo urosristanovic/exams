@@ -12,26 +12,27 @@
       <section class="filter">
         <div id="price-range" class="filter-item">
           <p>Price range:</p>
-          <div class="btns">
-            <button class="inexpensive" id="inexpensive">$</button>
-            <button class="moderate">$$</button>
-            <button class="expensive">$$$</button>
+          <div class="btns" id="btns-price">
+            <button class="inexpensive" value="inexpensive">$</button>
+            <button class="moderate" value="moderate">$$</button>
+            <button class="expensive" value="expensive">$$$</button>
           </div>
         </div>
         <div id="filter-capacity" class="filter-item">
           <p>Capacity:</p>
-          <div class="btns">
-            <button class="small">s</button>
-            <button class="medium">m</button>
-            <button class="large">l</button>
+          <div class="btns" id="btns-capacity">
+            <button class="small" value="small">s</button>
+            <button class="medium" value="medium">m</button>
+            <button class="large" value="large">l</button>
           </div>
         </div>
         <div id="working-hours" class="filter-item">
           <p>Working hours:</p>
           <div class="btns">
-            <button class="open-now">open now</button>
+            <button class="open-now" id="open-now">open now</button>
             <div class="select-hours">
-              <select>
+              <select id="select-hours">
+                <option value="choose">choose</option>
                 <option value="0">00:00</option>
                 <option value="1">01:00</option>
                 <option value="2">02:00</option>
