@@ -194,6 +194,9 @@ const getOpenRestaurants = (list, hours) => {
 const getRestaurantsByCategory = (list, category) => {
   return list.filter(res => category.every(c => res.category.includes(c)));
 };
+const getRestaurantsByCategorySeparate = (list, category) => {
+  return list.filter(res => category.some(c => res.category.includes(c)));
+};
 
 function createFoods(foods) {
   let string = '';
@@ -239,14 +242,13 @@ function createRestaurantCard(res) {
 }
 
 function createRest(listOfRestaurants) {
-  list.innerHTML = `
-  <h2 class="no-restaurants" id="no-restaurants">
-  Sorry, there is no restaurants with following criteria. Please, try something else.</h2>`;
+  list.innerHTML = ``;
 
   listOfRestaurants.forEach(res => {
     const rest = createRestaurantCard(res);
     list.appendChild(rest);
   });
+  document.getElementById('no-restaurants').style.display = 'none';
   if (listOfRestaurants < 1) {
     document.getElementById('no-restaurants').style.display = 'block';
   }
@@ -299,6 +301,9 @@ const form = document.getElementById('form-food');
 
 form.addEventListener('submit', e => {
   e.preventDefault();
+
+  const separate = document.getElementById('separate').checked;
+
   const foods = [
     'serbian',
     'chinese',
@@ -318,9 +323,8 @@ form.addEventListener('submit', e => {
     }
   });
 
-  const restaurantsByCategory = getRestaurantsByCategory(
-    listOfRestaurants,
-    categories
-  );
+  const restaurantsByCategory = separate
+    ? getRestaurantsByCategorySeparate(listOfRestaurants, categories)
+    : getRestaurantsByCategory(listOfRestaurants, categories);
   createRest(restaurantsByCategory);
 });

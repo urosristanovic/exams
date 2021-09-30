@@ -105,6 +105,9 @@ input[type='checkbox'] {
   margin: 5px 10px;
   outline: none;
 }
+.separate {
+  margin-top: 20px;
+}
 
 .restaurants {
   display: flex;
@@ -193,6 +196,35 @@ input[type='checkbox'] {
   width: 150px;
 }
 .no-restaurants {
-  text-align: center;
   display: none;
+  text-align: center;
+  margin-top: 60px;
+  margin-right: 30px;
+  padding: 20px;
+  border-radius: 6px;
+  background-color: rgba(255, 131, 86, 0.719);
+  /* background-color: rgba(255, 224, 49, 0.534); */
+}
+
+button .tooltiptext {
+  visibility: hidden;
+  width: 80px;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 4px 0;
+  margin-top: 23px;
+  font-size: 10px;
+
+  position: absolute;
+  z-index: 1;
+}
+button:hover .tooltiptext {
+  visibility: visible;
+}
+.green {
+  background-color: rgb(60, 207, 60);
+}
+.blue {
+  background-color: rgb(55, 170, 190);
 }
