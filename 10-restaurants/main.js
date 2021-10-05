@@ -116,10 +116,10 @@ const juliet = createRestaurant(
 const listOfRestaurants = [
   dobrok,
   pivarijum,
+  dvaStapica,
   petrus,
   zak,
   showRoom,
-  dvaStapica,
   dobriDim,
   juliet,
 ];
@@ -172,6 +172,7 @@ const chooseCapacityRange = selectedCapacity => {
   }
 };
 const getRestaurantsByPriceRange = (list, price) => {
+  console.log(price);
   return list.filter(
     res =>
       res.avgMealPrice >= price.minAvgPricePerMeal &&
@@ -181,7 +182,7 @@ const getRestaurantsByPriceRange = (list, price) => {
 const getRestaurantByCapacityRange = (list, capacity) => {
   return list.filter(
     res =>
-      res.capacity >= capacity.minTables && res.capacity < capacity.maxTables
+      res.capacity >= capacity.minTables && res.capacity <= capacity.maxTables
   );
 };
 const getOpenRestaurantsNow = list => {
@@ -241,7 +242,7 @@ function createRestaurantCard(res) {
   return div;
 }
 
-function createRest(listOfRestaurants) {
+function createRestaurants(listOfRestaurants) {
   list.innerHTML = ``;
 
   listOfRestaurants.forEach(res => {
@@ -268,7 +269,7 @@ btnsPriceRange.addEventListener('click', e => {
     listOfRestaurants,
     priceRange
   );
-  createRest(restaurantsByPrice);
+  createRestaurants(restaurantsByPrice);
 });
 
 const btnsCapacity = document.getElementById('btns-capacity');
@@ -279,13 +280,13 @@ btnsCapacity.addEventListener('click', e => {
     listOfRestaurants,
     capacity
   );
-  createRest(restaurantsByCapacity);
+  createRestaurants(restaurantsByCapacity);
 });
 
 const btnOpenNow = document.getElementById('open-now');
 btnOpenNow.addEventListener('click', () => {
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
-  createRest(openedRestaurants);
+  createRestaurants(openedRestaurants);
 });
 
 const selectHours = document.getElementById('select-hours');
@@ -293,17 +294,14 @@ selectHours.addEventListener('click', e => {
   const hours = e.target.value;
   if (hours != 'choose') {
     const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
-    createRest(openedRestaurants);
+    createRestaurants(openedRestaurants);
   }
 });
 
-const form = document.getElementById('form-food');
-
-form.addEventListener('submit', e => {
+const formFood = document.getElementById('form-food');
+formFood.addEventListener('submit', e => {
   e.preventDefault();
-
   const separate = document.getElementById('separate').checked;
-
   const foods = [
     'serbian',
     'chinese',
@@ -313,9 +311,7 @@ form.addEventListener('submit', e => {
     'burgers',
     'taiwanese',
   ];
-
   const categories = [];
-
   foods.forEach(food => {
     const checkFood = document.getElementById(food).checked;
     if (checkFood) {
@@ -326,5 +322,52 @@ form.addEventListener('submit', e => {
   const restaurantsByCategory = separate
     ? getRestaurantsByCategorySeparate(listOfRestaurants, categories)
     : getRestaurantsByCategory(listOfRestaurants, categories);
-  createRest(restaurantsByCategory);
+  createRestaurants(restaurantsByCategory);
+});
+
+const btnAdvanced = document.getElementById('btn-advanced');
+btnAdvanced.addEventListener('click', () => {
+  const priceForm = document.getElementById('price-form');
+  const capacityForm = document.getElementById('capacity-form');
+  if (priceForm.style.display === 'none') {
+    priceForm.style.display = 'flex';
+    capacityForm.style.display = 'flex';
+    btnAdvanced.innerText = 'Back to basic filters';
+  } else {
+    priceForm.style.display = 'none';
+    capacityForm.style.display = 'none';
+    btnAdvanced.innerText = 'Open advanced filters';
+  }
+});
+
+const formPrice = document.getElementById('price-form');
+formPrice.addEventListener('submit', e => {
+  e.preventDefault();
+  const minPrice = document.getElementById('min-price').value;
+  const maxPrice = document.getElementById('max-price').value;
+  const priceRange = {
+    minAvgPricePerMeal: minPrice,
+    maxAvgPricePerMeal: maxPrice,
+  };
+  const restaurantsByPrice = getRestaurantsByPriceRange(
+    listOfRestaurants,
+    priceRange
+  );
+  createRestaurants(restaurantsByPrice);
+});
+
+const formCapacity = document.getElementById('capacity-form');
+formCapacity.addEventListener('submit', e => {
+  e.preventDefault();
+  const minCapacity = document.getElementById('min-capacity').value;
+  const maxCapacity = document.getElementById('max-capacity').value;
+  const capacityRange = {
+    minTables: minCapacity,
+    maxTables: maxCapacity,
+  };
+  const restaurantsByCapacity = getRestaurantByCapacityRange(
+    listOfRestaurants,
+    capacityRange
+  );
+  createRestaurants(restaurantsByCapacity);
 });

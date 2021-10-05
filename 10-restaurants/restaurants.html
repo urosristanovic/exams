@@ -26,6 +26,19 @@
               $$$
             </button>
           </div>
+          <form action="" id="price-form" style="display: none">
+            <div class="min-wrapper">
+              <label for="min-price"> Min price: </label>
+              <input type="number" name="min-price" id="min-price" />
+            </div>
+            <div class="max-wrapper">
+              <label for="max-price"> Max price: </label>
+              <input type="number" name="max-price" id="max-price" />
+            </div>
+            <div class="btn-submit">
+              <button type="submit" id="submit">Apply filters</button>
+            </div>
+          </form>
         </div>
         <div id="filter-capacity" class="filter-item">
           <p>Capacity:</p>
@@ -43,6 +56,19 @@
               l
             </button>
           </div>
+          <form action="" id="capacity-form">
+            <div class="min-wrapper">
+              <label for="min-capacity"> Min capacity: </label>
+              <input type="number" name="min-capacity" id="min-capacity" />
+            </div>
+            <div class="max-wrapper">
+              <label for="max-capacity"> Max capacity: </label>
+              <input type="number" name="max-capacity" id="max-capacity" />
+            </div>
+            <div class="btn-submit">
+              <button type="submit" id="submit">Apply filters</button>
+            </div>
+          </form>
         </div>
         <div id="working-hours" class="filter-item">
           <p>Working hours:</p>
@@ -80,7 +106,7 @@
           </div>
         </div>
         <div id="food-served" class="filter-item">
-          <p>Food served:</p>
+          <p>Cuisines:</p>
           <form action="" id="form-food">
             <div>
               <input
@@ -152,12 +178,17 @@
                 name="interest"
                 value="separate"
               />
-              <label for="separate">Separate</label>
+              <label for="separate"
+                >List restaurants by each <br />choosen cuisine</label
+              >
             </div>
             <div class="btn-submit">
               <button type="submit" id="submit">Apply filters</button>
             </div>
           </form>
+        </div>
+        <div class="btn-advanced">
+          <button type="submit" id="btn-advanced">Open Advanced filters</button>
         </div>
       </section>
       <div>
