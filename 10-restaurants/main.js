@@ -23,7 +23,37 @@ function createRestaurant(
     category,
   };
 }
-
+function createPriceRanges() {
+  const priceRanges = [
+    {
+      label: '$',
+      note: 'inexpensive',
+      minAvgPricePerMeal: 0,
+      maxAvgPricePerMeal: 500,
+    },
+    {
+      label: '$$',
+      note: 'moderate',
+      minAvgPricePerMeal: 501,
+      maxAvgPricePerMeal: 1000,
+    },
+    {
+      label: '$$$',
+      note: 'expensive',
+      minAvgPricePerMeal: 1001,
+      maxAvgPricePerMeal: 10000,
+    },
+  ];
+  return priceRanges;
+}
+function createCapacityRanges() {
+  const capacityRange = [
+    { note: 'small', label: 'S', minTables: 0, maxTables: 50 },
+    { note: 'medium', label: 'M', minTables: 51, maxTables: 150 },
+    { note: 'large', label: 'L', minTables: 151, maxTables: 1000 },
+  ];
+  return capacityRange;
+}
 const dobrok = createRestaurant(
   'Dobrok',
   'Futoska 71',
@@ -35,7 +65,6 @@ const dobrok = createRestaurant(
   14,
   ['Serbian', 'Chinese', 'International']
 );
-
 const pivarijum = createRestaurant(
   'Pivarijum',
   'Brace Popovic 2',
@@ -125,26 +154,7 @@ const listOfRestaurants = [
 ];
 
 const choosePriceRange = selectedPriceRange => {
-  let priceRanges = [
-    {
-      label: '$',
-      note: 'Inexpensive',
-      minAvgPricePerMeal: 0,
-      maxAvgPricePerMeal: 500,
-    },
-    {
-      label: '$$',
-      note: 'Moderate',
-      minAvgPricePerMeal: 501,
-      maxAvgPricePerMeal: 1000,
-    },
-    {
-      label: '$$$',
-      note: 'Expensive',
-      minAvgPricePerMeal: 1001,
-      maxAvgPricePerMeal: 10000,
-    },
-  ];
+  let priceRanges = createPriceRanges();
 
   switch (selectedPriceRange) {
     case 'inexpensive':
@@ -156,11 +166,7 @@ const choosePriceRange = selectedPriceRange => {
   }
 };
 const chooseCapacityRange = selectedCapacity => {
-  let capacityRange = [
-    { note: 'Small', label: 'S', minTables: 0, maxTables: 50 },
-    { note: 'Medium', label: 'M', minTables: 51, maxTables: 150 },
-    { note: 'Large', label: 'L', minTables: 151, maxTables: 1000 },
-  ];
+  const capacityRange = createCapacityRanges();
 
   switch (selectedCapacity) {
     case 'small':
@@ -172,7 +178,6 @@ const chooseCapacityRange = selectedCapacity => {
   }
 };
 const getRestaurantsByPriceRange = (list, price) => {
-  console.log(price);
   return list.filter(
     res =>
       res.avgMealPrice >= price.minAvgPricePerMeal &&
@@ -199,7 +204,7 @@ const getRestaurantsByCategorySeparate = (list, category) => {
   return list.filter(res => category.some(c => res.category.includes(c)));
 };
 
-function createFoods(foods) {
+function createCuisines(foods) {
   let string = '';
   foods.forEach(food => {
     const h6 = document.createElement('h6');
@@ -209,7 +214,7 @@ function createFoods(foods) {
   return string;
 }
 function createRestaurantCard(res) {
-  const foods = createFoods(res.category);
+  const foods = createCuisines(res.category);
   const div = document.createElement('div');
   div.classList.add('card');
   div.innerHTML = `
@@ -243,6 +248,7 @@ function createRestaurantCard(res) {
 }
 
 function createRestaurants(listOfRestaurants) {
+  const list = document.getElementById('restaurants');
   list.innerHTML = ``;
 
   listOfRestaurants.forEach(res => {
@@ -255,10 +261,49 @@ function createRestaurants(listOfRestaurants) {
   }
 }
 
+function createPriceRangeButton(price) {
+  const div = document.createElement('div');
+  div.innerHTML = `
+  <button class="${price.note}" value="${price.note}">
+    <span class="tooltiptext green">
+      ${price.minAvgPricePerMeal}-${price.maxAvgPricePerMeal}$
+    </span>
+    ${price.label}
+  </button>`;
+  return div;
+}
+function createCapacityRangeButton(capacity) {
+  const div = document.createElement('div');
+  div.innerHTML = `
+  <button class="${capacity.note}" value="${capacity.note}">
+    <span class="tooltiptext blue">
+      ${capacity.minTables}-${capacity.maxTables}
+    </span>
+    ${capacity.label}
+  </button>
+  `;
+  return div;
+}
+/* ########################################################################################################## */
+
 const list = document.getElementById('restaurants');
 listOfRestaurants.forEach(res => {
   const rest = createRestaurantCard(res);
   list.appendChild(rest);
+});
+
+const priceRangesElement = document.getElementById('btns-price');
+const priceRanges = createPriceRanges();
+priceRanges.forEach(price => {
+  const priceRange = createPriceRangeButton(price);
+  priceRangesElement.appendChild(priceRange);
+});
+
+const capacityRangesElement = document.getElementById('btns-capacity');
+const capacityRanges = createCapacityRanges();
+capacityRanges.forEach(capacity => {
+  const capacityRange = createCapacityRangeButton(capacity);
+  capacityRangesElement.appendChild(capacityRange);
 });
 
 const btnsPriceRange = document.getElementById('btns-price');

@@ -59,7 +59,11 @@ p {
 .btns {
   display: flex;
 }
+.btns div {
+  width: 100%;
+}
 .btns button {
+  width: 95%;
   flex-grow: 1;
 }
 #price-range button {
@@ -71,6 +75,9 @@ p {
 #working-hours button,
 #working-hours select {
   background-color: rgba(255, 224, 49, 0.534);
+}
+#select-hours {
+  width: 100%;
 }
 .btn-submit button {
   margin-top: 10px;
