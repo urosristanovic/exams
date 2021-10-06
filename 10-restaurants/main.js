@@ -247,6 +247,7 @@ function createRestaurantCard(res) {
 }
 
 function createRestaurants(listOfRestaurants) {
+  const number = document.getElementById('number-of-restaurants');
   const list = document.getElementById('restaurants');
   list.innerHTML = ``;
 
@@ -255,9 +256,12 @@ function createRestaurants(listOfRestaurants) {
     list.appendChild(rest);
   });
   document.getElementById('no-restaurants').style.display = 'none';
+  number.style.display = 'block';
   if (listOfRestaurants < 1) {
     document.getElementById('no-restaurants').style.display = 'block';
+    number.style.display = 'none';
   }
+  number.innerHTML = `Number of restaurants is: ${listOfRestaurants.length}.`;
 }
 
 function createPriceRangeButton(price) {
@@ -286,11 +290,7 @@ function createCapacityRangeButton(capacity) {
 
 /* ########################################################################################################## */
 
-const list = document.getElementById('restaurants');
-listOfRestaurants.forEach(res => {
-  const rest = createRestaurantCard(res);
-  list.appendChild(rest);
-});
+createRestaurants(listOfRestaurants);
 
 const priceRangesElement = document.getElementById('btns-price');
 const priceRanges = createPriceRanges();
