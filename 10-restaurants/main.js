@@ -51,6 +51,7 @@ function createCapacityRanges() {
     { note: 'small', label: 'S', minTables: 0, maxTables: 50 },
     { note: 'medium', label: 'M', minTables: 51, maxTables: 150 },
     { note: 'large', label: 'L', minTables: 151, maxTables: 1000 },
+    // { note: 'x-large', label: 'XL', minTables: 1001, maxTables: 10000 },
   ];
   return capacityRange;
 }
@@ -142,6 +143,17 @@ const juliet = createRestaurant(
   22,
   ['Serbian', 'Italian', 'International', 'Mexican']
 );
+const burjAlArab = createRestaurant(
+  'Burj Al Arab',
+  'شارع جميرا،',
+  '97143017777',
+  'images/burjalarab.jpg',
+  21342,
+  1201,
+  17,
+  23,
+  ['Serbian', 'Chinese', 'Italian', 'burgers', 'Taiwanese']
+);
 const listOfRestaurants = [
   dobrok,
   pivarijum,
@@ -151,31 +163,18 @@ const listOfRestaurants = [
   showRoom,
   dobriDim,
   juliet,
+  burjAlArab,
 ];
 
 const choosePriceRange = selectedPriceRange => {
-  let priceRanges = createPriceRanges();
+  const priceRanges = createPriceRanges();
 
-  switch (selectedPriceRange) {
-    case 'inexpensive':
-      return priceRanges[0];
-    case 'moderate':
-      return priceRanges[1];
-    case 'expensive':
-      return priceRanges[2];
-  }
+  return priceRanges.filter(element => element.note === selectedPriceRange)[0];
 };
 const chooseCapacityRange = selectedCapacity => {
   const capacityRange = createCapacityRanges();
 
-  switch (selectedCapacity) {
-    case 'small':
-      return capacityRange[0];
-    case 'medium':
-      return capacityRange[1];
-    case 'large':
-      return capacityRange[2];
-  }
+  return capacityRange.filter(element => element.note === selectedCapacity)[0];
 };
 const getRestaurantsByPriceRange = (list, price) => {
   return list.filter(
@@ -284,6 +283,7 @@ function createCapacityRangeButton(capacity) {
   `;
   return div;
 }
+
 /* ########################################################################################################## */
 
 const list = document.getElementById('restaurants');
