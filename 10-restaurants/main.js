@@ -121,8 +121,20 @@ const burjAlArab = createRestaurant(
   1201,
   17,
   23,
-  ['Serbian', 'Chinese', 'Italian', 'burgers', 'Taiwanese']
+  ['Serbian', 'Chinese', 'Italian', 'Burgers', 'Taiwanese']
 );
+const nusret = createRestaurant(
+  'Nusr-Et Steakhouse',
+  'Jumeriah Beach Rd 2',
+  '97144074100',
+  'images/nusret.jpg',
+  1499,
+  104,
+  12,
+  23,
+  ['Burgers', 'International', 'Mexican']
+);
+
 const listOfRestaurants = [
   dobrok,
   pivarijum,
@@ -133,6 +145,7 @@ const listOfRestaurants = [
   dobriDim,
   juliet,
   burjAlArab,
+  nusret,
 ];
 
 function createPriceRanges() {
@@ -300,20 +313,6 @@ function createCapacityRangeButton(capacity) {
 
 createRestaurants(listOfRestaurants);
 
-const priceRangesElement = document.getElementById('btns-price');
-const priceRanges = createPriceRanges();
-priceRanges.forEach(price => {
-  const priceRange = createPriceRangeButton(price);
-  priceRangesElement.appendChild(priceRange);
-});
-
-const capacityRangesElement = document.getElementById('btns-capacity');
-const capacityRanges = createCapacityRanges();
-capacityRanges.forEach(capacity => {
-  const capacityRange = createCapacityRangeButton(capacity);
-  capacityRangesElement.appendChild(capacityRange);
-});
-
 const btnsPriceRange = document.getElementById('btns-price');
 btnsPriceRange.addEventListener('click', e => {
   const selectedPriceRange = e.target.value;
@@ -323,6 +322,11 @@ btnsPriceRange.addEventListener('click', e => {
     priceRange
   );
   createRestaurants(restaurantsByPrice);
+});
+const priceRanges = createPriceRanges();
+priceRanges.forEach(price => {
+  const priceRange = createPriceRangeButton(price);
+  btnsPriceRange.appendChild(priceRange);
 });
 
 const btnsCapacity = document.getElementById('btns-capacity');
@@ -334,6 +338,11 @@ btnsCapacity.addEventListener('click', e => {
     capacity
   );
   createRestaurants(restaurantsByCapacity);
+});
+const capacityRanges = createCapacityRanges();
+capacityRanges.forEach(capacity => {
+  const capacityRange = createCapacityRangeButton(capacity);
+  btnsCapacity.appendChild(capacityRange);
 });
 
 const btnOpenNow = document.getElementById('open-now');
