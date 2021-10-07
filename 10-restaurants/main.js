@@ -23,43 +23,12 @@ function createRestaurant(
     category,
   };
 }
-function createPriceRanges() {
-  const priceRanges = [
-    {
-      label: '$',
-      note: 'inexpensive',
-      minAvgPricePerMeal: 0,
-      maxAvgPricePerMeal: 500,
-    },
-    {
-      label: '$$',
-      note: 'moderate',
-      minAvgPricePerMeal: 501,
-      maxAvgPricePerMeal: 1000,
-    },
-    {
-      label: '$$$',
-      note: 'expensive',
-      minAvgPricePerMeal: 1001,
-      maxAvgPricePerMeal: 10000,
-    },
-  ];
-  return priceRanges;
-}
-function createCapacityRanges() {
-  const capacityRange = [
-    { note: 'small', label: 'S', minTables: 0, maxTables: 50 },
-    { note: 'medium', label: 'M', minTables: 51, maxTables: 150 },
-    { note: 'large', label: 'L', minTables: 151, maxTables: 1000 },
-    // { note: 'x-large', label: 'XL', minTables: 1001, maxTables: 10000 },
-  ];
-  return capacityRange;
-}
+
 const dobrok = createRestaurant(
   'Dobrok',
   'Futoska 71',
   '0652819801',
-  'images/dobrok.svg',
+  'images/dobrok.jpg',
   320,
   50,
   9,
@@ -103,7 +72,7 @@ const showRoom = createRestaurant(
   'Show Room',
   'Branka Bajica',
   '0213105105',
-  'images/showroom.png',
+  'images/showroom.jpg',
   890,
   100,
   8,
@@ -166,6 +135,38 @@ const listOfRestaurants = [
   burjAlArab,
 ];
 
+function createPriceRanges() {
+  const priceRanges = [
+    {
+      label: '$',
+      note: 'inexpensive',
+      minAvgPricePerMeal: 0,
+      maxAvgPricePerMeal: 500,
+    },
+    {
+      label: '$$',
+      note: 'moderate',
+      minAvgPricePerMeal: 501,
+      maxAvgPricePerMeal: 1000,
+    },
+    {
+      label: '$$$',
+      note: 'expensive',
+      minAvgPricePerMeal: 1001,
+      maxAvgPricePerMeal: 10000,
+    },
+  ];
+  return priceRanges;
+}
+function createCapacityRanges() {
+  const capacityRange = [
+    { note: 'small', label: 'S', minTables: 0, maxTables: 50 },
+    { note: 'medium', label: 'M', minTables: 51, maxTables: 150 },
+    { note: 'large', label: 'L', minTables: 151, maxTables: 1000 },
+    // { note: 'x-large', label: 'XL', minTables: 1001, maxTables: 10000 },
+  ];
+  return capacityRange;
+}
 const choosePriceRange = selectedPriceRange => {
   const priceRanges = createPriceRanges();
 
@@ -185,8 +186,9 @@ const getRestaurantsByPriceRange = (list, price) => {
 };
 const getRestaurantByCapacityRange = (list, capacity) => {
   return list.filter(
-    res =>
-      res.capacity >= capacity.minTables && res.capacity <= capacity.maxTables
+    restaurant =>
+      restaurant.capacity >= capacity.minTables &&
+      restaurant.capacity <= capacity.maxTables
   );
 };
 const getOpenRestaurantsNow = list => {
@@ -194,16 +196,22 @@ const getOpenRestaurantsNow = list => {
   return getOpenRestaurants(list, hours);
 };
 const getOpenRestaurants = (list, hours) => {
-  return list.filter(res => res.opening <= hours && res.closing > hours);
+  return list.filter(
+    restaurant => restaurant.opening <= hours && restaurant.closing > hours
+  );
 };
-const getRestaurantsByCategory = (list, category) => {
-  return list.filter(res => category.every(c => res.category.includes(c)));
+const getRestaurantsByCategory = (list, listOfCategories) => {
+  return list.filter(res =>
+    listOfCategories.every(category => res.category.includes(category))
+  );
 };
-const getRestaurantsByCategorySeparate = (list, category) => {
-  return list.filter(res => category.some(c => res.category.includes(c)));
+const getRestaurantsByCategorySeparate = (list, listOfCategories) => {
+  return list.filter(res =>
+    listOfCategories.some(category => res.category.includes(category))
+  );
 };
 
-function createCuisines(foods) {
+function createFoodTypes(foods) {
   let string = '';
   foods.forEach(food => {
     const h6 = document.createElement('h6');
@@ -213,7 +221,7 @@ function createCuisines(foods) {
   return string;
 }
 function createRestaurantCard(res) {
-  const foods = createCuisines(res.category);
+  const foods = createFoodTypes(res.category);
   const div = document.createElement('div');
   div.classList.add('card');
   div.innerHTML = `
