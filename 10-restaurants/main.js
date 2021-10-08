@@ -151,20 +151,20 @@ const listOfRestaurants = [
 function createPriceRanges() {
   const priceRanges = [
     {
-      label: '$',
-      note: 'inexpensive',
+      note: '$',
+      label: 'inexpensive',
       minAvgPricePerMeal: 0,
       maxAvgPricePerMeal: 500,
     },
     {
-      label: '$$',
-      note: 'moderate',
+      note: '$$',
+      label: 'moderate',
       minAvgPricePerMeal: 501,
       maxAvgPricePerMeal: 1000,
     },
     {
-      label: '$$$',
-      note: 'expensive',
+      note: '$$$',
+      label: 'expensive',
       minAvgPricePerMeal: 1001,
       maxAvgPricePerMeal: 10000,
     },
@@ -173,22 +173,21 @@ function createPriceRanges() {
 }
 function createCapacityRanges() {
   const capacityRange = [
-    { note: 'small', label: 'S', minTables: 0, maxTables: 50 },
-    { note: 'medium', label: 'M', minTables: 51, maxTables: 150 },
-    { note: 'large', label: 'L', minTables: 151, maxTables: 1000 },
-    // { note: 'x-large', label: 'XL', minTables: 1001, maxTables: 10000 },
+    { note: 'S', label: 'small', minTables: 0, maxTables: 50 },
+    { note: 'M', label: 'medium', minTables: 51, maxTables: 150 },
+    { note: 'L', label: 'large', minTables: 151, maxTables: 1000 },
+    // { note: 'XL', label: 'x-large', minTables: 1001, maxTables: 10000 },
   ];
   return capacityRange;
 }
 const choosePriceRange = selectedPriceRange => {
   const priceRanges = createPriceRanges();
-
-  return priceRanges.filter(element => element.note === selectedPriceRange)[0];
+  return priceRanges.filter(element => element.label === selectedPriceRange)[0];
 };
 const chooseCapacityRange = selectedCapacity => {
   const capacityRange = createCapacityRanges();
 
-  return capacityRange.filter(element => element.note === selectedCapacity)[0];
+  return capacityRange.filter(element => element.label === selectedCapacity)[0];
 };
 const getRestaurantsByPriceRange = (list, price) => {
   return list.filter(
@@ -227,9 +226,9 @@ const getRestaurantsByCategorySeparate = (list, listOfCategories) => {
 function createFoodTypes(foods) {
   let string = '';
   foods.forEach(food => {
-    const h6 = document.createElement('h6');
-    h6.innerText = food;
-    string += h6.outerHTML;
+    const li = document.createElement('li');
+    li.innerText = food;
+    string += li.outerHTML;
   });
   return string;
 }
@@ -267,7 +266,7 @@ function createRestaurantCard(res) {
   return div;
 }
 
-function createRestaurants(listOfRestaurants) {
+function displayRestaurants(listOfRestaurants) {
   const number = document.getElementById('number-of-restaurants');
   const list = document.getElementById('restaurants');
   list.innerHTML = ``;
@@ -288,30 +287,30 @@ function createRestaurants(listOfRestaurants) {
 function createPriceRangeButton(price) {
   const div = document.createElement('div');
   div.innerHTML = `
-  <button class="${price.note}" value="${price.note}">
+  <button class="${price.label}" value="${price.label}">
     <span class="tooltiptext green">
       ${price.minAvgPricePerMeal}-${price.maxAvgPricePerMeal}$
     </span>
-    ${price.label}
+    ${price.note}
   </button>`;
   return div;
 }
 function createCapacityRangeButton(capacity) {
   const div = document.createElement('div');
   div.innerHTML = `
-  <button class="${capacity.note}" value="${capacity.note}">
+  <button class="${capacity.label}" value="${capacity.label}">
     <span class="tooltiptext blue">
       ${capacity.minTables}-${capacity.maxTables}
     </span>
-    ${capacity.label}
+    ${capacity.note}
   </button>
   `;
   return div;
 }
 
-/* ########################################################################################################## */
+/* ################################################################### */
 
-createRestaurants(listOfRestaurants);
+displayRestaurants(listOfRestaurants);
 
 const btnsPriceRange = document.getElementById('btns-price');
 btnsPriceRange.addEventListener('click', e => {
@@ -321,7 +320,7 @@ btnsPriceRange.addEventListener('click', e => {
     listOfRestaurants,
     priceRange
   );
-  createRestaurants(restaurantsByPrice);
+  displayRestaurants(restaurantsByPrice);
 });
 const priceRanges = createPriceRanges();
 priceRanges.forEach(price => {
@@ -337,7 +336,7 @@ btnsCapacity.addEventListener('click', e => {
     listOfRestaurants,
     capacity
   );
-  createRestaurants(restaurantsByCapacity);
+  displayRestaurants(restaurantsByCapacity);
 });
 const capacityRanges = createCapacityRanges();
 capacityRanges.forEach(capacity => {
@@ -348,15 +347,16 @@ capacityRanges.forEach(capacity => {
 const btnOpenNow = document.getElementById('open-now');
 btnOpenNow.addEventListener('click', () => {
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
-  createRestaurants(openedRestaurants);
+  displayRestaurants(openedRestaurants);
 });
 
+// on select
 const selectHours = document.getElementById('select-hours');
 selectHours.addEventListener('click', e => {
   const hours = e.target.value;
   if (hours != 'choose') {
     const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
-    createRestaurants(openedRestaurants);
+    displayRestaurants(openedRestaurants);
   }
 });
 
@@ -374,19 +374,20 @@ formFood.addEventListener('submit', e => {
     'taiwanese',
   ];
   const categories = [];
-  foods.forEach(food => {
+  foods.filter(food => {
     const checkFood = document.getElementById(food).checked;
     if (checkFood) {
       categories.push(food.charAt(0).toUpperCase() + food.slice(1));
     }
   });
-
+  // any all
   const restaurantsByCategory = separate
     ? getRestaurantsByCategorySeparate(listOfRestaurants, categories)
     : getRestaurantsByCategory(listOfRestaurants, categories);
-  createRestaurants(restaurantsByCategory);
+  displayRestaurants(restaurantsByCategory);
 });
 
+// svaki poseban div
 const btnAdvanced = document.getElementById('btn-advanced');
 btnAdvanced.addEventListener('click', () => {
   const priceForm = document.getElementById('price-form');
@@ -405,31 +406,35 @@ btnAdvanced.addEventListener('click', () => {
 const formPrice = document.getElementById('price-form');
 formPrice.addEventListener('submit', e => {
   e.preventDefault();
-  const minPrice = document.getElementById('min-price').value;
-  const maxPrice = document.getElementById('max-price').value;
+  const minPrice = document.getElementById('min-price');
+  const maxPrice = document.getElementById('max-price');
   const priceRange = {
-    minAvgPricePerMeal: minPrice,
-    maxAvgPricePerMeal: maxPrice,
+    minAvgPricePerMeal: minPrice.value,
+    maxAvgPricePerMeal: maxPrice.value,
   };
   const restaurantsByPrice = getRestaurantsByPriceRange(
     listOfRestaurants,
     priceRange
   );
-  createRestaurants(restaurantsByPrice);
+  displayRestaurants(restaurantsByPrice);
+  minPrice.value = '';
+  maxPrice.value = '';
 });
 
 const formCapacity = document.getElementById('capacity-form');
 formCapacity.addEventListener('submit', e => {
   e.preventDefault();
-  const minCapacity = document.getElementById('min-capacity').value;
-  const maxCapacity = document.getElementById('max-capacity').value;
+  const minCapacity = document.getElementById('min-capacity');
+  const maxCapacity = document.getElementById('max-capacity');
   const capacityRange = {
-    minTables: minCapacity,
-    maxTables: maxCapacity,
+    minTables: minCapacity.values,
+    maxTables: maxCapacity.values,
   };
   const restaurantsByCapacity = getRestaurantByCapacityRange(
     listOfRestaurants,
     capacityRange
   );
   createRestaurants(restaurantsByCapacity);
+  minCapacity.value = '';
+  maxCapacity.value = '';
 });

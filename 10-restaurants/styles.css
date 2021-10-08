@@ -125,8 +125,17 @@ input[type='checkbox'] {
 #form-food {
   padding-left: 10px;
 }
+#food-card li {
+  display: flex;
+  align-items: center;
+  margin: 5px 5px 5px 0;
+  background-color: rgba(248, 110, 60, 0.5);
+  list-style-type: none;
+  font-size: 10px;
+  font-weight: 600;
+}
 .separate {
-  margin-top: 20px;
+  margin: 20px 0 0 5px;
 }
 
 .restaurants {
