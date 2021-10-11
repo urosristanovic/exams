@@ -444,7 +444,7 @@ formPrice.addEventListener('submit', e => {
     listOfRestaurants,
     priceRange
   );
-  const filter = ` with min price: ${minPrice.value} and max price: ${maxPrice.value}`;
+  const filter = ` with price between ${minPrice.value}$ and ${maxPrice.value}$`;
   minPrice.value = '';
   maxPrice.value = '';
   displayRestaurants(restaurantsByPrice, filter);
@@ -463,7 +463,7 @@ formCapacity.addEventListener('submit', e => {
     listOfRestaurants,
     capacityRange
   );
-  const filter = `with number of tables from: ${minPrice.value} to: ${maxPrice.value}`;
+  const filter = `with number of tables between ${minCapacity.value} and ${maxCapacity.value}`;
   minCapacity.value = '';
   maxCapacity.value = '';
   displayRestaurants(restaurantsByCapacity, filter);
