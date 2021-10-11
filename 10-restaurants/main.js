@@ -281,7 +281,7 @@ function displayRestaurants(listOfRestaurants, filter = '') {
     document.getElementById('no-restaurants').style.display = 'block';
     number.style.display = 'none';
   }
-  number.innerHTML = `Number of <em>${filter}</em> restaurants is: ${listOfRestaurants.length}.`;
+  number.innerHTML = `Number of restaurants <em>${filter}</em> is: ${listOfRestaurants.length}.`;
 }
 
 function createPriceRangeButton(price) {
@@ -320,7 +320,8 @@ btnsPriceRange.addEventListener('click', e => {
     listOfRestaurants,
     priceRange
   );
-  displayRestaurants(restaurantsByPrice);
+  const filter = `which are ${selectedPriceRange}`;
+  displayRestaurants(restaurantsByPrice, filter);
 });
 const priceRanges = createPriceRanges();
 priceRanges.forEach(price => {
@@ -336,7 +337,8 @@ btnsCapacity.addEventListener('click', e => {
     listOfRestaurants,
     capacity
   );
-  displayRestaurants(restaurantsByCapacity);
+  const filter = `which are ${selectedCapacity}`;
+  displayRestaurants(restaurantsByCapacity, filter);
 });
 const capacityRanges = createCapacityRanges();
 capacityRanges.forEach(capacity => {
@@ -347,7 +349,8 @@ capacityRanges.forEach(capacity => {
 const btnOpenNow = document.getElementById('open-now');
 btnOpenNow.addEventListener('click', () => {
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
-  displayRestaurants(openedRestaurants, 'right now');
+  const filter = `open now`;
+  displayRestaurants(openedRestaurants, filter);
 });
 
 const selectHours = document.getElementById('select-hours');
@@ -355,7 +358,8 @@ selectHours.addEventListener('change', () => {
   const hours = selectHours.value;
   if (hours != 'choose') {
     const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
-    displayRestaurants(openedRestaurants);
+    const filter = `at ${hours} hours`;
+    displayRestaurants(openedRestaurants, filter);
     selectHours.value = 'choose';
   }
 });
@@ -399,6 +403,7 @@ formFood.addEventListener('submit', e => {
       );
       break;
   }
+
   displayRestaurants(restaurantsByCategory);
 });
 
@@ -439,9 +444,10 @@ formPrice.addEventListener('submit', e => {
     listOfRestaurants,
     priceRange
   );
-  displayRestaurants(restaurantsByPrice);
+  const filter = ` with min price: ${minPrice.value} and max price: ${maxPrice.value}`;
   minPrice.value = '';
   maxPrice.value = '';
+  displayRestaurants(restaurantsByPrice, filter);
 });
 
 const formCapacity = document.getElementById('capacity-form');
@@ -457,7 +463,8 @@ formCapacity.addEventListener('submit', e => {
     listOfRestaurants,
     capacityRange
   );
+  const filter = `with number of tables from: ${minPrice.value} to: ${maxPrice.value}`;
   minCapacity.value = '';
   maxCapacity.value = '';
-  displayRestaurants(restaurantsByCapacity);
+  displayRestaurants(restaurantsByCapacity, filter);
 });

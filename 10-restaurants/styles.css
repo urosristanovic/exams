@@ -324,3 +324,6 @@ input[type='radio'],
 .separate label {
   cursor: pointer;
 }
+em {
+  background-color: rgba(128, 128, 128, 0.329);
+}
