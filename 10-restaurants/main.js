@@ -363,7 +363,9 @@ selectHours.addEventListener('click', e => {
 const formFood = document.getElementById('form-food');
 formFood.addEventListener('submit', e => {
   e.preventDefault();
-  const separate = document.getElementById('separate').checked;
+  const separate = document.querySelector(
+    'input[name="separate"]:checked'
+  ).value;
   const foods = [
     'serbian',
     'chinese',
@@ -380,10 +382,10 @@ formFood.addEventListener('submit', e => {
       categories.push(food.charAt(0).toUpperCase() + food.slice(1));
     }
   });
-  // any all
-  const restaurantsByCategory = separate
-    ? getRestaurantsByCategorySeparate(listOfRestaurants, categories)
-    : getRestaurantsByCategory(listOfRestaurants, categories);
+  const restaurantsByCategory =
+    separate === 'any'
+      ? getRestaurantsByCategorySeparate(listOfRestaurants, categories)
+      : getRestaurantsByCategory(listOfRestaurants, categories);
   displayRestaurants(restaurantsByCategory);
 });
 

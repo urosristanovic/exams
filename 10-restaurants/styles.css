@@ -136,6 +136,10 @@ input[type='checkbox'] {
 }
 .separate {
   margin: 20px 0 0 5px;
+  display: flex;
+}
+.separate .any {
+  margin-left: 20px;
 }
 
 .restaurants {
@@ -314,4 +318,8 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+input[type='radio'],
+.separate label {
+  cursor: pointer;
 }
