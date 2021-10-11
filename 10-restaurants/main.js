@@ -349,7 +349,7 @@ capacityRanges.forEach(capacity => {
 const btnOpenNow = document.getElementById('open-now');
 btnOpenNow.addEventListener('click', () => {
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
-  const filter = `open now`;
+  const filter = `which are open now`;
   displayRestaurants(openedRestaurants, filter);
 });
 
@@ -358,7 +358,7 @@ selectHours.addEventListener('change', () => {
   const hours = selectHours.value;
   if (hours != 'choose') {
     const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
-    const filter = `at ${hours} hours`;
+    const filter = `open at ${hours % 12}${hours > 12 ? 'pm' : 'am'}`;
     displayRestaurants(openedRestaurants, filter);
     selectHours.value = 'choose';
   }
