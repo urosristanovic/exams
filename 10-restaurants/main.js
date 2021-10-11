@@ -266,7 +266,7 @@ function createRestaurantCard(res) {
   return div;
 }
 
-function displayRestaurants(listOfRestaurants) {
+function displayRestaurants(listOfRestaurants, filter = '') {
   const number = document.getElementById('number-of-restaurants');
   const list = document.getElementById('restaurants');
   list.innerHTML = ``;
@@ -281,7 +281,7 @@ function displayRestaurants(listOfRestaurants) {
     document.getElementById('no-restaurants').style.display = 'block';
     number.style.display = 'none';
   }
-  number.innerHTML = `Number of restaurants is: ${listOfRestaurants.length}.`;
+  number.innerHTML = `Number of <em>${filter}</em> restaurants is: ${listOfRestaurants.length}.`;
 }
 
 function createPriceRangeButton(price) {
@@ -347,25 +347,24 @@ capacityRanges.forEach(capacity => {
 const btnOpenNow = document.getElementById('open-now');
 btnOpenNow.addEventListener('click', () => {
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
-  displayRestaurants(openedRestaurants);
+  displayRestaurants(openedRestaurants, 'right now');
 });
 
-// on select
 const selectHours = document.getElementById('select-hours');
-selectHours.addEventListener('click', e => {
-  const hours = e.target.value;
+selectHours.addEventListener('change', () => {
+  const hours = selectHours.value;
   if (hours != 'choose') {
     const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
     displayRestaurants(openedRestaurants);
+    selectHours.value = 'choose';
   }
 });
 
 const formFood = document.getElementById('form-food');
 formFood.addEventListener('submit', e => {
   e.preventDefault();
-  const separate = document.querySelector(
-    'input[name="separate"]:checked'
-  ).value;
+  let restaurantsByCategory = [];
+  const categories = [];
   const foods = [
     'serbian',
     'chinese',
@@ -375,33 +374,55 @@ formFood.addEventListener('submit', e => {
     'burgers',
     'taiwanese',
   ];
-  const categories = [];
+  const separate = document.querySelector(
+    'input[name="separate"]:checked'
+  ).value;
+
   foods.filter(food => {
     const checkFood = document.getElementById(food).checked;
     if (checkFood) {
       categories.push(food.charAt(0).toUpperCase() + food.slice(1));
     }
   });
-  const restaurantsByCategory =
-    separate === 'any'
-      ? getRestaurantsByCategorySeparate(listOfRestaurants, categories)
-      : getRestaurantsByCategory(listOfRestaurants, categories);
+
+  switch (separate) {
+    case 'any':
+      restaurantsByCategory = getRestaurantsByCategorySeparate(
+        listOfRestaurants,
+        categories
+      );
+      break;
+    case 'all':
+      restaurantsByCategory = getRestaurantsByCategory(
+        listOfRestaurants,
+        categories
+      );
+      break;
+  }
   displayRestaurants(restaurantsByCategory);
 });
 
-// svaki poseban div
-const btnAdvanced = document.getElementById('btn-advanced');
-btnAdvanced.addEventListener('click', () => {
-  const priceForm = document.getElementById('price-form');
+const advancedCapacity = document.getElementById('advanced-capacity');
+advancedCapacity.addEventListener('click', () => {
   const capacityForm = document.getElementById('capacity-form');
+  if (capacityForm.style.display === 'none') {
+    capacityForm.style.display = 'flex';
+    advancedCapacity.innerText = 'Back to basic filters';
+  } else {
+    capacityForm.style.display = 'none';
+    advancedCapacity.innerText = 'Advanced filters';
+  }
+});
+
+const advancedPrice = document.getElementById('advanced-price');
+advancedPrice.addEventListener('click', () => {
+  const priceForm = document.getElementById('price-form');
   if (priceForm.style.display === 'none') {
     priceForm.style.display = 'flex';
-    capacityForm.style.display = 'flex';
-    btnAdvanced.innerText = 'Back to basic filters';
+    advancedPrice.innerText = 'Back to basic filters';
   } else {
     priceForm.style.display = 'none';
-    capacityForm.style.display = 'none';
-    btnAdvanced.innerText = 'Open advanced filters';
+    advancedPrice.innerText = 'Advanced filters';
   }
 });
 
@@ -429,14 +450,14 @@ formCapacity.addEventListener('submit', e => {
   const minCapacity = document.getElementById('min-capacity');
   const maxCapacity = document.getElementById('max-capacity');
   const capacityRange = {
-    minTables: minCapacity.values,
-    maxTables: maxCapacity.values,
+    minTables: minCapacity.value,
+    maxTables: maxCapacity.value,
   };
   const restaurantsByCapacity = getRestaurantByCapacityRange(
     listOfRestaurants,
     capacityRange
   );
-  createRestaurants(restaurantsByCapacity);
   minCapacity.value = '';
   maxCapacity.value = '';
+  displayRestaurants(restaurantsByCapacity);
 });

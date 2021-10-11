@@ -35,14 +35,17 @@
               />
             </div>
             <div class="btn-submit">
-              <button type="submit" id="submit">Apply filters</button>
+              <button id="submit">Apply filters</button>
             </div>
           </form>
+          <div class="btn-advanced">
+            <button id="advanced-price">Advanced filters</button>
+          </div>
         </div>
         <div id="filter-capacity" class="filter-item">
           <p>Capacity:</p>
           <div class="btns" id="btns-capacity"></div>
-          <form action="" id="capacity-form">
+          <form action="" id="capacity-form" style="display: none">
             <div class="min-wrapper">
               <label for="min-capacity"> Min capacity: </label>
               <input
@@ -67,6 +70,9 @@
               <button type="submit" id="submit">Apply filters</button>
             </div>
           </form>
+          <div class="btn-advanced">
+            <button id="advanced-capacity">Advanced filters</button>
+          </div>
         </div>
         <div id="working-hours" class="filter-item">
           <p>Working hours:</p>
@@ -194,9 +200,6 @@
               <button type="submit" id="submit">Apply filters</button>
             </div>
           </form>
-        </div>
-        <div class="btn-advanced">
-          <button type="submit" id="btn-advanced">Open Advanced filters</button>
         </div>
       </section>
       <div>
