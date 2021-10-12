@@ -88,9 +88,15 @@ p {
   margin-top: 10px;
   background-color: rgba(255, 33, 33, 0.644);
 }
+#btns-price .active {
+  background-color: rgb(60, 207, 60);
+}
 #price-range button:hover {
   background-color: rgb(60, 207, 60);
   transition: all 0.3s;
+}
+#btns-capacity .active {
+  background-color: rgb(55, 170, 190);
 }
 #filter-capacity button:hover {
   background-color: rgb(55, 170, 190);

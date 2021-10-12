@@ -308,6 +308,13 @@ function createCapacityRangeButton(capacity) {
   return div;
 }
 
+function resetActiveButtons() {
+  const listOfButtons = document.querySelectorAll('button');
+  listOfButtons.forEach(btn => {
+    if (btn.classList.contains('active')) btn.classList.remove('active');
+  });
+}
+
 /* ################################################################### */
 
 displayRestaurants(listOfRestaurants);
@@ -322,6 +329,8 @@ btnsPriceRange.addEventListener('click', e => {
   );
   const filter = `which are ${selectedPriceRange}`;
   displayRestaurants(restaurantsByPrice, filter);
+  resetActiveButtons();
+  e.target.classList.add('active');
 });
 const priceRanges = createPriceRanges();
 priceRanges.forEach(price => {
@@ -329,6 +338,7 @@ priceRanges.forEach(price => {
   btnsPriceRange.appendChild(priceRange);
 });
 
+resetActiveButtons();
 const btnsCapacity = document.getElementById('btns-capacity');
 btnsCapacity.addEventListener('click', e => {
   const selectedCapacity = e.target.value;
@@ -337,6 +347,8 @@ btnsCapacity.addEventListener('click', e => {
     listOfRestaurants,
     capacity
   );
+  resetActiveButtons();
+  e.target.classList.add('active');
   const filter = `which are ${selectedCapacity}`;
   displayRestaurants(restaurantsByCapacity, filter);
 });
@@ -351,6 +363,7 @@ btnOpenNow.addEventListener('click', () => {
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
   const filter = `which are open now`;
   displayRestaurants(openedRestaurants, filter);
+  resetActiveButtons();
 });
 
 const selectHours = document.getElementById('select-hours');
@@ -362,6 +375,7 @@ selectHours.addEventListener('change', () => {
     displayRestaurants(openedRestaurants, filter);
     selectHours.value = 'choose';
   }
+  resetActiveButtons();
 });
 
 const formFood = document.getElementById('form-food');
@@ -405,6 +419,7 @@ formFood.addEventListener('submit', e => {
   }
 
   displayRestaurants(restaurantsByCategory);
+  resetActiveButtons();
 });
 
 const advancedCapacity = document.getElementById('advanced-capacity');
@@ -417,6 +432,7 @@ advancedCapacity.addEventListener('click', () => {
     capacityForm.style.display = 'none';
     advancedCapacity.innerText = 'Advanced filters';
   }
+  resetActiveButtons();
 });
 
 const advancedPrice = document.getElementById('advanced-price');
@@ -429,6 +445,7 @@ advancedPrice.addEventListener('click', () => {
     priceForm.style.display = 'none';
     advancedPrice.innerText = 'Advanced filters';
   }
+  resetActiveButtons();
 });
 
 const formPrice = document.getElementById('price-form');
@@ -448,6 +465,7 @@ formPrice.addEventListener('submit', e => {
   minPrice.value = '';
   maxPrice.value = '';
   displayRestaurants(restaurantsByPrice, filter);
+  resetActiveButtons();
 });
 
 const formCapacity = document.getElementById('capacity-form');
@@ -467,4 +485,5 @@ formCapacity.addEventListener('submit', e => {
   minCapacity.value = '';
   maxCapacity.value = '';
   displayRestaurants(restaurantsByCapacity, filter);
+  resetActiveButtons();
 });
