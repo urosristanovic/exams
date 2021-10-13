@@ -34,12 +34,20 @@ body {
 }
 #btn-submit {
   width: 50%;
-  background-color: rgb(6, 0, 17);
+  background-color: rgba(6, 0, 17, 5%);
   margin-top: 20px;
 }
-#btn-submit:hover {
-  background-color: rgba(6, 0, 17, 5%);
+#btn-back {
+  margin-top: 20px;
+  width: 40%;
   cursor: pointer;
+  background-color: rgba(6, 0, 17, 5%);
+}
+#btn-back:hover,
+#btn-submit:hover {
+  background-color: rgb(6, 0, 17);
+  cursor: pointer;
+  transform: scale(1.05);
   transition: all 0.3s;
 }
 input {
@@ -72,4 +80,7 @@ p {
 }
 #msg-container p {
   padding: 5px;
+}
+#em-counter {
+  color: red;
 }

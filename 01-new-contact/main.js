@@ -1,5 +1,42 @@
 'use strict';
 
+checkLanguage(navigator.language);
+
+let counter = 0;
+const cookies = document.cookie;
+const nameOfCookie = 'number-of-saves';
+
+if (cookies) {
+  const cookie = getCookie(cookies, nameOfCookie);
+  const cookieCounter = getCookieValue(cookie);
+
+  if (cookieCounter > 0) {
+    counter = getCookieValue(cookie);
+  }
+}
+
+const save = document.getElementById('form');
+save.addEventListener('submit', e => {
+  e.preventDefault();
+  const query = new URLSearchParams();
+  const name = document.getElementById('first-name');
+  const surname = document.getElementById('surname');
+  const date = document.getElementById('date');
+
+  query.set('fullname', `${name.value} ${surname.value}`);
+  query.set('date', `${date.value}`);
+
+  counter++;
+  updateCookie(nameOfCookie, counter);
+
+  location = `message.html?${query}`;
+
+  name.value = '';
+  surname.value = '';
+  date.value = '';
+});
+
+// Get elements for translate the page
 function getElements() {
   const name = document.getElementById('lbl-name');
   const surname = document.getElementById('lbl-surname');
@@ -12,18 +49,17 @@ function getElements() {
   };
 }
 function translateToEnglish() {
-  const labels = getElements();
-  labels.name.innerText = 'Name:';
-  labels.surname.innerText = 'Surname:';
-  labels.date.innerText = 'Date Of Birth:';
+  const elements = getElements();
+  elements.name.innerText = 'Name:';
+  elements.surname.innerText = 'Surname:';
+  elements.date.innerText = 'Date Of Birth:';
 }
 function translateToSerbian() {
-  const labels = getElements();
-  labels.name.innerText = 'Ime:';
-  labels.surname.innerText = 'Prezime:';
-  labels.date.innerText = 'Datum rođenja:';
+  const elements = getElements();
+  elements.name.innerText = 'Ime:';
+  elements.surname.innerText = 'Prezime:';
+  elements.date.innerText = 'Datum rođenja:';
 }
-
 function checkLanguage(language) {
   if (language === 'sr') {
     translateToSerbian();
@@ -32,23 +68,14 @@ function checkLanguage(language) {
   }
 }
 
-checkLanguage(navigator.language);
-
-const save = document.getElementById('form');
-save.addEventListener('submit', e => {
-  e.preventDefault();
-  const query = new URLSearchParams();
-
-  const name = document.getElementById('first-name').value;
-  const surname = document.getElementById('surname').value;
-  const date = document.getElementById('date').value;
-
-  query.set('fullname', `${name} ${surname}`);
-  query.set('date', `${date}`);
-
-  location = `message.html?${query}`;
-
-  name.value = '';
-  surname.value = '';
-  date.value = '';
-});
+// Create or Update cookie
+function updateCookie(name, counter) {
+  document.cookie = `${name}=${counter}`;
+}
+function getCookie(cookies, searchCookie) {
+  const array = cookies.split(';');
+  return array.filter(cookie => cookie.split('=')[0] === searchCookie)[0];
+}
+function getCookieValue(cookie) {
+  return cookie.split('=')[1];
+}
