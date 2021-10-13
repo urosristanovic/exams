@@ -1,6 +1,6 @@
 'use strict';
 
-function getLabels() {
+function getElements() {
   const name = document.getElementById('lbl-name');
   const surname = document.getElementById('lbl-surname');
   const date = document.getElementById('lbl-date');
@@ -12,13 +12,13 @@ function getLabels() {
   };
 }
 function translateToEnglish() {
-  const labels = getLabels();
+  const labels = getElements();
   labels.name.innerText = 'Name:';
   labels.surname.innerText = 'Surname:';
   labels.date.innerText = 'Date Of Birth:';
 }
 function translateToSerbian() {
-  const labels = getLabels();
+  const labels = getElements();
   labels.name.innerText = 'Ime:';
   labels.surname.innerText = 'Prezime:';
   labels.date.innerText = 'Datum rođenja:';
@@ -37,11 +37,16 @@ checkLanguage(navigator.language);
 const save = document.getElementById('form');
 save.addEventListener('submit', e => {
   e.preventDefault();
+  const query = new URLSearchParams();
+
   const name = document.getElementById('first-name').value;
   const surname = document.getElementById('surname').value;
   const date = document.getElementById('date').value;
 
-  location = `message.html?name=${name}&surname=${surname}&date=${date}`;
+  query.set('fullname', `${name} ${surname}`);
+  query.set('date', `${date}`);
+
+  location = `message.html?${query}`;
 
   name.value = '';
   surname.value = '';
