@@ -2,16 +2,20 @@
 
 checkLanguage(navigator.language);
 
+// document.cookie = 'first-name="uros"';
+// document.cookie = 'last-name="ristanovic"';
+
 let counter = 0;
 const cookies = document.cookie;
 const nameOfCookie = 'number-of-saves';
 
 if (cookies) {
   const cookie = getCookie(cookies, nameOfCookie);
-  const cookieCounter = getCookieValue(cookie);
-
-  if (cookieCounter > 0) {
-    counter = getCookieValue(cookie);
+  if (cookie) {
+    const cookieCounter = getCookieValue(cookie);
+    if (cookieCounter > 0) {
+      counter = getCookieValue(cookie);
+    }
   }
 }
 
@@ -74,7 +78,9 @@ function updateCookie(name, counter) {
 }
 function getCookie(cookies, searchCookie) {
   const array = cookies.split(';');
-  return array.filter(cookie => cookie.split('=')[0] === searchCookie)[0];
+  return array.filter(
+    cookie => cookie.trim().split('=')[0] === searchCookie
+  )[0];
 }
 function getCookieValue(cookie) {
   return cookie.split('=')[1];

@@ -65,7 +65,10 @@ function translateToSerbian() {
 
 function getCookie(cookies, searchCookie) {
   const array = cookies.split(';');
-  return array.filter(cookie => cookie.split('=')[0] === searchCookie)[0];
+
+  return array.filter(
+    cookie => cookie.trim().split('=')[0] === searchCookie
+  )[0];
 }
 function getCookieValue(cookie) {
   return cookie.split('=')[1];
