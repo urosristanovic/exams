@@ -1,0 +1,20 @@
+--- Front-End Web Developer, Part VIII - Browser Object Model (BOM) ---
+Collection of exercises, that should be followed in this order:
+	1. Clock
+		Create Web application that displays clock with current date and time.
+		WARNING: Date and time should be updated in real-time.
+		NOTE: Pay attention to the look & feel (UX) of the application.
+		
+	2. New Contact v4
+		Improve New Contact example to display confirmation message (with contact information) 
+		after saving information about new contact, on the separate page.
+
+	3. New Contact v5
+		Improve New Contact example to support multiple languages (at least two), and display 
+		form in user-preferred language as set in Web browser preferences.
+		
+	3. New Contact v6
+		Improve New Contact example to display confirmation message (with contact information 
+		and ordinal number of contact saved) after saving information about new contact, 
+		on the separate page.
+		NOTE: Count of previously saved contacts should be stored in a cookie.
