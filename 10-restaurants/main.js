@@ -359,11 +359,12 @@ capacityRanges.forEach(capacity => {
 });
 
 const btnOpenNow = document.getElementById('open-now');
-btnOpenNow.addEventListener('click', () => {
+btnOpenNow.addEventListener('click', e => {
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
   const filter = `which are open now`;
   displayRestaurants(openedRestaurants, filter);
   resetActiveButtons();
+  e.target.classList.add('active');
 });
 
 const selectHours = document.getElementById('select-hours');

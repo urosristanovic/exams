@@ -95,6 +95,9 @@ p {
   background-color: rgb(60, 207, 60);
   transition: all 0.3s;
 }
+#open-now.active {
+  background-color: rgb(209, 184, 41);
+}
 #btns-capacity .active {
   background-color: rgb(55, 170, 190);
 }
