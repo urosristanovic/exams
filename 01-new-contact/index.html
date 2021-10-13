@@ -10,25 +10,23 @@
   <body>
     <div class="container">
       <form action="" class="form" id="form">
-        <label for="name">Name:</label>
+        <label id="lbl-name" for="name"></label>
         <input
           type="text"
           placeholder="Uros"
           id="first-name"
-          pattern="[a-zA-Z]+"
           required
           autocomplete="off"
         />
-        <label for="surname">Surname:</label>
+        <label id="lbl-surname" for="surname"></label>
         <input
           type="text"
           placeholder="Ristanovic"
-          id="surename"
-          pattern="[a-zA-Z]+"
+          id="surname"
           required
           autocomplete="off"
         />
-        <label for="date-of-birth:"> Date of birth: </label>
+        <label id="lbl-date" for="date-of-birth:"></label>
         <input type="date" name="date" id="date" required />
         <div class="btn">
           <input type="submit" value="SAVE" id="btn-submit" />
