@@ -5,8 +5,18 @@ const dob = params.get('date');
 
 const cookies = document.cookie;
 const nameOfCookie = 'number-of-saves';
-const cookie = getCookie(cookies, nameOfCookie);
-const cookieCounter = getCookieValue(cookie);
+
+let cookieCounter = 0;
+
+if (cookies) {
+  const cookie = getCookie(cookies, nameOfCookie);
+  if (cookie) {
+    cookieCounter = getCookieValue(cookie);
+    if (cookieCounter > 0) {
+      counter = getCookieValue(cookie);
+    }
+  }
+}
 
 const back = document.getElementById('btn-back');
 back.addEventListener('click', () => {

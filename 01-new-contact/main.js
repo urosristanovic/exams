@@ -41,7 +41,7 @@ save.addEventListener('submit', e => {
 });
 
 // Get elements for translate the page
-function getElements() {
+function getLabels() {
   const name = document.getElementById('lbl-name');
   const surname = document.getElementById('lbl-surname');
   const date = document.getElementById('lbl-date');
@@ -53,13 +53,13 @@ function getElements() {
   };
 }
 function translateToEnglish() {
-  const elements = getElements();
+  const elements = getLabels();
   elements.name.innerText = 'Name:';
   elements.surname.innerText = 'Surname:';
   elements.date.innerText = 'Date Of Birth:';
 }
 function translateToSerbian() {
-  const elements = getElements();
+  const elements = getLabels();
   elements.name.innerText = 'Ime:';
   elements.surname.innerText = 'Prezime:';
   elements.date.innerText = 'Datum rođenja:';
