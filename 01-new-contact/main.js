@@ -2,28 +2,17 @@
 
 checkLanguage(navigator.language);
 
-let counter = 0;
-let cookies = document.cookie;
 const nameCookieSaves = 'number-of-saves';
 const nameCookieLanguage = 'language';
 
-if (cookies) {
-  const saveCookie = getCookie(cookies, nameCookieSaves);
-  if (saveCookie) {
-    counter = getCookieValue(saveCookie);
-  }
-}
+let counter = setCookieValue(nameCookieSaves)
+  ? setCookieValue(nameCookieSaves)
+  : 0;
 
 const save = document.getElementById('form');
 save.addEventListener('submit', e => {
   e.preventDefault();
-  let language;
-  cookies = document.cookie;
-  const languageCookie = getCookie(cookies, nameCookieLanguage);
-
-  if (languageCookie) {
-    language = getCookieValue(languageCookie);
-  }
+  let language = setCookieValue(nameCookieLanguage);
 
   counter++;
   updateCookie(nameCookieSaves, counter);
@@ -38,6 +27,16 @@ languages.addEventListener('click', e => {
   updateCookie(nameCookieLanguage, language);
   checkLanguage(language);
 });
+
+function setCookieValue(nameCookie) {
+  const cookies = document.cookie;
+  if (cookies) {
+    const cookie = getCookie(cookies, nameCookie);
+    if (cookie) {
+      return getCookieValue(cookie);
+    }
+  }
+}
 
 function setQuery(counter, language) {
   const query = new URLSearchParams();
