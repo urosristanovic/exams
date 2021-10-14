@@ -2,32 +2,34 @@
 
 checkLanguage(navigator.language);
 
-// document.cookie = 'first-name="uros"';
-// document.cookie = 'last-name="ristanovic"';
-
 let counter = 0;
-const cookies = document.cookie;
+let cookies = document.cookie;
 const nameCookieSaves = 'number-of-saves';
 const nameCookieLanguage = 'language';
 
 if (cookies) {
   const saveCookie = getCookie(cookies, nameCookieSaves);
   if (saveCookie) {
-    const cookieCounter = getCookieValue(saveCookie);
-    if (cookieCounter > 0) {
-      counter = getCookieValue(saveCookie);
-    }
+    counter = getCookieValue(saveCookie);
   }
 }
 
 const save = document.getElementById('form');
 save.addEventListener('submit', e => {
   e.preventDefault();
+  let language;
+  cookies = document.cookie;
+  const languageCookie = getCookie(cookies, nameCookieLanguage);
+
+  if (languageCookie) {
+    language = getCookieValue(languageCookie);
+  }
 
   counter++;
-  setQuery(counter);
-
   updateCookie(nameCookieSaves, counter);
+  const query = setQuery(counter, language);
+
+  location = `message.html?${query}`;
 });
 
 const languages = document.getElementById('languages');
@@ -37,8 +39,7 @@ languages.addEventListener('click', e => {
   checkLanguage(language);
 });
 
-function setQuery(counter) {
-  console.log(counter);
+function setQuery(counter, language) {
   const query = new URLSearchParams();
   const name = document.getElementById('first-name');
   const surname = document.getElementById('surname');
@@ -48,11 +49,15 @@ function setQuery(counter) {
   query.set('date', `${date.value}`);
   query.set('counter', `${counter}`);
 
-  location = `message.html?${query}`;
+  if (language) {
+    query.set('language', `${language}`);
+  }
 
   name.value = '';
   surname.value = '';
   date.value = '';
+
+  return query;
 }
 
 // Get elements for translate the page

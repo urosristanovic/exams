@@ -3,20 +3,15 @@ const params = new URLSearchParams(location.search);
 const fullname = params.get('fullname');
 const dob = params.get('date');
 const counter = params.get('counter');
+const language = params.get('language');
 
+checkLanguage(language);
 createMessage(fullname, dob, counter);
-
-const back = document.getElementById('btn-back');
-back.addEventListener('click', () => {
-  history.back();
-});
 
 function createMessage(fullName, dob, counter) {
   const fullNameElement = document.getElementById('full-name');
   const dobElement = document.getElementById('em-dob');
   const counterElement = document.getElementById('em-counter');
-
-  checkLanguage();
 
   fullNameElement.innerText = `${fullName}`;
   dobElement.innerText = `${dob}.`;
@@ -30,6 +25,11 @@ function checkLanguage(language) {
     translateToEnglish();
   }
 }
+
+const back = document.getElementById('btn-back');
+back.addEventListener('click', () => {
+  history.back();
+});
 
 function getElements() {
   const newContactText = document.getElementById('new-contact');

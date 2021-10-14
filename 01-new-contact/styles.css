@@ -84,3 +84,18 @@ p {
 #em-counter {
   color: red;
 }
+#languages button {
+  background-color: transparent;
+  outline: none;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 7px 20px;
+  color: white;
+  cursor: pointer;
+  margin: 10px 5px;
+}
+#languages button:hover {
+  background-color: rgb(6, 0, 17);
+  transform: scale(1.05);
+  transition: all 0.3s;
+}
