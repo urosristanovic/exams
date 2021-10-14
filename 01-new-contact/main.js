@@ -24,14 +24,10 @@ const save = document.getElementById('form');
 save.addEventListener('submit', e => {
   e.preventDefault();
 
-  setQuery();
-
   counter++;
-  updateCookie(nameCookieSaves, counter);
+  setQuery(counter);
 
-  // name.value = '';
-  // surname.value = '';
-  // date.value = '';
+  updateCookie(nameCookieSaves, counter);
 });
 
 const languages = document.getElementById('languages');
@@ -41,13 +37,8 @@ languages.addEventListener('click', e => {
   checkLanguage(language);
 });
 
-function setQuery() {
-  let cookieLanguage = '';
-  const nameCookieLanguage = 'language';
-
-  const languageCookie = getCookie(cookies, nameCookieLanguage);
-  cookieLanguage = getCookieValue(languageCookie);
-
+function setQuery(counter) {
+  console.log(counter);
   const query = new URLSearchParams();
   const name = document.getElementById('first-name');
   const surname = document.getElementById('surname');
@@ -55,9 +46,13 @@ function setQuery() {
 
   query.set('fullname', `${name.value} ${surname.value}`);
   query.set('date', `${date.value}`);
-  query.set('language', `${cookieLanguage}`);
+  query.set('counter', `${counter}`);
 
   location = `message.html?${query}`;
+
+  name.value = '';
+  surname.value = '';
+  date.value = '';
 }
 
 // Get elements for translate the page

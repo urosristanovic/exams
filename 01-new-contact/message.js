@@ -2,44 +2,25 @@ const params = new URLSearchParams(location.search);
 
 const fullname = params.get('fullname');
 const dob = params.get('date');
+const counter = params.get('counter');
 
-const cookies = document.cookie;
-const nameOfCookie = 'number-of-saves';
-
-if (cookies) {
-  const cookie = getCookie(cookies, nameOfCookie);
-  if (cookie) {
-    cookieCounter = getCookieValue(cookie);
-    if (cookieCounter > 0) {
-      counter = getCookieValue(cookie);
-    }
-  }
-}
+createMessage(fullname, dob, counter);
 
 const back = document.getElementById('btn-back');
 back.addEventListener('click', () => {
   history.back();
 });
 
-const language = params.get('language');
-if (language) {
-  createMessage(fullname, dob, cookieCounter, language);
-}
-
-function createMessage(fullName, dob, cookieCounter, language) {
+function createMessage(fullName, dob, counter) {
   const fullNameElement = document.getElementById('full-name');
   const dobElement = document.getElementById('em-dob');
   const counterElement = document.getElementById('em-counter');
 
-  if (language) {
-    checkLanguage(language);
-  } else {
-    checkLanguage(navigator.language);
-  }
+  checkLanguage();
 
   fullNameElement.innerText = `${fullName}`;
   dobElement.innerText = `${dob}.`;
-  counterElement.innerText = `${cookieCounter}`;
+  counterElement.innerText = `${counter}`;
 }
 
 function checkLanguage(language) {
@@ -76,15 +57,4 @@ function translateToSerbian() {
   elements.successText.innerText = `Uspešno kreiran!`;
   elements.dobText.innerText = `Datum rođenja: `;
   elements.savesCounter.innerText = `Brojač čuvanja: `;
-}
-
-function getCookie(cookies, searchCookie) {
-  const array = cookies.split(';');
-
-  return array.filter(
-    cookie => cookie.trim().split('=')[0] === searchCookie
-  )[0];
-}
-function getCookieValue(cookie) {
-  return cookie.split('=')[1];
 }
