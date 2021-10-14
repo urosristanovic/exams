@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+li {
+  list-style-type: none;
+}
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: gainsboro;
+}
+.lights-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#lights {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  background-color: rgb(61, 61, 61);
+  width: 200px;
+  height: 600px;
+  border-radius: 10px;
+  margin-top: 50px;
+  box-shadow: rgba(0, 0, 0, 1) 0px 0px 30px;
+}
+#red,
+#yellow,
+#green {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.3;
+  transition: all 0.3s;
+}
+#pillar {
+  width: 50px;
+  height: 300px;
+  background-color: gray;
+  box-shadow: rgba(0, 0, 0, 1) 0px 0px 20px;
+}
+#red {
+  background-color: red;
+  box-shadow: red 0px 0px 20px;
+}
+#green {
+  background-color: rgb(15, 236, 15);
+  box-shadow: rgb(15, 236, 15) 0px 0px 20px;
+}
+#yellow {
+  background-color: yellow;
+  box-shadow: yellow 0px 0px 20px;
+}
+#conditionally {
+  width: 40px;
+  height: 50px;
+  background-color: black;
+}
