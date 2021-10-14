@@ -7,9 +7,6 @@ body {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
 }
-li {
-  list-style-type: none;
-}
 .container {
   width: 100vw;
   height: 100vh;
@@ -32,13 +29,14 @@ li {
   background-color: rgb(61, 61, 61);
   width: 200px;
   height: 600px;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 10px;
   margin-top: 50px;
   box-shadow: rgba(0, 0, 0, 1) 0px 0px 30px;
 }
-#red,
-#yellow,
-#green {
+#right,
+.red,
+.yellow,
+.green {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -53,21 +51,62 @@ li {
   height: 300px;
   background-color: gray;
   box-shadow: rgba(0, 0, 0, 1) 0px 0px 20px;
+  margin-right: 200px;
 }
-#red {
+.red {
   background-color: red;
   box-shadow: red 0px 0px 20px;
 }
-#green {
+.green {
   background-color: rgb(15, 236, 15);
   box-shadow: rgb(15, 236, 15) 0px 0px 20px;
 }
-#yellow {
+.yellow {
   background-color: yellow;
   box-shadow: yellow 0px 0px 20px;
 }
-#conditionally {
-  width: 40px;
-  height: 50px;
+#right {
+  box-shadow: white 0px 0px 20px;
+}
+#lights-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+#turn-right {
+  width: 200px;
+  height: 200px;
   background-color: black;
+  box-shadow: rgba(0, 0, 0, 1) 0px 0px 30px;
+  border-radius: 0 10px 10px 0;
+  background-color: rgb(61, 61, 61);
+  justify-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#right-arrow {
+  font-size: 120px;
+  color: rgb(15, 236, 15);
+}
+.fa-arrow-right {
+  opacity: 0.2;
+}
+#right {
+  justify-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #343434;
+  box-shadow: rgba(255, 255, 255, 0.349) 0px 0px 20px;
+  opacity: 1;
+}
+
+.opacity-03 {
+  opacity: 0.3;
+}
+.opacity-02 {
+  opacity: 0.2;
+}
+.opacity-1 {
+  opacity: 1;
 }
