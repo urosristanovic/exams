@@ -9,12 +9,16 @@
   </head>
   <body>
     <div class="container">
+      <h1 class="heading">Stopwatch</h1>
       <div class="stopwatch">
-        <p><span id="clock">00:00:00</span><span id="miliseconds">0</span></p>
-        <div class="btns">
-          <button id="start">Start</button>
-          <button id="stop">Stop</button>
-          <button id="reset">Reset</button>
+        <p>
+          <span id="time">00:00:00</span>
+          <span id="miliseconds">0</span>
+        </p>
+        <div class="btns" id="btns">
+          <button value="start" id="start">Start</button>
+          <button value="stop" id="stop">Stop</button>
+          <button value="reset" id="reset">Reset</button>
         </div>
       </div>
     </div>
