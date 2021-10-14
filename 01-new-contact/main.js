@@ -7,14 +7,15 @@ checkLanguage(navigator.language);
 
 let counter = 0;
 const cookies = document.cookie;
-const nameOfCookie = 'number-of-saves';
+const nameCookieSaves = 'number-of-saves';
+const nameCookieLanguage = 'language';
 
 if (cookies) {
-  const cookie = getCookie(cookies, nameOfCookie);
-  if (cookie) {
-    const cookieCounter = getCookieValue(cookie);
+  const saveCookie = getCookie(cookies, nameCookieSaves);
+  if (saveCookie) {
+    const cookieCounter = getCookieValue(saveCookie);
     if (cookieCounter > 0) {
-      counter = getCookieValue(cookie);
+      counter = getCookieValue(saveCookie);
     }
   }
 }
@@ -22,6 +23,31 @@ if (cookies) {
 const save = document.getElementById('form');
 save.addEventListener('submit', e => {
   e.preventDefault();
+
+  setQuery();
+
+  counter++;
+  updateCookie(nameCookieSaves, counter);
+
+  // name.value = '';
+  // surname.value = '';
+  // date.value = '';
+});
+
+const languages = document.getElementById('languages');
+languages.addEventListener('click', e => {
+  const language = e.target.value;
+  updateCookie(nameCookieLanguage, language);
+  checkLanguage(language);
+});
+
+function setQuery() {
+  let cookieLanguage = '';
+  const nameCookieLanguage = 'language';
+
+  const languageCookie = getCookie(cookies, nameCookieLanguage);
+  cookieLanguage = getCookieValue(languageCookie);
+
   const query = new URLSearchParams();
   const name = document.getElementById('first-name');
   const surname = document.getElementById('surname');
@@ -29,16 +55,10 @@ save.addEventListener('submit', e => {
 
   query.set('fullname', `${name.value} ${surname.value}`);
   query.set('date', `${date.value}`);
-
-  counter++;
-  updateCookie(nameOfCookie, counter);
+  query.set('language', `${cookieLanguage}`);
 
   location = `message.html?${query}`;
-
-  name.value = '';
-  surname.value = '';
-  date.value = '';
-});
+}
 
 // Get elements for translate the page
 function getLabels() {
@@ -46,10 +66,17 @@ function getLabels() {
   const surname = document.getElementById('lbl-surname');
   const date = document.getElementById('lbl-date');
 
+  const language = document.getElementById('lbl-language');
+  const langSerbian = document.getElementById('lang-serbian');
+  const langEnglish = document.getElementById('lang-english');
+
   return {
     name,
     surname,
     date,
+    language,
+    langSerbian,
+    langEnglish,
   };
 }
 function translateToEnglish() {
@@ -57,12 +84,18 @@ function translateToEnglish() {
   elements.name.innerText = 'Name:';
   elements.surname.innerText = 'Surname:';
   elements.date.innerText = 'Date Of Birth:';
+  elements.language.innerText = 'Choose language:';
+  elements.langEnglish.innerText = 'English';
+  elements.langSerbian.innerText = 'Serbian';
 }
 function translateToSerbian() {
   const elements = getLabels();
   elements.name.innerText = 'Ime:';
   elements.surname.innerText = 'Prezime:';
   elements.date.innerText = 'Datum rođenja:';
+  elements.language.innerText = 'Izaberi jezik:';
+  elements.langEnglish.innerText = 'Engleski';
+  elements.langSerbian.innerText = 'Srpski';
 }
 function checkLanguage(language) {
   if (language === 'sr') {

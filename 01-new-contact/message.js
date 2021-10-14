@@ -6,8 +6,6 @@ const dob = params.get('date');
 const cookies = document.cookie;
 const nameOfCookie = 'number-of-saves';
 
-let cookieCounter = 0;
-
 if (cookies) {
   const cookie = getCookie(cookies, nameOfCookie);
   if (cookie) {
@@ -23,14 +21,21 @@ back.addEventListener('click', () => {
   history.back();
 });
 
-createMessage(fullname, dob, cookieCounter);
+const language = params.get('language');
+if (language) {
+  createMessage(fullname, dob, cookieCounter, language);
+}
 
-function createMessage(fullName, dob, cookieCounter) {
+function createMessage(fullName, dob, cookieCounter, language) {
   const fullNameElement = document.getElementById('full-name');
   const dobElement = document.getElementById('em-dob');
   const counterElement = document.getElementById('em-counter');
 
-  checkLanguage(navigator.language);
+  if (language) {
+    checkLanguage(language);
+  } else {
+    checkLanguage(navigator.language);
+  }
 
   fullNameElement.innerText = `${fullName}`;
   dobElement.innerText = `${dob}.`;

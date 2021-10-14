@@ -9,13 +9,17 @@
   </head>
   <body>
     <div class="container">
+      <label id="lbl-language" for="name"></label>
+      <div id="languages">
+        <button value="sr" id="lang-serbian"></button>
+        <button value="en" id="lang-english"></button>
+      </div>
       <form action="" class="form" id="form">
         <label id="lbl-name" for="name"></label>
         <input
           type="text"
           placeholder="Uros"
           id="first-name"
-          required
           autocomplete="off"
         />
         <label id="lbl-surname" for="surname"></label>
@@ -23,11 +27,10 @@
           type="text"
           placeholder="Ristanovic"
           id="surname"
-          required
           autocomplete="off"
         />
         <label id="lbl-date" for="date-of-birth:"></label>
-        <input type="date" name="date" id="date" required />
+        <input type="date" name="date" id="date" />
         <div class="btn">
           <input type="submit" value="SAVE" id="btn-submit" />
         </div>
