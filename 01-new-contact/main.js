@@ -39,6 +39,27 @@ const quote08 = createQuote(
   'Imagination is everything. It is the preview of life’s coming attractions.',
   'Albert Einstein'
 );
+const quote09 = createQuote(
+  'Almost everything worthwhile carries with it some sort of risk, whether it’s starting a new business, whether it’s leaving home, whether it’s getting married, or whether it’s flying into space.',
+  'Chris Hadfield'
+);
+const quote10 = createQuote(
+  'The real test is not whether you avoid this failure, because you won’t. It’s whether you let it harden or shame you into inaction, or whether you learn from it; whether you choose to persevere.',
+  'Barack Obama'
+);
+const quote11 = createQuote(
+  'Never fear the haters. You can’t reach your potential without them.',
+  'Grant Cardone'
+);
+const quote12 = createQuote(
+  'Focus on creating and producing a future, not what happened yesterday.',
+  'Grant Cardone'
+);
+const quote13 = createQuote(
+  'You sleep like you’re rich. I’m up like I’m broke.',
+  'Grant Cardone'
+);
+
 const arrayOfQuotes = [
   quote01,
   quote02,
@@ -48,6 +69,11 @@ const arrayOfQuotes = [
   quote06,
   quote07,
   quote08,
+  quote09,
+  quote10,
+  quote11,
+  quote12,
+  quote13,
 ];
 
 delay(2000).then(() => {
