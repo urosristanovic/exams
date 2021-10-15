@@ -7,6 +7,85 @@ let counter = setCookieValue(nameCookieSaves) || 0;
 
 translate(getCurrentLanguage());
 
+const quote01 = createQuote(
+  'Success is not final; failure is not fatal: it is the courage to continue that counts.',
+  'Winston Churchill'
+);
+const quote02 = createQuote(
+  'Play by the rules, but be ferocious.',
+  'Phil Knight'
+);
+const quote03 = createQuote(
+  'Business opportunities are like buses, there’s always another one coming.',
+  'Richard Branson'
+);
+const quote04 = createQuote(
+  'Every problem is a gift—without problems we would not grow.',
+  'Anthony Robbins'
+);
+const quote05 = createQuote(
+  'You only have to do a few things right in your life so long as you don’t do too many things wrong.',
+  'Warren Buffett'
+);
+const quote06 = createQuote(
+  'Success usually comes to those who are too busy to be looking for it.',
+  'Henry David Thoreau'
+);
+const quote07 = createQuote(
+  'If you really look closely, most overnight successes took a long time.',
+  'Steve Jobs'
+);
+const quote08 = createQuote(
+  'Imagination is everything. It is the preview of life’s coming attractions.',
+  'Albert Einstein'
+);
+const arrayOfQuotes = [
+  quote01,
+  quote02,
+  quote03,
+  quote04,
+  quote05,
+  quote06,
+  quote07,
+  quote08,
+];
+
+delay(2000).then(() => {
+  displayRandomQuote(arrayOfQuotes);
+});
+setInterval(() => {
+  delay(2000).then(() => {
+    displayRandomQuote(arrayOfQuotes);
+  });
+}, 3000);
+
+function displayRandomQuote(array) {
+  const loader = document.getElementById('loader');
+  const quotesWrapper = document.getElementById('quotes-wrapper');
+  const quote = document.getElementById('quote');
+  const author = document.getElementById('author');
+  const randomElement = array[Math.floor(Math.random() * array.length)];
+  loader.style.display = 'none';
+  quotesWrapper.style.display = 'block';
+  quote.innerText = randomElement.quote;
+  author.innerText = randomElement.author;
+}
+
+function delay(ms) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}
+
+function createQuote(quote, author) {
+  return {
+    quote,
+    author,
+  };
+}
+
 const save = document.getElementById('form');
 save.addEventListener('submit', e => {
   e.preventDefault();
