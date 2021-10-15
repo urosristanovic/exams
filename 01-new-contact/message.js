@@ -3,9 +3,8 @@ const params = new URLSearchParams(location.search);
 const fullname = params.get('fullname');
 const dob = params.get('date');
 const counter = params.get('counter');
-const language = params.get('language');
 
-checkLanguage(language);
+translate(getCurrentLanguage());
 createMessage(fullname, dob, counter);
 
 function createMessage(fullName, dob, counter) {
@@ -18,7 +17,15 @@ function createMessage(fullName, dob, counter) {
   counterElement.innerText = `${counter}`;
 }
 
-function checkLanguage(language) {
+function getCurrentLanguage() {
+  const cookieLanguage = getCookie('language');
+  if (cookieLanguage) {
+    return getCookieValue(cookieLanguage);
+  }
+  return navigator.language;
+}
+
+function translate(language) {
   if (language === 'sr') {
     translateToSerbian();
   } else {
@@ -57,4 +64,14 @@ function translateToSerbian() {
   elements.successText.innerText = `Uspešno kreiran!`;
   elements.dobText.innerText = `Datum rođenja: `;
   elements.savesCounter.innerText = `Brojač čuvanja: `;
+}
+
+function getCookie(searchCookie) {
+  const cookies = document.cookie;
+  const array = cookies.split(';');
+
+  return array.find(cookie => cookie.trim().split('=')[0] === searchCookie);
+}
+function getCookieValue(cookie) {
+  return cookie.split('=')[1];
 }

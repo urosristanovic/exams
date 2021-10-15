@@ -1,22 +1,19 @@
 'use strict';
 
-checkLanguage(navigator.language);
-
 const nameCookieSaves = 'number-of-saves';
 const nameCookieLanguage = 'language';
 
-let counter = setCookieValue(nameCookieSaves)
-  ? setCookieValue(nameCookieSaves)
-  : 0;
+let counter = setCookieValue(nameCookieSaves) || 0;
+
+translate(getCurrentLanguage());
 
 const save = document.getElementById('form');
 save.addEventListener('submit', e => {
   e.preventDefault();
-  let language = setCookieValue(nameCookieLanguage);
 
   counter++;
   updateCookie(nameCookieSaves, counter);
-  const query = setQuery(counter, language);
+  const query = setQuery(counter);
 
   location = `message.html?${query}`;
 });
@@ -25,20 +22,25 @@ const languages = document.getElementById('languages');
 languages.addEventListener('click', e => {
   const language = e.target.value;
   updateCookie(nameCookieLanguage, language);
-  checkLanguage(language);
+  translate(language);
 });
 
+function getCurrentLanguage() {
+  const cookieLanguage = getCookie('language');
+  if (cookieLanguage) {
+    return getCookieValue(cookieLanguage);
+  }
+  return navigator.language;
+}
+
 function setCookieValue(nameCookie) {
-  const cookies = document.cookie;
-  if (cookies) {
-    const cookie = getCookie(cookies, nameCookie);
-    if (cookie) {
-      return getCookieValue(cookie);
-    }
+  const cookie = getCookie(nameCookie);
+  if (cookie) {
+    return getCookieValue(cookie);
   }
 }
 
-function setQuery(counter, language) {
+function setQuery(counter) {
   const query = new URLSearchParams();
   const name = document.getElementById('first-name');
   const surname = document.getElementById('surname');
@@ -48,10 +50,6 @@ function setQuery(counter, language) {
   query.set('date', `${date.value}`);
   query.set('counter', `${counter}`);
 
-  if (language) {
-    query.set('language', `${language}`);
-  }
-
   name.value = '';
   surname.value = '';
   date.value = '';
@@ -59,7 +57,6 @@ function setQuery(counter, language) {
   return query;
 }
 
-// Get elements for translate the page
 function getLabels() {
   const name = document.getElementById('lbl-name');
   const surname = document.getElementById('lbl-surname');
@@ -96,7 +93,7 @@ function translateToSerbian() {
   elements.langEnglish.innerText = 'Engleski';
   elements.langSerbian.innerText = 'Srpski';
 }
-function checkLanguage(language) {
+function translate(language) {
   if (language === 'sr') {
     translateToSerbian();
   } else {
@@ -104,16 +101,15 @@ function checkLanguage(language) {
   }
 }
 
-// Create or Update cookie
-function updateCookie(name, counter) {
-  document.cookie = `${name}=${counter}`;
-}
-function getCookie(cookies, searchCookie) {
+function getCookie(searchCookie) {
+  const cookies = document.cookie;
   const array = cookies.split(';');
-  return array.filter(
-    cookie => cookie.trim().split('=')[0] === searchCookie
-  )[0];
+
+  return array.find(cookie => cookie.trim().split('=')[0] === searchCookie);
 }
 function getCookieValue(cookie) {
   return cookie.split('=')[1];
+}
+function updateCookie(name, counter) {
+  document.cookie = `${name}=${counter}`;
 }
