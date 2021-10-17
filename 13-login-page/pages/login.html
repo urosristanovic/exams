@@ -9,7 +9,7 @@
   </head>
   <body>
     <header>
-      <img src="../images/logo.svg" alt="logo" class="logo" />
+      <img src="../assets/images/logo.svg" alt="logo" class="logo" />
       <nav class="nav">
         <ul class="nav__links">
           <li><a href="../index.html">Homepage</a></li>
@@ -24,15 +24,15 @@
       <div class="container">
         <div class="container__wrapper">
           <div class="logo">
-            <img src="../images/logo.svg" alt="logo" />
+            <img src="../assets/images/logo.svg" alt="logo" />
           </div>
           <h1 class="page-heading">LOGIN</h1>
-          <p class="wrong-credentials">
+          <p class="wrong-credentials" id="wrong-credentials">
             You have entered an invalid <br />
             username or password.
           </p>
         </div>
-        <form action="" class="form" id="form">
+        <form action="" class="form" id="form-login">
           <div class="form__username">
             <input
               type="text"
@@ -45,7 +45,7 @@
           </div>
           <div class="form__password">
             <input
-              type="email"
+              type="password"
               name="password"
               id="password"
               placeholder="Password"
@@ -67,5 +67,6 @@
     <footer>
       <p>&copy 2021. All rights reserved.</p>
     </footer>
+    <script src="../js/login.js" refer></script>
   </body>
 </html>
