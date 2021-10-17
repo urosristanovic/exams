@@ -1,0 +1,18 @@
+{
+  "newContact": {
+    "english": "New contact:",
+    "serbian": "Nov kontakt:"
+  },
+  "successfully": {
+    "english": "Has successfully created!",
+    "serbian": "Uspešno kreiran!"
+  },
+  "dob": {
+    "english": "Date of birth:",
+    "serbian": "Datum rođenja:"
+  },
+  "counter": {
+    "english": "Number of saves:",
+    "serbian": "Brojač čuvanja:"
+  }
+}

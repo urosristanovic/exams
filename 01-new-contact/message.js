@@ -53,17 +53,24 @@ function getElements() {
 }
 function translateToEnglish() {
   const elements = getElements();
-  elements.newContactText.innerText = `New contact: `;
-  elements.successText.innerText = `Has successfully created!`;
-  elements.dobText.innerText = `Date of birth: `;
-  elements.savesCounter.innerText = `Number of saves: `;
+  fetch('json/translate-confirm.json')
+    .then(response => response.json())
+    .then(data => {
+      elements.newContactText.innerText = data.newContact.english;
+      elements.successText.innerText = data.successfully.english;
+      elements.dobText.innerText = data.dob.english;
+      elements.savesCounter.innerText = data.counter.english;
+    });
 }
-function translateToSerbian() {
+
+async function translateToSerbian() {
   const elements = getElements();
-  elements.newContactText.innerText = `Nov kontakt: `;
-  elements.successText.innerText = `Uspešno kreiran!`;
-  elements.dobText.innerText = `Datum rođenja: `;
-  elements.savesCounter.innerText = `Brojač čuvanja: `;
+  const response = await fetch('json/translate-confirm.json');
+  const data = await response.json();
+  elements.newContactText.innerText = data.newContact.serbian;
+  elements.successText.innerText = data.successfully.serbian;
+  elements.dobText.innerText = data.dob.serbian;
+  elements.savesCounter.innerText = data.counter.serbian;
 }
 
 function getCookie(searchCookie) {

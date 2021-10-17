@@ -1,0 +1,26 @@
+{
+  "name": {
+    "english": "Name:",
+    "serbian": "Ime:"
+  },
+  "surname": {
+    "english": "Surname:",
+    "serbian": "Prezime:"
+  },
+  "dob": {
+    "english": "Date of birth:",
+    "serbian": "Datum rođenja:"
+  },
+  "chooseLanguage": {
+    "english": "Choose language:",
+    "serbian": "Izaberi jezik:"
+  },
+  "langEnglish": {
+    "english": "English:",
+    "serbian": "Engleski:"
+  },
+  "langSerbian": {
+    "english": "Serbian:",
+    "serbian": "Srpski:"
+  }
+}

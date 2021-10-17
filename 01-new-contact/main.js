@@ -6,84 +6,25 @@ const nameCookieLanguage = 'language';
 let counter = setCookieValue(nameCookieSaves) || 0;
 
 translate(getCurrentLanguage());
+fetchQuotes();
 
-const quote01 = createQuote(
-  'Success is not final; failure is not fatal: it is the courage to continue that counts.',
-  'Winston Churchill'
-);
-const quote02 = createQuote(
-  'Play by the rules, but be ferocious.',
-  'Phil Knight'
-);
-const quote03 = createQuote(
-  'Business opportunities are like buses, there’s always another one coming.',
-  'Richard Branson'
-);
-const quote04 = createQuote(
-  'Every problem is a gift—without problems we would not grow.',
-  'Anthony Robbins'
-);
-const quote05 = createQuote(
-  'You only have to do a few things right in your life so long as you don’t do too many things wrong.',
-  'Warren Buffett'
-);
-const quote06 = createQuote(
-  'Success usually comes to those who are too busy to be looking for it.',
-  'Henry David Thoreau'
-);
-const quote07 = createQuote(
-  'If you really look closely, most overnight successes took a long time.',
-  'Steve Jobs'
-);
-const quote08 = createQuote(
-  'Imagination is everything. It is the preview of life’s coming attractions.',
-  'Albert Einstein'
-);
-const quote09 = createQuote(
-  'Almost everything worthwhile carries with it some sort of risk, whether it’s starting a new business, whether it’s leaving home, whether it’s getting married, or whether it’s flying into space.',
-  'Chris Hadfield'
-);
-const quote10 = createQuote(
-  'The real test is not whether you avoid this failure, because you won’t. It’s whether you let it harden or shame you into inaction, or whether you learn from it; whether you choose to persevere.',
-  'Barack Obama'
-);
-const quote11 = createQuote(
-  'Never fear the haters. You can’t reach your potential without them.',
-  'Grant Cardone'
-);
-const quote12 = createQuote(
-  'Focus on creating and producing a future, not what happened yesterday.',
-  'Grant Cardone'
-);
-const quote13 = createQuote(
-  'You sleep like you’re rich. I’m up like I’m broke.',
-  'Grant Cardone'
-);
-
-const arrayOfQuotes = [
-  quote01,
-  quote02,
-  quote03,
-  quote04,
-  quote05,
-  quote06,
-  quote07,
-  quote08,
-  quote09,
-  quote10,
-  quote11,
-  quote12,
-  quote13,
-];
-
-delay(2000).then(() => {
-  displayRandomQuote(arrayOfQuotes);
-});
-setInterval(() => {
-  delay(2000).then(() => {
-    displayRandomQuote(arrayOfQuotes);
-  });
-}, 3000);
+async function fetchQuotes() {
+  const response = await fetch('json/quotes.json');
+  const json = await response.json();
+  await delay(2000);
+  return displayRandomQuote(json);
+}
+// function fetchQuotes() {
+//   fetch('json/quotes.json')
+//     .then(response => {
+//       console.log(response);
+//       response.json();
+//     })
+//     .then(json => {
+//       console.log(json);
+//       displayRandomQuote(json);
+//     });
+// }
 
 function displayRandomQuote(array) {
   const loader = document.getElementById('loader');
@@ -180,23 +121,30 @@ function getLabels() {
     langEnglish,
   };
 }
+
 function translateToEnglish() {
   const elements = getLabels();
-  elements.name.innerText = 'Name:';
-  elements.surname.innerText = 'Surname:';
-  elements.date.innerText = 'Date Of Birth:';
-  elements.language.innerText = 'Choose language:';
-  elements.langEnglish.innerText = 'English';
-  elements.langSerbian.innerText = 'Serbian';
+  fetch('json/translate-new-contact.json')
+    .then(response => response.json())
+    .then(data => {
+      elements.name.innerText = data.name.english;
+      elements.surname.innerText = data.surname.english;
+      elements.date.innerText = data.dob.english;
+      elements.language.innerText = data.chooseLanguage.english;
+      elements.langEnglish.innerText = data.langEnglish.english;
+      elements.langSerbian.innerText = data.langSerbian.english;
+    });
 }
-function translateToSerbian() {
+async function translateToSerbian() {
   const elements = getLabels();
-  elements.name.innerText = 'Ime:';
-  elements.surname.innerText = 'Prezime:';
-  elements.date.innerText = 'Datum rođenja:';
-  elements.language.innerText = 'Izaberi jezik:';
-  elements.langEnglish.innerText = 'Engleski';
-  elements.langSerbian.innerText = 'Srpski';
+  const response = await fetch('json/translate-new-contact.json');
+  const data = await response.json();
+  elements.name.innerText = data.name.serbian;
+  elements.surname.innerText = data.surname.serbian;
+  elements.date.innerText = data.dob.serbian;
+  elements.language.innerText = data.chooseLanguage.serbian;
+  elements.langEnglish.innerText = data.langEnglish.serbian;
+  elements.langSerbian.innerText = data.langSerbian.serbian;
 }
 function translate(language) {
   if (language === 'sr') {
