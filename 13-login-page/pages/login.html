@@ -22,8 +22,45 @@
         <button>Login</button>
       </a>
     </header>
-    <section>
-      <p>Content Login</p>
+    <section class="login">
+      <div class="container">
+        <div class="container__wrapper">
+          <div class="logo">
+            <img src="../images/logo.svg" alt="logo" />
+          </div>
+          <h1 class="page-heading">LOGIN</h1>
+        </div>
+        <form action="" class="form" id="form">
+          <div class="form__username">
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="form__password">
+            <input
+              type="text"
+              name="password"
+              id="password"
+              placeholder="Password"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div class="remember-wrapper">
+            <input type="checkbox" name="remember-me" id="remember-me" />
+            <label for="remember-me">Remember me</label>
+          </div>
+          <input type="submit" value="Login" class="btn-submit" />
+        </form>
+        <a href="forgot-password.html" class="forgot-password"
+          >Forgot Password?</a
+        >
+      </div>
     </section>
     <footer>
       <p>&copy 2021. All rights reserved.</p>

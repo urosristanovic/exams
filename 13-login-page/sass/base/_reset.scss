@@ -11,6 +11,7 @@ body {
 
 li,
 a,
+input[type='submit'],
 button {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
@@ -18,9 +19,17 @@ button {
   color: $btn-color;
   text-decoration: none;
 }
+a:hover {
+  color: $font-color;
+}
 ul,
 p {
   margin: 0;
   padding: 0;
   color: $btn-color;
+}
+input {
+  padding: 10px 10px;
+  border: none;
+  outline: none;
 }
