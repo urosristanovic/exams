@@ -1,0 +1,15 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "Multipage-page application for login ",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass sass/main.scss dist/css/styles.css",
+    "watch:sass": "node-sass sass/main.scss dist/css/styles.css -w"
+  },
+  "author": "Uros Ristanovic",
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^6.0.1"
+  }
+}
