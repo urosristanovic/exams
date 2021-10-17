@@ -1,3 +1,9 @@
+const username = getCookie('username');
+
+if (username) {
+  location = '/13-login-page/index.html';
+}
+
 const loginForm = document.getElementById('form-login');
 loginForm.addEventListener('submit', async e => {
   e.preventDefault();
@@ -12,6 +18,13 @@ loginForm.addEventListener('submit', async e => {
     document.getElementById('wrong-credentials').style.display = 'block';
   } else {
     document.getElementById('wrong-credentials').style.display = 'none';
+
+    const remember = document.getElementById('remember-me').checked;
+    if (remember) {
+      document.cookie = `remember-me=${username.value}; path=/`;
+    }
+
+    document.cookie = `username=${username.value}; path=/`;
     location = '/13-login-page/index.html';
   }
 
@@ -24,4 +37,10 @@ function getUser(users, username, password) {
     user => user.username === username && user.password === password
   );
   return user;
+}
+function getCookie(searchCookie) {
+  const cookies = document.cookie;
+  const array = cookies.split(';');
+
+  return array.find(cookie => cookie.trim().split('=')[0] === searchCookie);
 }
