@@ -42,7 +42,7 @@ button {
   transition: all 0.3s ease 0s;
 
   &:hover {
-    background-color: transparent;
+    background-color: $primary-color;
     color: $font-color-hover;
   }
 }
