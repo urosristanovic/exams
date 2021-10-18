@@ -6,10 +6,10 @@ if (!username) {
 
 const logout = document.getElementById('logout');
 logout.addEventListener('click', () => {
-  const rememberMe = getCookie('remember-me');
-  if (rememberMe) {
-    removeCookie(rememberMe);
-  }
+  // const rememberMe = getCookie('remember-me');
+  // if (rememberMe) {
+  //   removeCookie(rememberMe);
+  // }
   removeCookie(username);
   location = `pages/login.html`;
 });
