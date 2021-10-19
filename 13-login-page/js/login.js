@@ -47,7 +47,6 @@ function handleUser(user) {
     document.getElementById('wrong-credentials').style.display = 'block';
   } else {
     const isCheckedRemember = document.getElementById('remember-me').checked;
-
     const { password, ...userWithoutPassword } = user;
 
     if (isCheckedRemember) {
