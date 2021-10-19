@@ -1,3 +1,5 @@
+import { getCookie } from '../modules/cookies.js';
+
 const username = getCookie('logged-in-user');
 
 if (username) {
@@ -10,10 +12,3 @@ formForgotPass.addEventListener('submit', e => {
   document.getElementById('confirmation').style.display = 'flex';
   document.getElementById('form-forgot-password').style.display = 'none';
 });
-
-function getCookie(searchCookie) {
-  const cookies = document.cookie;
-  const array = cookies.split(';');
-
-  return array.find(cookie => cookie.trim().split('=')[0] === searchCookie);
-}

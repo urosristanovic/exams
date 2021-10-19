@@ -1,3 +1,5 @@
+import { getCookie, getCookieValue, createCookie } from '../modules/cookies.js';
+
 loggedInUser();
 rememberedUser();
 
@@ -33,7 +35,7 @@ function rememberedUser() {
       const users = await response.json();
 
       const user = JSON.parse(getCookieValue(rememberMe)); // {"id":3,"name":"Uros","username":"uros","email":"uros@mysite.com"}
-      const password = getPassword(users, user.username); // uros123.
+      const password = getUserPassword(users, user.username); // uros123.
       document.getElementById('username').value = `${user.username}`;
       document.getElementById('password').value = `${password}`;
     })();
@@ -65,20 +67,7 @@ function getUser(users, username, password) {
   return user;
 }
 
-function getPassword(users, username) {
+function getUserPassword(users, username) {
   const user = users.find(user => user.username === username);
   return user.password;
-}
-
-function createCookie(name, value) {
-  document.cookie = `${name}=${value}; path=/`;
-}
-function getCookie(searchCookie) {
-  const cookies = document.cookie;
-  const array = cookies.split(';');
-
-  return array.find(cookie => cookie.trim().split('=')[0] === searchCookie);
-}
-function getCookieValue(cookie) {
-  return cookie.split('=')[1];
 }
