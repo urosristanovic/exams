@@ -1,153 +1,5 @@
 'use strict';
 
-function createRestaurant(
-  name,
-  address,
-  phoneNumber,
-  image,
-  avgMealPrice,
-  capacity,
-  opening,
-  closing,
-  category
-) {
-  return {
-    name,
-    address,
-    phoneNumber,
-    image,
-    avgMealPrice,
-    capacity,
-    opening,
-    closing,
-    category,
-  };
-}
-
-const dobrok = createRestaurant(
-  'Dobrok',
-  'Futoska 71',
-  '0652819801',
-  'images/dobrok.jpg',
-  320,
-  50,
-  9,
-  14,
-  ['Serbian', 'Chinese', 'International']
-);
-const pivarijum = createRestaurant(
-  'Pivarijum',
-  'Brace Popovic 2',
-  '0213014334',
-  'images/pivarijum.jpg',
-  510,
-  25,
-  12,
-  22,
-  ['Burgers']
-);
-const petrus = createRestaurant(
-  'Petrus',
-  'Modena 1',
-  '066323424',
-  'images/petrus.jpg',
-  1150,
-  200,
-  7,
-  23,
-  ['Chinese', 'International', 'Italian', 'Mexican', 'Burgers']
-);
-const zak = createRestaurant(
-  'Kalem by Zak',
-  'Narodnih heroja 3',
-  '0668888021',
-  'images/kalembyzak.jpg',
-  1270,
-  170,
-  7,
-  23,
-  ['Serbian', 'Italian', 'Burgers', 'Mexican']
-);
-const showRoom = createRestaurant(
-  'Show Room',
-  'Branka Bajica',
-  '0213105105',
-  'images/showroom.jpg',
-  890,
-  100,
-  8,
-  23,
-  ['Serbian', 'Italian', 'Mexican']
-);
-const dvaStapica = createRestaurant(
-  'Dva Stapica',
-  'Janka Cmelika',
-  '021459524',
-  'images/dvastapica.jpg',
-  630,
-  40,
-  8,
-  17,
-  ['Chinese', 'Taiwanese']
-);
-const dobriDim = createRestaurant(
-  'Dobri dim',
-  'Laze Teleckog',
-  '0693388088',
-  'images/dobridim.jpg',
-  480,
-  35,
-  11,
-  23,
-  ['Serbian', 'Mexican', 'Burgers']
-);
-const juliet = createRestaurant(
-  'Juliet bar',
-  'Veselina Maslese 32a',
-  '0213014334',
-  'images/juliet.jpg',
-  850,
-  40,
-  8,
-  22,
-  ['Serbian', 'Italian', 'International', 'Mexican']
-);
-const burjAlArab = createRestaurant(
-  'Burj Al Arab',
-  'شارع جميرا،',
-  '97143017777',
-  'images/burjalarab.jpg',
-  21342,
-  1201,
-  17,
-  23,
-  ['Serbian', 'Chinese', 'Italian', 'Burgers', 'Taiwanese']
-);
-const nusret = createRestaurant(
-  'Nusr-Et Steakhouse',
-  'Jumeriah Beach Rd 2',
-  '97144074100',
-  'images/nusret.jpg',
-  1499,
-  104,
-  12,
-  23,
-  ['Burgers', 'International', 'Mexican']
-);
-
-const listOfRestaurants = [
-  dobrok,
-  pivarijum,
-  dvaStapica,
-  petrus,
-  zak,
-  showRoom,
-  dobriDim,
-  juliet,
-  burjAlArab,
-  nusret,
-];
-
 function createPriceRanges() {
   const priceRanges = [
     {
@@ -315,9 +167,15 @@ function resetActiveButtons() {
   });
 }
 
+async function fetchRestaurants() {
+  const response = await fetch('json/restaurants.json');
+  const json = await response.json();
+  return displayRestaurants(json);
+}
+
 /* ################################################################### */
 
-displayRestaurants(listOfRestaurants);
+fetchRestaurants();
 
 const btnsPriceRange = document.getElementById('btns-price');
 btnsPriceRange.addEventListener('click', e => {

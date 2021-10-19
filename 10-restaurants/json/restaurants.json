@@ -1,0 +1,112 @@
+[
+  {
+    "name": "Dobrok",
+    "address": "Futoska 71",
+    "phoneNumber": "0652819801",
+    "image": "images/dobrok.jpg",
+    "avgMealPrice": "320",
+    "capacity": "50",
+    "opening": "9",
+    "closing": "14",
+    "category": ["Serbian", "Chinese", "International"]
+  },
+  {
+    "name": "Pivarijum",
+    "address": "Brace Popovic 2",
+    "phoneNumber": "0213014334",
+    "image": "images/pivarijum.jpg",
+    "avgMealPrice": "510",
+    "capacity": "25",
+    "opening": "12",
+    "closing": "22",
+    "category": ["Burgers"]
+  },
+  {
+    "name": "Petrus",
+    "address": "Modena 1",
+    "phoneNumber": "066323424",
+    "image": "images/petrus.jpg",
+    "avgMealPrice": "1150",
+    "capacity": "200",
+    "opening": "7",
+    "closing": "23",
+    "category": ["Chinese", "International", "Italian", "Mexican", "Burgers"]
+  },
+  {
+    "name": "Kalem by Zak",
+    "address": "Narodnih heroja 3",
+    "phoneNumber": "0668888021",
+    "image": "images/kalembyzak.jpg",
+    "avgMealPrice": "1270",
+    "capacity": "170",
+    "opening": "7",
+    "closing": "23",
+    "category": ["Serbian", "Italian", "Burgers", "Mexican"]
+  },
+  {
+    "name": "Show Room",
+    "address": "Branka Bajica",
+    "phoneNumber": "0213105105",
+    "image": "images/showroom.jpg",
+    "avgMealPrice": "890",
+    "capacity": "100",
+    "opening": "8",
+    "closing": "23",
+    "category": ["Serbian", "Italian", "Mexican"]
+  },
+  {
+    "name": "Dva Stapica",
+    "address": "Janka Cmelika",
+    "phoneNumber": "021459524",
+    "image": "images/dvastapica.jpg",
+    "avgMealPrice": "630",
+    "capacity": "40",
+    "opening": "8",
+    "closing": "17",
+    "category": ["Chinese", "Taiwanese"]
+  },
+  {
+    "name": "Dobri dim",
+    "address": "Laze Teleckog",
+    "phoneNumber": "0693388088",
+    "image": "images/dobridim.jpg",
+    "avgMealPrice": "480",
+    "capacity": "35",
+    "opening": "11",
+    "closing": "23",
+    "category": ["Serbian", "Mexican", "Burgers"]
+  },
+  {
+    "name": "Juliet bar",
+    "address": "Veselina Maslese 32a",
+    "phoneNumber": "0213014334",
+    "image": "images/juliet.jpg",
+    "avgMealPrice": "850",
+    "capacity": "40",
+    "opening": "8",
+    "closing": "22",
+    "category": ["Serbian", "Italian", "International", "Mexican"]
+  },
+  {
+    "name": "Burj Al Arab",
+    "address": "شارع جميرا،",
+    "phoneNumber": "97143017777",
+    "image": "images/burjalarab.jpg",
+    "avgMealPrice": "21342",
+    "capacity": "1201",
+    "opening": "17",
+    "closing": "23",
+    "category": ["Serbian", "Chinese", "Italian", "Burgers", "Taiwanese"]
+  },
+  {
+    "name": "Nusr-Et Steakhouse",
+    "address": "Jumeriah Beach Rd 2",
+    "phoneNumber": "97144074100",
+    "image": "images/nusret.jpg",
+    "avgMealPrice": "1499",
+    "capacity": "104",
+    "opening": "12",
+    "closing": "23",
+    "category": ["Burgers", "International", "Mexican"]
+  }
+]
