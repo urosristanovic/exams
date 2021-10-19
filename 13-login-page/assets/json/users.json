@@ -1,22 +1,37 @@
 [
   {
+    "id": 1,
+    "name": "Admin",
     "username": "admin",
-    "password": "admin"
+    "password": "admin",
+    "email": "admin@mysite.com"
   },
   {
+    "id": 2,
+    "name": "Vega",
     "username": "vega",
-    "password": "vega123"
+    "password": "vega123",
+    "email": "vega@mysite.com"
   },
   {
+    "id": 3,
+    "name": "Uros",
     "username": "uros",
-    "password": "uros123"
+    "password": "uros123",
+    "email": "uros@mysite.com"
   },
   {
+    "id": 4,
+    "name": "Test",
     "username": "test",
-    "password": "12345"
+    "password": "12345",
+    "email": "test@mysite.com"
   },
   {
+    "id": 5,
+    "name": "James",
     "username": "jamesbond",
-    "password": "007"
+    "password": "007",
+    "email": "jamesbond@mysite.com"
   }
 ]
