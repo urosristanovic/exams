@@ -1,16 +1,12 @@
-const username = getCookie('username');
+const user = getCookie('logged-in-user');
 
-if (!username) {
+if (!user) {
   location = '/13-login-page/pages/login.html';
 }
 
 const logout = document.getElementById('logout');
 logout.addEventListener('click', () => {
-  // const rememberMe = getCookie('remember-me');
-  // if (rememberMe) {
-  //   removeCookie(rememberMe);
-  // }
-  removeCookie(username);
+  removeCookie(user);
   location = `pages/login.html`;
 });
 

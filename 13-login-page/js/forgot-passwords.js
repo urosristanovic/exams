@@ -1,4 +1,4 @@
-const username = getCookie('username');
+const username = getCookie('logged-in-user');
 
 if (username) {
   location = '/13-login-page/index.html';

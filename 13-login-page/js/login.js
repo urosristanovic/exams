@@ -19,22 +19,22 @@ loginForm.addEventListener('submit', async e => {
 });
 
 function loggedInUser() {
-  const user = getCookie('username');
+  const user = getCookie('logged-in-user');
   if (user) {
     location = '/13-login-page/index.html';
   }
 }
 function rememberedUser() {
-  const rememberMe = getCookie('remember-me'); // 'remember-me=uros'
+  // remembered-user={"id":3,"name":"Uros","username":"uros","email":"uros@mysite.com"}
+  const rememberMe = getCookie('remembered-user');
   if (rememberMe) {
     (async function () {
       const response = await fetch('../assets/json/users.json');
       const users = await response.json();
 
-      const username = getCookieValue(rememberMe); // 'uros'
-      const password = getPassword(users, username); // 'uros123'
-
-      document.getElementById('username').value = `${username}`;
+      const user = JSON.parse(getCookieValue(rememberMe)); // {"id":3,"name":"Uros","username":"uros","email":"uros@mysite.com"}
+      const password = getPassword(users, user.username); // uros123.
+      document.getElementById('username').value = `${user.username}`;
       document.getElementById('password').value = `${password}`;
     })();
   }
@@ -44,13 +44,14 @@ function handleUser(user) {
   if (!user) {
     document.getElementById('wrong-credentials').style.display = 'block';
   } else {
-    const username = document.getElementById('username');
     const isCheckedRemember = document.getElementById('remember-me').checked;
 
+    const { password, ...userWithoutPassword } = user;
+
     if (isCheckedRemember) {
-      createCookie('remember-me', username.value);
+      createCookie('remembered-user', JSON.stringify(userWithoutPassword));
     }
-    createCookie('username', username.value);
+    createCookie('logged-in-user', JSON.stringify(userWithoutPassword));
 
     document.getElementById('wrong-credentials').style.display = 'none';
     location = '/13-login-page/index.html';
