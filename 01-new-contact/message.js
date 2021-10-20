@@ -1,4 +1,4 @@
-import { translateMessage, getCurrentLanguage } from './modules/languages.js';
+import { fetchLanguages, getCurrentLanguage } from './modules/languages.js';
 
 const params = new URLSearchParams(location.search);
 
@@ -24,3 +24,43 @@ const back = document.getElementById('btn-back');
 back.addEventListener('click', () => {
   history.back();
 });
+
+export function translateMessage(language) {
+  if (language === 'sr') {
+    messageToSerbian();
+  } else {
+    messageToEnglish();
+  }
+}
+
+async function messageToEnglish() {
+  const elements = getElements();
+  const data = await fetchLanguages();
+  elements.newContactText.innerText = data.newContact.english;
+  elements.successText.innerText = data.successfully.english;
+  elements.dobText.innerText = data.dob.english;
+  elements.savesCounter.innerText = data.counter.english;
+}
+
+async function messageToSerbian() {
+  const elements = getElements();
+  const data = await fetchLanguages();
+  elements.newContactText.innerText = data.newContact.serbian;
+  elements.successText.innerText = data.successfully.serbian;
+  elements.dobText.innerText = data.dob.serbian;
+  elements.savesCounter.innerText = data.counter.serbian;
+}
+
+function getElements() {
+  const newContactText = document.getElementById('new-contact');
+  const successText = document.getElementById('success');
+  const dobText = document.getElementById('dob');
+  const savesCounter = document.getElementById('counter');
+
+  return {
+    newContactText,
+    successText,
+    dobText,
+    savesCounter,
+  };
+}

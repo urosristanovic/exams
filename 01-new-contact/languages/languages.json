@@ -1,4 +1,20 @@
 {
+  "newContact": {
+    "english": "New contact:",
+    "serbian": "Nov kontakt:"
+  },
+  "successfully": {
+    "english": "Has successfully created!",
+    "serbian": "Uspešno kreiran!"
+  },
+  "dob": {
+    "english": "Date of birth:",
+    "serbian": "Datum rođenja:"
+  },
+  "counter": {
+    "english": "Number of saves:",
+    "serbian": "Brojač čuvanja:"
+  },
   "name": {
     "english": "Name:",
     "serbian": "Ime:"
@@ -6,10 +22,6 @@
   "surname": {
     "english": "Surname:",
     "serbian": "Prezime:"
-  },
-  "dob": {
-    "english": "Date of birth:",
-    "serbian": "Datum rođenja:"
   },
   "chooseLanguage": {
     "english": "Choose language:",
