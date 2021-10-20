@@ -4,10 +4,10 @@
     "address": "Futoska 71",
     "phoneNumber": "0652819801",
     "image": "images/dobrok.jpg",
-    "avgMealPrice": "320",
-    "capacity": "50",
-    "opening": "9",
-    "closing": "14",
+    "avgMealPrice": 320,
+    "capacity": 50,
+    "opening": 9,
+    "closing": 14,
     "category": ["Serbian", "Chinese", "International"]
   },
   {
@@ -15,10 +15,10 @@
     "address": "Brace Popovic 2",
     "phoneNumber": "0213014334",
     "image": "images/pivarijum.jpg",
-    "avgMealPrice": "510",
-    "capacity": "25",
-    "opening": "12",
-    "closing": "22",
+    "avgMealPrice": 510,
+    "capacity": 25,
+    "opening": 12,
+    "closing": 22,
     "category": ["Burgers"]
   },
   {
@@ -26,10 +26,10 @@
     "address": "Modena 1",
     "phoneNumber": "066323424",
     "image": "images/petrus.jpg",
-    "avgMealPrice": "1150",
-    "capacity": "200",
-    "opening": "7",
-    "closing": "23",
+    "avgMealPrice": 1150,
+    "capacity": 200,
+    "opening": 7,
+    "closing": 23,
     "category": ["Chinese", "International", "Italian", "Mexican", "Burgers"]
   },
   {
@@ -37,10 +37,10 @@
     "address": "Narodnih heroja 3",
     "phoneNumber": "0668888021",
     "image": "images/kalembyzak.jpg",
-    "avgMealPrice": "1270",
-    "capacity": "170",
-    "opening": "7",
-    "closing": "23",
+    "avgMealPrice": 1270,
+    "capacity": 170,
+    "opening": 7,
+    "closing": 23,
     "category": ["Serbian", "Italian", "Burgers", "Mexican"]
   },
   {
@@ -48,10 +48,10 @@
     "address": "Branka Bajica",
     "phoneNumber": "0213105105",
     "image": "images/showroom.jpg",
-    "avgMealPrice": "890",
-    "capacity": "100",
-    "opening": "8",
-    "closing": "23",
+    "avgMealPrice": 890,
+    "capacity": 100,
+    "opening": 8,
+    "closing": 23,
     "category": ["Serbian", "Italian", "Mexican"]
   },
   {
@@ -59,10 +59,10 @@
     "address": "Janka Cmelika",
     "phoneNumber": "021459524",
     "image": "images/dvastapica.jpg",
-    "avgMealPrice": "630",
-    "capacity": "40",
-    "opening": "8",
-    "closing": "17",
+    "avgMealPrice": 630,
+    "capacity": 40,
+    "opening": 8,
+    "closing": 17,
     "category": ["Chinese", "Taiwanese"]
   },
   {
@@ -70,10 +70,10 @@
     "address": "Laze Teleckog",
     "phoneNumber": "0693388088",
     "image": "images/dobridim.jpg",
-    "avgMealPrice": "480",
-    "capacity": "35",
-    "opening": "11",
-    "closing": "23",
+    "avgMealPrice": 480,
+    "capacity": 35,
+    "opening": 11,
+    "closing": 23,
     "category": ["Serbian", "Mexican", "Burgers"]
   },
   {
@@ -81,10 +81,10 @@
     "address": "Veselina Maslese 32a",
     "phoneNumber": "0213014334",
     "image": "images/juliet.jpg",
-    "avgMealPrice": "850",
-    "capacity": "40",
-    "opening": "8",
-    "closing": "22",
+    "avgMealPrice": 850,
+    "capacity": 40,
+    "opening": 8,
+    "closing": 22,
     "category": ["Serbian", "Italian", "International", "Mexican"]
   },
   {
@@ -92,10 +92,10 @@
     "address": "شارع جميرا،",
     "phoneNumber": "97143017777",
     "image": "images/burjalarab.jpg",
-    "avgMealPrice": "21342",
-    "capacity": "1201",
-    "opening": "17",
-    "closing": "23",
+    "avgMealPrice": 21342,
+    "capacity": 1201,
+    "opening": 17,
+    "closing": 23,
     "category": ["Serbian", "Chinese", "Italian", "Burgers", "Taiwanese"]
   },
   {
@@ -103,10 +103,10 @@
     "address": "Jumeriah Beach Rd 2",
     "phoneNumber": "97144074100",
     "image": "images/nusret.jpg",
-    "avgMealPrice": "1499",
-    "capacity": "104",
-    "opening": "12",
-    "closing": "23",
+    "avgMealPrice": 1499,
+    "capacity": 104,
+    "opening": 12,
+    "closing": 23,
     "category": ["Burgers", "International", "Mexican"]
   }
 ]

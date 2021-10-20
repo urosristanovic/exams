@@ -49,6 +49,7 @@ const getRestaurantsByPriceRange = (list, price) => {
   );
 };
 const getRestaurantByCapacityRange = (list, capacity) => {
+  console.log(list, capacity);
   return list.filter(
     restaurant =>
       restaurant.capacity >= capacity.minTables &&
@@ -167,19 +168,23 @@ function resetActiveButtons() {
   });
 }
 
-async function fetchRestaurants() {
-  const response = await fetch('json/restaurants.json');
-  const json = await response.json();
-  return displayRestaurants(json);
+async function displayAllRestaurants() {
+  const listOfRestaurants = await fetchRestaurants();
+  displayRestaurants(listOfRestaurants);
 }
 
+async function fetchRestaurants() {
+  const response = await fetch('json/restaurants.json');
+  return response.json();
+}
 /* ################################################################### */
 
-fetchRestaurants();
+displayAllRestaurants();
 
 const btnsPriceRange = document.getElementById('btns-price');
-btnsPriceRange.addEventListener('click', e => {
+btnsPriceRange.addEventListener('click', async e => {
   const selectedPriceRange = e.target.value;
+  const listOfRestaurants = await fetchRestaurants();
   const priceRange = choosePriceRange(selectedPriceRange);
   const restaurantsByPrice = getRestaurantsByPriceRange(
     listOfRestaurants,
@@ -198,7 +203,8 @@ priceRanges.forEach(price => {
 
 resetActiveButtons();
 const btnsCapacity = document.getElementById('btns-capacity');
-btnsCapacity.addEventListener('click', e => {
+btnsCapacity.addEventListener('click', async e => {
+  const listOfRestaurants = await fetchRestaurants();
   const selectedCapacity = e.target.value;
   const capacity = chooseCapacityRange(selectedCapacity);
   const restaurantsByCapacity = getRestaurantByCapacityRange(
@@ -217,7 +223,8 @@ capacityRanges.forEach(capacity => {
 });
 
 const btnOpenNow = document.getElementById('open-now');
-btnOpenNow.addEventListener('click', e => {
+btnOpenNow.addEventListener('click', async e => {
+  const listOfRestaurants = await fetchRestaurants();
   const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
   const filter = `which are open now`;
   displayRestaurants(openedRestaurants, filter);
@@ -226,7 +233,8 @@ btnOpenNow.addEventListener('click', e => {
 });
 
 const selectHours = document.getElementById('select-hours');
-selectHours.addEventListener('change', () => {
+selectHours.addEventListener('change', async () => {
+  const listOfRestaurants = await fetchRestaurants();
   const hours = selectHours.value;
   if (hours != 'choose') {
     const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
@@ -238,8 +246,9 @@ selectHours.addEventListener('change', () => {
 });
 
 const formFood = document.getElementById('form-food');
-formFood.addEventListener('submit', e => {
+formFood.addEventListener('submit', async e => {
   e.preventDefault();
+  const listOfRestaurants = await fetchRestaurants();
   let restaurantsByCategory = [];
   const categories = [];
   const foods = [
@@ -308,8 +317,9 @@ advancedPrice.addEventListener('click', () => {
 });
 
 const formPrice = document.getElementById('price-form');
-formPrice.addEventListener('submit', e => {
+formPrice.addEventListener('submit', async e => {
   e.preventDefault();
+  const listOfRestaurants = await fetchRestaurants();
   const minPrice = document.getElementById('min-price');
   const maxPrice = document.getElementById('max-price');
   const priceRange = {
@@ -328,8 +338,9 @@ formPrice.addEventListener('submit', e => {
 });
 
 const formCapacity = document.getElementById('capacity-form');
-formCapacity.addEventListener('submit', e => {
+formCapacity.addEventListener('submit', async e => {
   e.preventDefault();
+  const listOfRestaurants = await fetchRestaurants();
   const minCapacity = document.getElementById('min-capacity');
   const maxCapacity = document.getElementById('max-capacity');
   const capacityRange = {
