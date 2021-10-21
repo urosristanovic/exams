@@ -1,7 +1,6 @@
-import { getCookie, getCookieValue, createCookie } from '../modules/cookies.js';
+import { getCookie, getCookieValue, setCookie } from '../modules/cookies.js';
 
 loggedInUser();
-rememberedUser();
 
 const loginForm = document.getElementById('form-login');
 loginForm.addEventListener('submit', async e => {
@@ -26,22 +25,6 @@ function loggedInUser() {
     location = '/13-login-page/index.html';
   }
 }
-function rememberedUser() {
-  // remembered-user={"id":3,"name":"Uros","username":"uros","email":"uros@mysite.com"}
-  const rememberMe = getCookie('remembered-user');
-  if (rememberMe) {
-    (async function () {
-      const response = await fetch('../assets/json/users.json');
-      const users = await response.json();
-
-      const user = JSON.parse(getCookieValue(rememberMe)); // {"id":3,"name":"Uros","username":"uros","email":"uros@mysite.com"}
-      const password = getUserPassword(users, user.username); // uros123.
-      document.getElementById('username').value = `${user.username}`;
-      document.getElementById('password').value = `${password}`;
-    })();
-  }
-}
-
 function handleUser(user) {
   if (!user) {
     document.getElementById('wrong-credentials').style.display = 'block';
@@ -50,9 +33,10 @@ function handleUser(user) {
     const { password, ...userWithoutPassword } = user;
 
     if (isCheckedRemember) {
-      createCookie('remembered-user', JSON.stringify(userWithoutPassword));
+      setCookie('logged-in-user', JSON.stringify(userWithoutPassword), 7);
+    } else {
+      setCookie('logged-in-user', JSON.stringify(userWithoutPassword));
     }
-    createCookie('logged-in-user', JSON.stringify(userWithoutPassword));
 
     document.getElementById('wrong-credentials').style.display = 'none';
     location = '/13-login-page/index.html';
