@@ -1,4 +1,4 @@
-import { getCookie, getCookieValue, setCookie } from '../modules/cookies.js';
+import { getCookie, createCookie } from '../modules/cookies.js';
 
 loggedInUser();
 
@@ -33,9 +33,9 @@ function handleUser(user) {
     const { password, ...userWithoutPassword } = user;
 
     if (isCheckedRemember) {
-      setCookie('logged-in-user', JSON.stringify(userWithoutPassword), 7);
+      createCookie('logged-in-user', JSON.stringify(userWithoutPassword), 7);
     } else {
-      setCookie('logged-in-user', JSON.stringify(userWithoutPassword));
+      createCookie('logged-in-user', JSON.stringify(userWithoutPassword));
     }
 
     document.getElementById('wrong-credentials').style.display = 'none';
