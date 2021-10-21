@@ -49,8 +49,3 @@ function getUser(users, username, password) {
   );
   return user;
 }
-
-function getUserPassword(users, username) {
-  const user = users.find(user => user.username === username);
-  return user.password;
-}
