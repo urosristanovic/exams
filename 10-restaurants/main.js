@@ -1,37 +1,22 @@
-'use strict';
+import {
+  createCapacityRanges,
+  createPriceRanges,
+  fetchRestaurants,
+} from './modules/data.js';
+import {
+  getRestaurantsByPriceRange,
+  getRestaurantByCapacityRange,
+  getOpenRestaurantsNow,
+  getOpenRestaurants,
+  getRestaurantsByCategory,
+  getRestaurantsByCategorySeparate,
+} from './modules/filters.js';
+import {
+  createCapacityRangeButton,
+  createPriceRangeButton,
+  createRestaurantCard,
+} from './modules/elements.js';
 
-function createPriceRanges() {
-  const priceRanges = [
-    {
-      note: '$',
-      label: 'inexpensive',
-      minAvgPricePerMeal: 0,
-      maxAvgPricePerMeal: 500,
-    },
-    {
-      note: '$$',
-      label: 'moderate',
-      minAvgPricePerMeal: 501,
-      maxAvgPricePerMeal: 1000,
-    },
-    {
-      note: '$$$',
-      label: 'expensive',
-      minAvgPricePerMeal: 1001,
-      maxAvgPricePerMeal: 10000,
-    },
-  ];
-  return priceRanges;
-}
-function createCapacityRanges() {
-  const capacityRange = [
-    { note: 'S', label: 'small', minTables: 0, maxTables: 50 },
-    { note: 'M', label: 'medium', minTables: 51, maxTables: 150 },
-    { note: 'L', label: 'large', minTables: 151, maxTables: 1000 },
-    // { note: 'XL', label: 'x-large', minTables: 1001, maxTables: 10000 },
-  ];
-  return capacityRange;
-}
 const choosePriceRange = selectedPriceRange => {
   const priceRanges = createPriceRanges();
   return priceRanges.filter(element => element.label === selectedPriceRange)[0];
@@ -41,83 +26,6 @@ const chooseCapacityRange = selectedCapacity => {
 
   return capacityRange.filter(element => element.label === selectedCapacity)[0];
 };
-const getRestaurantsByPriceRange = (list, price) => {
-  return list.filter(
-    res =>
-      res.avgMealPrice >= price.minAvgPricePerMeal &&
-      res.avgMealPrice < price.maxAvgPricePerMeal
-  );
-};
-const getRestaurantByCapacityRange = (list, capacity) => {
-  console.log(list, capacity);
-  return list.filter(
-    restaurant =>
-      restaurant.capacity >= capacity.minTables &&
-      restaurant.capacity <= capacity.maxTables
-  );
-};
-const getOpenRestaurantsNow = list => {
-  const hours = new Date().getHours();
-  return getOpenRestaurants(list, hours);
-};
-const getOpenRestaurants = (list, hours) => {
-  return list.filter(
-    restaurant => restaurant.opening <= hours && restaurant.closing > hours
-  );
-};
-const getRestaurantsByCategory = (list, listOfCategories) => {
-  return list.filter(res =>
-    listOfCategories.every(category => res.category.includes(category))
-  );
-};
-const getRestaurantsByCategorySeparate = (list, listOfCategories) => {
-  return list.filter(res =>
-    listOfCategories.some(category => res.category.includes(category))
-  );
-};
-
-function createFoodTypes(foods) {
-  let string = '';
-  foods.forEach(food => {
-    const li = document.createElement('li');
-    li.innerText = food;
-    string += li.outerHTML;
-  });
-  return string;
-}
-function createRestaurantCard(res) {
-  const foods = createFoodTypes(res.category);
-  const div = document.createElement('div');
-  div.classList.add('card');
-  div.innerHTML = `
-  <div class="logo">
-  <img src="${res.image}" alt="logo" />
-  </div>
-  <div class="details">
-  <h2 class="restaurant-name">${res.name}</h2>
-  <p class="address">${res.address}</p>
-  <a href="tel:${res.phoneNumber}">${res.phoneNumber}</a>
-    <div class="food-card" id="food-card">
-    ${foods}
-    </div>
-    <div class="sizes">
-      <div class="p-range">
-        <h5>Average <br> meal price:</h5>
-        <p class="avg-price">${res.avgMealPrice}$</p>
-      </div>
-      <div class="c-range">
-        <h5>Capacity:</h5>
-        <p class="card-capacity">${res.capacity}</p>
-      </div>
-    </div>
-    <div class="w-hours">
-      <p class="openning">opening: ${res.opening}h</p>
-      <p class="closing">closing: ${res.closing}h</p>
-    </div>
-  </div>`;
-
-  return div;
-}
 
 function displayRestaurants(listOfRestaurants, filter = '') {
   const number = document.getElementById('number-of-restaurants');
@@ -137,28 +45,9 @@ function displayRestaurants(listOfRestaurants, filter = '') {
   number.innerHTML = `Number of restaurants <em>${filter}</em> is: ${listOfRestaurants.length}.`;
 }
 
-function createPriceRangeButton(price) {
-  const div = document.createElement('div');
-  div.innerHTML = `
-  <button class="${price.label}" value="${price.label}">
-    <span class="tooltiptext green">
-      ${price.minAvgPricePerMeal}-${price.maxAvgPricePerMeal}$
-    </span>
-    ${price.note}
-  </button>`;
-  return div;
-}
-function createCapacityRangeButton(capacity) {
-  const div = document.createElement('div');
-  div.innerHTML = `
-  <button class="${capacity.label}" value="${capacity.label}">
-    <span class="tooltiptext blue">
-      ${capacity.minTables}-${capacity.maxTables}
-    </span>
-    ${capacity.note}
-  </button>
-  `;
-  return div;
+async function displayAllRestaurants() {
+  const listOfRestaurants = await fetchRestaurants();
+  displayRestaurants(listOfRestaurants);
 }
 
 function resetActiveButtons() {
@@ -168,15 +57,6 @@ function resetActiveButtons() {
   });
 }
 
-async function displayAllRestaurants() {
-  const listOfRestaurants = await fetchRestaurants();
-  displayRestaurants(listOfRestaurants);
-}
-
-async function fetchRestaurants() {
-  const response = await fetch('json/restaurants.json');
-  return response.json();
-}
 /* ################################################################### */
 
 displayAllRestaurants();
