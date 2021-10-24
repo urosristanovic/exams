@@ -1,4 +1,5 @@
-import { getCookie, createCookie } from '../modules/cookies.js';
+import { createCookie } from '../modules/cookies.js';
+import { loggedInUser, getUser } from '../modules/user.js';
 
 loggedInUser();
 
@@ -19,12 +20,6 @@ loginForm.addEventListener('submit', async e => {
   password.value = '';
 });
 
-function loggedInUser() {
-  const user = getCookie('logged-in-user');
-  if (user) {
-    location = '/13-login-page/index.html';
-  }
-}
 function handleUser(user) {
   if (!user) {
     document.getElementById('wrong-credentials').style.display = 'block';
@@ -41,11 +36,4 @@ function handleUser(user) {
     document.getElementById('wrong-credentials').style.display = 'none';
     location = '/13-login-page/index.html';
   }
-}
-
-function getUser(users, username, password) {
-  const user = users.find(
-    user => user.username === username && user.password === password
-  );
-  return user;
 }
