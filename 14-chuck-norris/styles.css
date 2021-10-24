@@ -6,18 +6,88 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  background-color: #ffb90856;
+}
+h1,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.fight {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+.heading {
+  background-color: #faa307;
+  width: 100%;
+  text-align: center;
+  padding: 30px 0;
+  color: #370617;
 }
 
 .container {
-  width: 100vw;
-  height: 100vh;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-around;
-  background: url('./images/background2.jpg');
-  background-position: center;
-  background-size: contain;
+  align-items: center;
+  text-align: center;
+}
+.wrapper {
+  width: 350px;
 }
 img {
-  transform: scale(1);
+  width: 300px;
+  border-radius: 7px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 15px;
+}
+img:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  transition: all 0.2s;
+}
+.health {
+  margin: 30px 0;
+}
+.health p {
+  padding: 5px 0;
+}
+#chuck-health,
+#bruce-health {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.fight-btn {
+  padding: 15px 50px;
+  font-size: 18px;
+}
+button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: #d00000;
+  border-radius: 6px;
+}
+button:hover {
+  background-color: #dc2f02;
+}
+.text {
+  width: 600px;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 22px;
+}
+.show-result {
+  font-size: 54px;
+  font-weight: 600;
+  color: #370617;
+  padding: 10px;
+  background-color: #370617;
+  color: #ffba08;
+  margin-top: 20px;
+  border-radius: 6px;
+}
+.p-winner {
+  font-size: 220px;
 }
