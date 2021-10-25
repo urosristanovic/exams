@@ -8,6 +8,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   background-color: #ffb90856;
 }
+button,
 h1,
 p {
   margin: 0;
@@ -47,7 +48,12 @@ img:hover {
   transition: all 0.2s;
 }
 .health {
-  margin: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 10px 0;
 }
 .health p {
   padding: 5px 0;
@@ -61,16 +67,20 @@ img:hover {
 .fight-btn {
   padding: 15px 50px;
   font-size: 18px;
+  border: 1px solid black;
+  color: #faa307;
+  font-weight: 600;
 }
 button {
   outline: none;
   border: none;
   cursor: pointer;
-  background-color: #d00000;
+  background-color: #370617;
   border-radius: 6px;
+  transition: all 0.2s;
 }
 button:hover {
-  background-color: #dc2f02;
+  background-color: #370617b6;
 }
 .text {
   width: 600px;
@@ -79,15 +89,16 @@ button:hover {
   font-size: 22px;
 }
 .show-result {
-  font-size: 54px;
+  font-size: 24px;
   font-weight: 600;
-  color: #370617;
   padding: 10px;
   background-color: #370617;
   color: #ffba08;
-  margin-top: 20px;
   border-radius: 6px;
 }
 .p-winner {
   font-size: 220px;
+}
+.points {
+  padding-top: 20px;
 }
