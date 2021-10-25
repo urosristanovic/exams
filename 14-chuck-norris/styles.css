@@ -102,3 +102,6 @@ button:hover {
 .points {
   padding-top: 20px;
 }
+#winner {
+  display: none;
+}

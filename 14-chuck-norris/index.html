@@ -15,44 +15,42 @@
           <div class="health">
             <p>Health: <span id="chuck-health">100</span> %</p>
           </div>
-          <button>
+          <button id="chuck-points">
             <img src="chuck-norris.jpg" alt="Chuck Norris" />
           </button>
           <p class="points">
             Points:
-            <span class="show-result">?</span>
+            <span class="show-result" id="show-result-chuck">?</span>
           </p>
         </div>
         <div class="result">
-          <button class="fight-btn">FIGHT</button>
+          <button class="fight-btn" id="fight-btn">FIGHT</button>
         </div>
         <div class="wrapper">
           <div class="health">
-            <p>Health: <span id="bruce-health">60</span> %</p>
+            <p>
+              Health:
+              <span id="bruce-health" id="show-result-bruce">100</span> %
+            </p>
           </div>
-          <button>
+          <button id="bruce-points">
             <img src="bruce-lee.jpeg" alt="Bruce Lee" />
           </button>
           <p class="points">
             Points:
-            <span class="show-result">?</span>
+            <span class="show-result" id="show-result-bruce">?</span>
           </p>
         </div>
       </div>
       <h2>Winner is:</h2>
-      <div class="winner">
+      <div class="winner" id="winner">
         <img src="chuck-norris-fight.jpg" alt="Chuck Norris" />
       </div>
-      <p class="p-winner">?</p>
+      <p class="p-winner" id="p-winner">?</p>
       <div class="quote">
-        <p class="text">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa
-          excepturi consequatur asperiores impedit animi! Inventore in atque
-          harum, commodi doloremque magnam expedita obcaecati ex sunt! Eos
-          delectus sunt eveniet nam.
-        </p>
+        <p class="text" id="text"></p>
       </div>
     </div>
-    <script src="main.js"></script>
+    <script src="main.js" type="module"></script>
   </body>
 </html>
