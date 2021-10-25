@@ -21,6 +21,7 @@ fight.addEventListener('click', async () => {
   if (result <= 0) {
     bruce.innerText = 0;
     document.getElementById('winner').style.display = 'block';
+    document.getElementById('quote').style.display = 'block';
     document.getElementById('p-winner').style.display = 'none';
 
     const randomJoke = await fetch('http://api.icndb.com/jokes/random');
@@ -29,6 +30,7 @@ fight.addEventListener('click', async () => {
     document.getElementById('text').innerText = joke.value.joke;
   } else {
     bruce.innerText = result;
+    bruce.style.color = 'red';
   }
 
   document.getElementById('show-result-chuck').innerText = '?';
