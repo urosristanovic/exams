@@ -7,7 +7,6 @@ export const getRestaurantsByPriceRange = (list, price) => {
 };
 
 export const getRestaurantByCapacityRange = (list, capacity) => {
-  console.log(list, capacity);
   return list.filter(
     restaurant =>
       restaurant.capacity >= capacity.minTables &&

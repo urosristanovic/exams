@@ -1,0 +1,15 @@
+[
+  {
+    "note": "S",
+    "label": "small",
+    "minTables": 0,
+    "maxTables": 50
+  },
+  {
+    "note": "M",
+    "label": "medium",
+    "minTables": 51,
+    "maxTables": 150
+  },
+  { "note": "L", "label": "large", "minTables": 151, "maxTables": 1000 }
+]

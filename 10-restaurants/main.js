@@ -1,30 +1,29 @@
 import {
-  createCapacityRanges,
-  createPriceRanges,
+  fetchCapacity,
+  fetchPrices,
   fetchRestaurants,
 } from './modules/data.js';
 import {
-  getRestaurantsByPriceRange,
-  getRestaurantByCapacityRange,
-  getOpenRestaurantsNow,
+  createCapacityButtons,
+  createPriceButtons,
+  createRestaurantCard,
+} from './modules/components.js';
+import {
   getOpenRestaurants,
+  getOpenRestaurantsNow,
+  getRestaurantByCapacityRange,
   getRestaurantsByCategory,
   getRestaurantsByCategorySeparate,
+  getRestaurantsByPriceRange,
 } from './modules/filters.js';
-import {
-  createCapacityRangeButton,
-  createPriceRangeButton,
-  createRestaurantCard,
-} from './modules/elements.js';
 
-const choosePriceRange = selectedPriceRange => {
-  const priceRanges = createPriceRanges();
-  return priceRanges.filter(element => element.label === selectedPriceRange)[0];
+const choosePriceRange = async selectedPriceRange => {
+  const priceRanges = await fetchPrices();
+  return priceRanges.find(element => element.label === selectedPriceRange);
 };
-const chooseCapacityRange = selectedCapacity => {
-  const capacityRange = createCapacityRanges();
-
-  return capacityRange.filter(element => element.label === selectedCapacity)[0];
+const chooseCapacityRange = async selectedCapacity => {
+  const capacityRange = await fetchCapacity();
+  return capacityRange.find(element => element.label === selectedCapacity);
 };
 
 function displayRestaurants(listOfRestaurants, filter = '') {
@@ -65,7 +64,7 @@ const btnsPriceRange = document.getElementById('btns-price');
 btnsPriceRange.addEventListener('click', async e => {
   const selectedPriceRange = e.target.value;
   const listOfRestaurants = await fetchRestaurants();
-  const priceRange = choosePriceRange(selectedPriceRange);
+  const priceRange = await choosePriceRange(selectedPriceRange);
   const restaurantsByPrice = getRestaurantsByPriceRange(
     listOfRestaurants,
     priceRange
@@ -75,18 +74,13 @@ btnsPriceRange.addEventListener('click', async e => {
   resetActiveButtons();
   e.target.classList.add('active');
 });
-const priceRanges = createPriceRanges();
-priceRanges.forEach(price => {
-  const priceRange = createPriceRangeButton(price);
-  btnsPriceRange.appendChild(priceRange);
-});
+createPriceButtons(btnsPriceRange);
 
-resetActiveButtons();
 const btnsCapacity = document.getElementById('btns-capacity');
 btnsCapacity.addEventListener('click', async e => {
   const listOfRestaurants = await fetchRestaurants();
   const selectedCapacity = e.target.value;
-  const capacity = chooseCapacityRange(selectedCapacity);
+  const capacity = await chooseCapacityRange(selectedCapacity);
   const restaurantsByCapacity = getRestaurantByCapacityRange(
     listOfRestaurants,
     capacity
@@ -96,11 +90,7 @@ btnsCapacity.addEventListener('click', async e => {
   const filter = `which are ${selectedCapacity}`;
   displayRestaurants(restaurantsByCapacity, filter);
 });
-const capacityRanges = createCapacityRanges();
-capacityRanges.forEach(capacity => {
-  const capacityRange = createCapacityRangeButton(capacity);
-  btnsCapacity.appendChild(capacityRange);
-});
+createCapacityButtons(btnsCapacity);
 
 const btnOpenNow = document.getElementById('open-now');
 btnOpenNow.addEventListener('click', async e => {

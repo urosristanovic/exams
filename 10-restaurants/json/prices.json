@@ -1,0 +1,20 @@
+[
+  {
+    "note": "$",
+    "label": "inexpensive",
+    "minAvgPricePerMeal": 0,
+    "maxAvgPricePerMeal": 500
+  },
+  {
+    "note": "$$",
+    "label": "moderate",
+    "minAvgPricePerMeal": 501,
+    "maxAvgPricePerMeal": 1000
+  },
+  {
+    "note": "$$$",
+    "label": "expensive",
+    "minAvgPricePerMeal": 1001,
+    "maxAvgPricePerMeal": 10000
+  }
+]

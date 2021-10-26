@@ -1,3 +1,21 @@
+import { fetchCapacity, fetchPrices } from './data.js';
+
+export async function createPriceButtons(btnsPriceRange) {
+  const priceRanges = await fetchPrices();
+  priceRanges.forEach(price => {
+    const priceRange = createPriceRangeButton(price);
+    btnsPriceRange.appendChild(priceRange);
+  });
+}
+
+export async function createCapacityButtons(btnsCapacity) {
+  const capacityRanges = await fetchCapacity();
+  capacityRanges.forEach(capacity => {
+    const capacityRange = createCapacityRangeButton(capacity);
+    btnsCapacity.appendChild(capacityRange);
+  });
+}
+
 export function createCapacityRangeButton(capacity) {
   const div = document.createElement('div');
   div.innerHTML = `
