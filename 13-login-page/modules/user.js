@@ -1,9 +1,14 @@
 import { getCookie } from './cookies.js';
 
-export function loggedInUser() {
+export function redirectIfLoggedIn(path) {
   const user = getCookie('logged-in-user');
   if (user) {
-    location = '/13-login-page/index.html';
+    location = path;
+  }
+}
+export function redirectIfNotLoggedIn(user, path) {
+  if (!user) {
+    location = path;
   }
 }
 export function getUser(users, username, password) {
@@ -11,4 +16,8 @@ export function getUser(users, username, password) {
     user => user.username === username && user.password === password
   );
   return user;
+}
+export async function fetchUsers() {
+  const response = await fetch('../assets/json/users.json');
+  return response.json();
 }

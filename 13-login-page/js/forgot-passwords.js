@@ -1,10 +1,6 @@
-import { getCookie } from '../modules/cookies.js';
+import { redirectIfLoggedIn } from '../modules/user.js';
 
-const username = getCookie('logged-in-user');
-
-if (username) {
-  location = '/13-login-page/index.html';
-}
+redirectIfLoggedIn('/13-login-page/index.html');
 
 const formForgotPass = document.getElementById('form-forgot-password');
 formForgotPass.addEventListener('submit', e => {

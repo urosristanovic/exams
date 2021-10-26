@@ -1,7 +1,7 @@
 import { createCookie } from '../modules/cookies.js';
-import { loggedInUser, getUser } from '../modules/user.js';
+import { redirectIfLoggedIn, getUser, fetchUsers } from '../modules/user.js';
 
-loggedInUser();
+redirectIfLoggedIn('/13-login-page/index.html');
 
 const loginForm = document.getElementById('form-login');
 loginForm.addEventListener('submit', async e => {
@@ -9,9 +9,7 @@ loginForm.addEventListener('submit', async e => {
   const username = document.getElementById('username');
   const password = document.getElementById('password');
 
-  const response = await fetch('../assets/json/users.json');
-  const users = await response.json();
-
+  const users = await fetchUsers();
   const user = getUser(users, username.value, password.value);
 
   handleUser(user);

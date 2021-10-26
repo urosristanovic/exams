@@ -1,9 +1,9 @@
 import { getCookie, getCookieValue, removeCookie } from '../modules/cookies.js';
 
+import { redirectIfNotLoggedIn } from '../modules/user.js';
+
 const userCookie = getCookie('logged-in-user');
-if (!userCookie) {
-  location = '/13-login-page/pages/login.html';
-}
+redirectIfNotLoggedIn(userCookie, '/13-login-page/pages/login.html');
 
 const user = JSON.parse(getCookieValue(userCookie));
 
