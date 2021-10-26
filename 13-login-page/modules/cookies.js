@@ -14,10 +14,15 @@ export function getCookieValue(cookie) {
   return false;
 }
 
-function yesterday() {
-  const date = new Date();
-  date.setDate(date.getDate() - 1);
-  return date;
+export function setCookie(user, isCheckedRemember) {
+  const { password, ...userWithoutPassword } = user;
+  const stringifiedUser = JSON.stringify(userWithoutPassword);
+
+  if (isCheckedRemember) {
+    createCookie('logged-in-user', stringifiedUser, 7);
+  } else {
+    createCookie('logged-in-user', stringifiedUser);
+  }
 }
 
 export function createCookie(name, value, days) {
@@ -28,4 +33,10 @@ export function createCookie(name, value, days) {
     expires = '; expires=' + date.toUTCString();
   }
   document.cookie = `${name}=${value}${expires}; path=/`;
+}
+
+function yesterday() {
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  return date;
 }

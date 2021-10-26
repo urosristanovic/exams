@@ -1,5 +1,6 @@
-import { createCookie } from '../modules/cookies.js';
+import { setCookie } from '../modules/cookies.js';
 import { redirectIfLoggedIn, getUser, fetchUsers } from '../modules/user.js';
+import { redirect } from './modules/redirect.js';
 
 redirectIfLoggedIn('/13-login-page/index.html');
 
@@ -19,19 +20,14 @@ loginForm.addEventListener('submit', async e => {
 });
 
 function handleUser(user) {
+  const wrongCredentials = document.getElementById('wrong-credentials');
   if (!user) {
-    document.getElementById('wrong-credentials').style.display = 'block';
+    wrongCredentials.style.display = 'block';
   } else {
     const isCheckedRemember = document.getElementById('remember-me').checked;
-    const { password, ...userWithoutPassword } = user;
+    wrongCredentials.style.display = 'none';
 
-    if (isCheckedRemember) {
-      createCookie('logged-in-user', JSON.stringify(userWithoutPassword), 7);
-    } else {
-      createCookie('logged-in-user', JSON.stringify(userWithoutPassword));
-    }
-
-    document.getElementById('wrong-credentials').style.display = 'none';
-    location = '/13-login-page/index.html';
+    setCookie(user, isCheckedRemember);
+    redirect('/13-login-page/index.html');
   }
 }

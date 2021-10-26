@@ -1,14 +1,16 @@
 import { getCookie } from './cookies.js';
+import { redirect } from './redirect.js';
 
 export function redirectIfLoggedIn(path) {
   const user = getCookie('logged-in-user');
   if (user) {
-    location = path;
+    redirect(path);
   }
 }
-export function redirectIfNotLoggedIn(user, path) {
+export function redirectIfNotLoggedIn(path) {
+  const user = getCookie('logged-in-user');
   if (!user) {
-    location = path;
+    redirect(path);
   }
 }
 export function getUser(users, username, password) {
