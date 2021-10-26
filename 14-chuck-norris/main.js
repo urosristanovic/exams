@@ -1,4 +1,5 @@
 import { pointsHandler } from './modules/points.js';
+import { fetchJoke } from './modules/data.js';
 
 const chuck = document.getElementById('chuck-points');
 chuck.addEventListener('click', () => {
@@ -24,8 +25,7 @@ fight.addEventListener('click', async () => {
     document.getElementById('quote').style.display = 'block';
     document.getElementById('p-winner').style.display = 'none';
 
-    const randomJoke = await fetch('http://api.icndb.com/jokes/random');
-    const joke = await randomJoke.json();
+    const joke = await fetchJoke();
 
     document.getElementById('text').innerText = joke.value.joke;
   } else {
