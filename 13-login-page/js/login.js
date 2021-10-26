@@ -1,6 +1,6 @@
 import { setCookie } from '../modules/cookies.js';
 import { redirectIfLoggedIn, getUser, fetchUsers } from '../modules/user.js';
-import { redirect } from './modules/redirect.js';
+import { redirect } from '../modules/redirect.js';
 
 redirectIfLoggedIn('/13-login-page/index.html');
 
