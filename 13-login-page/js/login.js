@@ -1,5 +1,9 @@
-import { setCookie } from '../modules/cookies.js';
-import { redirectIfLoggedIn, getUser, fetchUsers } from '../modules/user.js';
+import {
+  redirectIfLoggedIn,
+  getUser,
+  fetchUsers,
+  saveUser,
+} from '../modules/user.js';
 import { redirect } from '../modules/redirect.js';
 
 redirectIfLoggedIn('/13-login-page/index.html');
@@ -27,7 +31,7 @@ function handleUser(user) {
     const isCheckedRemember = document.getElementById('remember-me').checked;
     wrongCredentials.style.display = 'none';
 
-    setCookie(user, isCheckedRemember);
+    saveUser(user, isCheckedRemember);
     redirect('/13-login-page/index.html');
   }
 }

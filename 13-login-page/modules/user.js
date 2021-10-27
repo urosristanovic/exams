@@ -23,3 +23,13 @@ export async function fetchUsers() {
   const response = await fetch('../assets/json/users.json');
   return response.json();
 }
+export function saveUser(user, isCheckedRemember) {
+  const { password, ...userWithoutPassword } = user;
+  const stringifiedUser = JSON.stringify(userWithoutPassword);
+
+  if (isCheckedRemember) {
+    createCookie('logged-in-user', stringifiedUser, 7);
+  } else {
+    createCookie('logged-in-user', stringifiedUser);
+  }
+}

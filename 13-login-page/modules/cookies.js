@@ -14,17 +14,6 @@ export function getCookieValue(cookie) {
   return false;
 }
 
-export function setCookie(user, isCheckedRemember) {
-  const { password, ...userWithoutPassword } = user;
-  const stringifiedUser = JSON.stringify(userWithoutPassword);
-
-  if (isCheckedRemember) {
-    createCookie('logged-in-user', stringifiedUser, 7);
-  } else {
-    createCookie('logged-in-user', stringifiedUser);
-  }
-}
-
 export function createCookie(name, value, days) {
   let expires = '';
   if (days) {
