@@ -1,21 +1,22 @@
-import { fetchRestaurants } from './modules/data.js';
+import {
+  displayRestaurantsByCapacity,
+  displayRestaurantsByCapacityAdvanced,
+} from './modules/capacity.js';
+import { displayRestaurantsByCategories } from './modules/category.js';
+import { redirect, setQuery } from './modules/common.js';
 import {
   createCapacityButtons,
   createPriceButtons,
   createRestaurantCard,
 } from './modules/components.js';
+import { fetchRestaurants } from './modules/data.js';
 import {
-  getOpenRestaurants,
-  getOpenRestaurantsNow,
-  getRestaurantsByPriceRange,
-  getRestaurantByCapacityRange,
-  getRestaurantsByCategory,
-  getRestaurantsByCategorySeparate,
-  choosePriceRange,
-  chooseCapacityRange,
-} from './modules/filters.js';
+  displayRestaurantsByPrice,
+  displayRestaurantsByPriceAdvanced,
+} from './modules/price.js';
+import { displayRestaurantsByTime } from './modules/time.js';
 
-function displayRestaurants(listOfRestaurants, filter = '') {
+export function displayRestaurants(listOfRestaurants, filter = '') {
   const number = document.getElementById('number-of-restaurants');
   const list = document.getElementById('restaurants');
   list.innerHTML = ``;
@@ -33,141 +34,9 @@ function displayRestaurants(listOfRestaurants, filter = '') {
   number.innerHTML = `Number of restaurants <em>${filter}</em> is: ${listOfRestaurants.length}.`;
 }
 
-function resetActiveButtons() {
-  const listOfButtons = document.querySelectorAll('button');
-  listOfButtons.forEach(btn => {
-    if (btn.classList.contains('active')) btn.classList.remove('active');
-  });
-}
-function setQuery(filter, value) {
-  const query = new URLSearchParams();
-  query.set(`${filter}`, `${value}`);
-  return query;
-}
-function redirect(query) {
-  location = query;
-}
-
-async function displayRestaurantsByPrice(listOfRestaurants, priceFromParams) {
-  const priceRange = await choosePriceRange(priceFromParams);
-  const restaurantsByPrice = getRestaurantsByPriceRange(
-    listOfRestaurants,
-    priceRange
-  );
-  const filter = `which are ${priceFromParams}`;
-  displayRestaurants(restaurantsByPrice, filter);
-  resetActiveButtons();
-  const active = document.getElementsByClassName(priceFromParams);
-  active[0].classList.add('active');
-}
-
-function displayRestaurantsByPriceAdvanced(
-  listOfRestaurants,
-  minPrice,
-  maxPrice
-) {
-  document.getElementById('advanced-price').innerText = 'Back to basic filters';
-  document.getElementById('price-form').style.display = 'flex';
-
-  const priceRange = {
-    minAvgPricePerMeal: minPrice,
-    maxAvgPricePerMeal: maxPrice,
-  };
-  const restaurantsByPrice = getRestaurantsByPriceRange(
-    listOfRestaurants,
-    priceRange
-  );
-  const filter = ` with price between ${minPrice}$ and ${maxPrice}$`;
-  displayRestaurants(restaurantsByPrice, filter);
-}
-
-function displayRestaurantsByCapacityAdvanced(
-  listOfRestaurants,
-  minCapacity,
-  maxCapacity
-) {
-  document.getElementById('advanced-capacity').innerText =
-    'Back to basic filters';
-  document.getElementById('capacity-form').style.display = 'flex';
-
-  const capacityRange = {
-    minTables: minCapacity,
-    maxTables: maxCapacity,
-  };
-  const restaurantsByCapacity = getRestaurantByCapacityRange(
-    listOfRestaurants,
-    capacityRange
-  );
-  const filter = `with number of tables between ${minCapacity} and ${maxCapacity}`;
-  displayRestaurants(restaurantsByCapacity, filter);
-}
-
-async function displayRestaurantsByCapacity(
-  listOfRestaurants,
-  capacityFromParams
-) {
-  const capacity = await chooseCapacityRange(capacityFromParams);
-  const restaurantsByCapacity = getRestaurantByCapacityRange(
-    listOfRestaurants,
-    capacity
-  );
-  const filter = `which are ${capacityFromParams}`;
-  displayRestaurants(restaurantsByCapacity, filter);
-  resetActiveButtons();
-  const active = document.getElementsByClassName(capacityFromParams);
-  active[0].classList.add('active');
-}
-
-function displayRestaurantsByTime(listOfRestaurants, hours) {
-  let filter = '';
-  let openedRestaurants = null;
-  if (hours === 'now') {
-    openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
-    filter = `which are open now`;
-  } else {
-    openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
-    filter = `open at ${hours % 12}${hours > 12 ? 'pm' : 'am'}`;
-  }
-  displayRestaurants(openedRestaurants, filter);
-}
-
-function setCheckboxes(categories, separate) {
-  const catToLowerCase = categories.map(el => el.toLowerCase());
-
-  catToLowerCase.filter(food => {
-    document.getElementById(food).checked = true;
-  });
-  if (separate) document.getElementById(`radio-${separate}`).checked = true;
-}
-
-function displayRestaurantsByCategories(
-  listOfRestaurants,
-  categories,
-  separate
-) {
-  let restaurantsByCategory = [];
-  const categoriesArray = categories.split(',');
-
-  switch (separate) {
-    case 'any':
-      restaurantsByCategory = getRestaurantsByCategorySeparate(
-        listOfRestaurants,
-        categoriesArray
-      );
-      break;
-    case 'all':
-      restaurantsByCategory = getRestaurantsByCategory(
-        listOfRestaurants,
-        categoriesArray
-      );
-      break;
-  }
-  setCheckboxes(categoriesArray, separate);
-  displayRestaurants(restaurantsByCategory);
-}
-
 async function handleRestaurantsByQuery() {
   const params = new URLSearchParams(location.search);
+
   const priceParams = params.get('price');
   const priceFromParams = params.get('price-from');
   const priceToParams = params.get('price-to');
@@ -207,11 +76,9 @@ async function handleRestaurantsByQuery() {
   } else {
     displayRestaurants(listOfRestaurants);
   }
-  resetActiveButtons();
 }
 
 /* ################################################################### */
-
 handleRestaurantsByQuery();
 
 const btnsPriceRange = document.getElementById('btns-price');
@@ -270,7 +137,6 @@ formFood.addEventListener('submit', e => {
 
   const queryCategories = setQuery('categories', categories);
   const querySeparate = setQuery('separate', separate);
-
   redirect(`restaurants.html?${queryCategories}&${querySeparate}`);
 });
 
@@ -285,6 +151,7 @@ advancedCapacity.addEventListener('click', () => {
     advancedCapacity.innerText = 'Advanced filters';
   }
 });
+
 const advancedPrice = document.getElementById('advanced-price');
 advancedPrice.addEventListener('click', () => {
   const priceForm = document.getElementById('price-form');
@@ -295,7 +162,6 @@ advancedPrice.addEventListener('click', () => {
     priceForm.style.display = 'none';
     advancedPrice.innerText = 'Advanced filters';
   }
-  resetActiveButtons();
 });
 
 const formPrice = document.getElementById('price-form');
