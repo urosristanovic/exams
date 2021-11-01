@@ -1,8 +1,4 @@
-import {
-  fetchCapacity,
-  fetchPrices,
-  fetchRestaurants,
-} from './modules/data.js';
+import { fetchRestaurants } from './modules/data.js';
 import {
   createCapacityButtons,
   createPriceButtons,
@@ -15,16 +11,9 @@ import {
   getRestaurantsByCategory,
   getRestaurantsByCategorySeparate,
   getRestaurantsByPriceRange,
+  choosePriceRange,
+  chooseCapacityRange,
 } from './modules/filters.js';
-
-const choosePriceRange = async selectedPriceRange => {
-  const priceRanges = await fetchPrices();
-  return priceRanges.find(element => element.label === selectedPriceRange);
-};
-const chooseCapacityRange = async selectedCapacity => {
-  const capacityRange = await fetchCapacity();
-  return capacityRange.find(element => element.label === selectedCapacity);
-};
 
 function displayRestaurants(listOfRestaurants, filter = '') {
   const number = document.getElementById('number-of-restaurants');

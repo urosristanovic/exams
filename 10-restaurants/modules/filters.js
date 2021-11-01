@@ -1,3 +1,5 @@
+import { fetchCapacity, fetchPrices } from './data.js';
+
 export const getRestaurantsByPriceRange = (list, price) => {
   return list.filter(
     res =>
@@ -5,7 +7,6 @@ export const getRestaurantsByPriceRange = (list, price) => {
       res.avgMealPrice < price.maxAvgPricePerMeal
   );
 };
-
 export const getRestaurantByCapacityRange = (list, capacity) => {
   return list.filter(
     restaurant =>
@@ -13,6 +14,15 @@ export const getRestaurantByCapacityRange = (list, capacity) => {
       restaurant.capacity <= capacity.maxTables
   );
 };
+export const choosePriceRange = async selectedPriceRange => {
+  const priceRanges = await fetchPrices();
+  return priceRanges.find(element => element.label === selectedPriceRange);
+};
+export const chooseCapacityRange = async selectedCapacity => {
+  const capacityRange = await fetchCapacity();
+  return capacityRange.find(element => element.label === selectedCapacity);
+};
+
 export const getOpenRestaurantsNow = list => {
   const hours = new Date().getHours();
   return getOpenRestaurants(list, hours);
