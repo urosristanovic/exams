@@ -7,10 +7,10 @@ import {
 import {
   getOpenRestaurants,
   getOpenRestaurantsNow,
+  getRestaurantsByPriceRange,
   getRestaurantByCapacityRange,
   getRestaurantsByCategory,
   getRestaurantsByCategorySeparate,
-  getRestaurantsByPriceRange,
   choosePriceRange,
   chooseCapacityRange,
 } from './modules/filters.js';
@@ -33,75 +33,157 @@ function displayRestaurants(listOfRestaurants, filter = '') {
   number.innerHTML = `Number of restaurants <em>${filter}</em> is: ${listOfRestaurants.length}.`;
 }
 
-async function displayAllRestaurants() {
-  const listOfRestaurants = await fetchRestaurants();
-  displayRestaurants(listOfRestaurants);
-}
-
 function resetActiveButtons() {
   const listOfButtons = document.querySelectorAll('button');
   listOfButtons.forEach(btn => {
     if (btn.classList.contains('active')) btn.classList.remove('active');
   });
 }
+function setQuery(filter, value) {
+  const query = new URLSearchParams();
+  query.set(`${filter}`, `${value}`);
+  return query;
+}
+function redirect(query) {
+  location = query;
+}
 
-/* ################################################################### */
-
-displayAllRestaurants();
-
-const btnsPriceRange = document.getElementById('btns-price');
-btnsPriceRange.addEventListener('click', async e => {
-  const selectedPriceRange = e.target.value;
-  const listOfRestaurants = await fetchRestaurants();
-  const priceRange = await choosePriceRange(selectedPriceRange);
+async function displayRestaurantsByPrice(listOfRestaurants, priceFromParams) {
+  const priceRange = await choosePriceRange(priceFromParams);
   const restaurantsByPrice = getRestaurantsByPriceRange(
     listOfRestaurants,
     priceRange
   );
-  const filter = `which are ${selectedPriceRange}`;
+  const filter = `which are ${priceFromParams}`;
   displayRestaurants(restaurantsByPrice, filter);
+}
+
+function displayRestaurantsByPriceAdvanced(
+  listOfRestaurants,
+  minPrice,
+  maxPrice
+) {
+  const priceRange = {
+    minAvgPricePerMeal: minPrice,
+    maxAvgPricePerMeal: maxPrice,
+  };
+  const restaurantsByPrice = getRestaurantsByPriceRange(
+    listOfRestaurants,
+    priceRange
+  );
+  const filter = ` with price between ${minPrice}$ and ${maxPrice}$`;
+  displayRestaurants(restaurantsByPrice, filter);
+}
+
+function displayRestaurantsByCapacityAdvanced(
+  listOfRestaurants,
+  minCapacity,
+  maxCapacity
+) {
+  const capacityRange = {
+    minTables: minCapacity,
+    maxTables: maxCapacity,
+  };
+  const restaurantsByCapacity = getRestaurantByCapacityRange(
+    listOfRestaurants,
+    capacityRange
+  );
+  const filter = `with number of tables between ${minCapacity} and ${maxCapacity}`;
+  displayRestaurants(restaurantsByCapacity, filter);
+}
+
+async function displayRestaurantsByCapacity(
+  listOfRestaurants,
+  capacityFromParams
+) {
+  const capacity = await chooseCapacityRange(capacityFromParams);
+  const restaurantsByCapacity = getRestaurantByCapacityRange(
+    listOfRestaurants,
+    capacity
+  );
+  const filter = `which are ${capacityFromParams}`;
+  displayRestaurants(restaurantsByCapacity, filter);
+}
+
+function displayRestaurantsByTime(listOfRestaurants, hours) {
+  let filter = '';
+  let openedRestaurants = null;
+  if (hours === 'now') {
+    openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
+    filter = `which are open now`;
+  } else {
+    openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
+    filter = `open at ${hours % 12}${hours > 12 ? 'pm' : 'am'}`;
+  }
+  displayRestaurants(openedRestaurants, filter);
+}
+
+async function handleRestaurantsByQuery() {
+  const params = new URLSearchParams(location.search);
+  const priceParams = params.get('price');
+  const priceFromParams = params.get('price-from');
+  const priceToParams = params.get('price-to');
+  const capacityParams = params.get('capacity');
+  const capacityFromParams = params.get('capacity-from');
+  const capacityToParams = params.get('capacity-to');
+  const hoursParams = params.get('open-at');
+
+  const listOfRestaurants = await fetchRestaurants();
+  if (priceParams) {
+    displayRestaurantsByPrice(listOfRestaurants, priceParams);
+  } else if (capacityParams) {
+    displayRestaurantsByCapacity(listOfRestaurants, capacityParams);
+  } else if (hoursParams) {
+    displayRestaurantsByTime(listOfRestaurants, hoursParams);
+  } else if (priceFromParams && priceToParams) {
+    displayRestaurantsByPriceAdvanced(
+      listOfRestaurants,
+      priceFromParams,
+      priceToParams
+    );
+  } else if (capacityFromParams && capacityToParams) {
+    displayRestaurantsByCapacityAdvanced(
+      listOfRestaurants,
+      capacityFromParams,
+      capacityToParams
+    );
+  } else {
+    displayRestaurants(listOfRestaurants);
+  }
   resetActiveButtons();
-  e.target.classList.add('active');
+}
+
+/* ################################################################### */
+
+handleRestaurantsByQuery();
+
+const btnsPriceRange = document.getElementById('btns-price');
+btnsPriceRange.addEventListener('click', async e => {
+  const selectedPriceRange = e.target.value;
+  const query = setQuery('price', selectedPriceRange);
+  redirect(`restaurants.html?${query}`);
 });
 createPriceButtons(btnsPriceRange);
 
 const btnsCapacity = document.getElementById('btns-capacity');
 btnsCapacity.addEventListener('click', async e => {
-  const listOfRestaurants = await fetchRestaurants();
   const selectedCapacity = e.target.value;
-  const capacity = await chooseCapacityRange(selectedCapacity);
-  const restaurantsByCapacity = getRestaurantByCapacityRange(
-    listOfRestaurants,
-    capacity
-  );
-  resetActiveButtons();
-  e.target.classList.add('active');
-  const filter = `which are ${selectedCapacity}`;
-  displayRestaurants(restaurantsByCapacity, filter);
+  const query = setQuery('capacity', selectedCapacity);
+  redirect(`restaurants.html?${query}`);
 });
 createCapacityButtons(btnsCapacity);
 
 const btnOpenNow = document.getElementById('open-now');
-btnOpenNow.addEventListener('click', async e => {
-  const listOfRestaurants = await fetchRestaurants();
-  const openedRestaurants = getOpenRestaurantsNow(listOfRestaurants);
-  const filter = `which are open now`;
-  displayRestaurants(openedRestaurants, filter);
-  resetActiveButtons();
-  e.target.classList.add('active');
+btnOpenNow.addEventListener('click', async () => {
+  const query = setQuery('open-at', 'now');
+  redirect(`restaurants.html?${query}`);
 });
 
 const selectHours = document.getElementById('select-hours');
 selectHours.addEventListener('change', async () => {
-  const listOfRestaurants = await fetchRestaurants();
   const hours = selectHours.value;
-  if (hours != 'choose') {
-    const openedRestaurants = getOpenRestaurants(listOfRestaurants, hours);
-    const filter = `open at ${hours % 12}${hours > 12 ? 'pm' : 'am'}`;
-    displayRestaurants(openedRestaurants, filter);
-    selectHours.value = 'choose';
-  }
-  resetActiveButtons();
+  const query = setQuery('open-at', hours);
+  redirect(`restaurants.html?${query}`);
 });
 
 const formFood = document.getElementById('form-food');
@@ -159,7 +241,6 @@ advancedCapacity.addEventListener('click', () => {
     capacityForm.style.display = 'none';
     advancedCapacity.innerText = 'Advanced filters';
   }
-  resetActiveButtons();
 });
 
 const advancedPrice = document.getElementById('advanced-price');
@@ -176,43 +257,23 @@ advancedPrice.addEventListener('click', () => {
 });
 
 const formPrice = document.getElementById('price-form');
-formPrice.addEventListener('submit', async e => {
+formPrice.addEventListener('submit', e => {
   e.preventDefault();
-  const listOfRestaurants = await fetchRestaurants();
   const minPrice = document.getElementById('min-price');
   const maxPrice = document.getElementById('max-price');
-  const priceRange = {
-    minAvgPricePerMeal: minPrice.value,
-    maxAvgPricePerMeal: maxPrice.value,
-  };
-  const restaurantsByPrice = getRestaurantsByPriceRange(
-    listOfRestaurants,
-    priceRange
-  );
-  const filter = ` with price between ${minPrice.value}$ and ${maxPrice.value}$`;
-  minPrice.value = '';
-  maxPrice.value = '';
-  displayRestaurants(restaurantsByPrice, filter);
-  resetActiveButtons();
+
+  const queryMin = setQuery('price-from', minPrice.value);
+  const queryMax = setQuery('price-to', maxPrice.value);
+  redirect(`restaurants.html?${queryMin}&${queryMax}`);
 });
 
 const formCapacity = document.getElementById('capacity-form');
-formCapacity.addEventListener('submit', async e => {
+formCapacity.addEventListener('submit', e => {
   e.preventDefault();
-  const listOfRestaurants = await fetchRestaurants();
   const minCapacity = document.getElementById('min-capacity');
   const maxCapacity = document.getElementById('max-capacity');
-  const capacityRange = {
-    minTables: minCapacity.value,
-    maxTables: maxCapacity.value,
-  };
-  const restaurantsByCapacity = getRestaurantByCapacityRange(
-    listOfRestaurants,
-    capacityRange
-  );
-  const filter = `with number of tables between ${minCapacity.value} and ${maxCapacity.value}`;
-  minCapacity.value = '';
-  maxCapacity.value = '';
-  displayRestaurants(restaurantsByCapacity, filter);
-  resetActiveButtons();
+
+  const queryMin = setQuery('capacity-from', minCapacity.value);
+  const queryMax = setQuery('capacity-to', maxCapacity.value);
+  redirect(`restaurants.html?${queryMin}&${queryMax}`);
 });
