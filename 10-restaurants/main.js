@@ -56,6 +56,9 @@ async function displayRestaurantsByPrice(listOfRestaurants, priceFromParams) {
   );
   const filter = `which are ${priceFromParams}`;
   displayRestaurants(restaurantsByPrice, filter);
+  resetActiveButtons();
+  const active = document.getElementsByClassName(priceFromParams);
+  active[0].classList.add('active');
 }
 
 function displayRestaurantsByPriceAdvanced(
@@ -110,6 +113,9 @@ async function displayRestaurantsByCapacity(
   );
   const filter = `which are ${capacityFromParams}`;
   displayRestaurants(restaurantsByCapacity, filter);
+  resetActiveButtons();
+  const active = document.getElementsByClassName(capacityFromParams);
+  active[0].classList.add('active');
 }
 
 function displayRestaurantsByTime(listOfRestaurants, hours) {
@@ -125,6 +131,41 @@ function displayRestaurantsByTime(listOfRestaurants, hours) {
   displayRestaurants(openedRestaurants, filter);
 }
 
+function setCheckboxes(categories, separate) {
+  const catToLowerCase = categories.map(el => el.toLowerCase());
+
+  catToLowerCase.filter(food => {
+    document.getElementById(food).checked = true;
+  });
+  if (separate) document.getElementById(`radio-${separate}`).checked = true;
+}
+
+function displayRestaurantsByCategories(
+  listOfRestaurants,
+  categories,
+  separate
+) {
+  let restaurantsByCategory = [];
+  const categoriesArray = categories.split(',');
+
+  switch (separate) {
+    case 'any':
+      restaurantsByCategory = getRestaurantsByCategorySeparate(
+        listOfRestaurants,
+        categoriesArray
+      );
+      break;
+    case 'all':
+      restaurantsByCategory = getRestaurantsByCategory(
+        listOfRestaurants,
+        categoriesArray
+      );
+      break;
+  }
+  setCheckboxes(categoriesArray, separate);
+  displayRestaurants(restaurantsByCategory);
+}
+
 async function handleRestaurantsByQuery() {
   const params = new URLSearchParams(location.search);
   const priceParams = params.get('price');
@@ -134,8 +175,11 @@ async function handleRestaurantsByQuery() {
   const capacityFromParams = params.get('capacity-from');
   const capacityToParams = params.get('capacity-to');
   const hoursParams = params.get('open-at');
+  const categoriesParams = params.get('categories');
+  const separateParams = params.get('separate');
 
   const listOfRestaurants = await fetchRestaurants();
+
   if (priceParams) {
     displayRestaurantsByPrice(listOfRestaurants, priceParams);
   } else if (capacityParams) {
@@ -153,6 +197,12 @@ async function handleRestaurantsByQuery() {
       listOfRestaurants,
       capacityFromParams,
       capacityToParams
+    );
+  } else if (categoriesParams) {
+    displayRestaurantsByCategories(
+      listOfRestaurants,
+      categoriesParams,
+      separateParams
     );
   } else {
     displayRestaurants(listOfRestaurants);
@@ -194,10 +244,8 @@ selectHours.addEventListener('change', async () => {
 });
 
 const formFood = document.getElementById('form-food');
-formFood.addEventListener('submit', async e => {
+formFood.addEventListener('submit', e => {
   e.preventDefault();
-  const listOfRestaurants = await fetchRestaurants();
-  let restaurantsByCategory = [];
   const categories = [];
   const foods = [
     'serbian',
@@ -208,6 +256,7 @@ formFood.addEventListener('submit', async e => {
     'burgers',
     'taiwanese',
   ];
+
   const separate = document.querySelector(
     'input[name="separate"]:checked'
   ).value;
@@ -219,23 +268,10 @@ formFood.addEventListener('submit', async e => {
     }
   });
 
-  switch (separate) {
-    case 'any':
-      restaurantsByCategory = getRestaurantsByCategorySeparate(
-        listOfRestaurants,
-        categories
-      );
-      break;
-    case 'all':
-      restaurantsByCategory = getRestaurantsByCategory(
-        listOfRestaurants,
-        categories
-      );
-      break;
-  }
+  const queryCategories = setQuery('categories', categories);
+  const querySeparate = setQuery('separate', separate);
 
-  displayRestaurants(restaurantsByCategory);
-  resetActiveButtons();
+  redirect(`restaurants.html?${queryCategories}&${querySeparate}`);
 });
 
 const advancedCapacity = document.getElementById('advanced-capacity');
