@@ -63,6 +63,9 @@ function displayRestaurantsByPriceAdvanced(
   minPrice,
   maxPrice
 ) {
+  document.getElementById('advanced-price').innerText = 'Back to basic filters';
+  document.getElementById('price-form').style.display = 'flex';
+
   const priceRange = {
     minAvgPricePerMeal: minPrice,
     maxAvgPricePerMeal: maxPrice,
@@ -80,6 +83,10 @@ function displayRestaurantsByCapacityAdvanced(
   minCapacity,
   maxCapacity
 ) {
+  document.getElementById('advanced-capacity').innerText =
+    'Back to basic filters';
+  document.getElementById('capacity-form').style.display = 'flex';
+
   const capacityRange = {
     minTables: minCapacity,
     maxTables: maxCapacity,
@@ -242,7 +249,6 @@ advancedCapacity.addEventListener('click', () => {
     advancedCapacity.innerText = 'Advanced filters';
   }
 });
-
 const advancedPrice = document.getElementById('advanced-price');
 advancedPrice.addEventListener('click', () => {
   const priceForm = document.getElementById('price-form');
